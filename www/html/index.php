@@ -1,9 +1,35 @@
 <?php
+session_start();
+
 require_once 'pdo_connect.php';
+require_once 'function.php';
 
 
-if ($_POST['name'] === '') {
-	$error['name'] = 'blank';
+if (!empty($_POST)) {
+
+	if ($_POST['name'] === '') {
+		$error['name'] = 'blank';
+	}
+	if ($_POST['email'] === '') {
+		$error['email'] = 'blank';
+	}
+	if (strlen($_POST['password'] < 8)) {
+		$error['password'] = 'length';
+	}
+	if ($_POST['password'] === '') {
+		$error['password'] = 'blank';
+	}
+	if (empty($error)) {
+		$image = date('YmdHis') . $_FILES['image']['name']; //ここで実際にアップロードする
+		$_SESSION['join'] = $_POST;
+		header('Location: check.php');
+		exit();
+	}
+}
+
+
+if ($_REQUEST['action'] == 'rewrite' && isset($_SESSION['join'])) {
+	$_POST = $_SESSION['join'];
 }
 ?>
 
@@ -31,17 +57,26 @@ if ($_POST['name'] === '') {
 				<dl>
 					<dt>ニックネーム<span class="required">必須</span></dt>
 					<dd>
-						<input type="text" name="name" size="35" maxlength="255" value="" />
+						<input type="text" name="name" size="35" maxlength="255" value="<?php echo (h($_POST['name'])); ?>" />
 						<?php if ($error['name'] === 'blank') : ?>
 							<p class="error">*ニックネームを入力してください</p>
 						<?php endif; ?>
 					</dd>
 					<dt>メールアドレス<span class="required">必須</span></dt>
 					<dd>
-						<input type="text" name="email" size="35" maxlength="255" value="" />
+						<input type="text" name="email" size="35" maxlength="255" value="<?php echo (h($_POST['email'])); ?>" />
+						<?php if ($error['email'] === 'blank') : ?>
+							<p class="error">*メールアドレスを入力してください</p>
+						<?php endif; ?>
 					<dt>パスワード<span class="required">必須</span></dt>
 					<dd>
-						<input type="password" name="password" size="10" maxlength="20" value="" />
+						<input type="password" name="password" size="10" maxlength="20" value="<?php echo (h($_POST['password'])); ?>" />
+						<?php if ($error['password'] === 'length') : ?>
+							<p class="error">*パスワードは8文字以上入力してください</p>
+						<?php endif; ?>
+						<?php if ($error['password'] === 'blank') : ?>
+							<p class="error">*パスワードを入力してください</p>
+						<?php endif; ?>
 					</dd>
 					<dt>写真など</dt>
 					<dd>
