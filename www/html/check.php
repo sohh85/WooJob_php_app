@@ -47,9 +47,13 @@ if (!isset($_SESSION['join'])) {
 					</dd>
 					<dt>写真など</dt>
 					<dd>
+						<?php if ($_SESSION['join']['image'] !== '') : ?>
+							<img src="member_picture/<?php echo (h($_SESSION['join']['image'])); ?>" style="width:200px;">
+						<?php endif; ?>
 					</dd>
 				</dl>
-				<div><a href="index.php?action=rewrite">&laquo;&nbsp;書き直す</a> | <input type="submit" value="登録する" /></div>
+				<div><a href=" index.php?action=rewrite">&laquo;&nbsp;書き直す</a> | <input type="submit" value="登録する" />
+				</div>
 			</form>
 		</div>
 
