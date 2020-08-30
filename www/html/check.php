@@ -1,6 +1,6 @@
 <?php
 session_start();
-
+require_once 'pdo_connect.php';
 require_once 'function.php';
 
 if (!isset($_SESSION['join'])) {
@@ -8,8 +8,20 @@ if (!isset($_SESSION['join'])) {
 	exit();
 }
 
-?>
+if (!empty($_POST)) {
+	header('Location: thanks.php');
+	$statement = $dbh->prepare('INSERT INTO members SET name=?, email=?, password=?, picture=?, created=NOW()');
+	echo $statement->execute(array(
+		$_SESSION['join']['name'],
+		$_SESSION['join']['email'],
+		sha1($_SESSION['join']['password']),
+		$_SESSION['join']['image']
+	));
+	unset($_SESSION['join']);
 
+	exit();
+}
+?>
 <!DOCTYPE html>
 <html lang="ja">
 

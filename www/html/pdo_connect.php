@@ -13,6 +13,6 @@ try {
     $dbh = new PDO($dsn, $user, $password);
 } catch (PDOException $e) {
     var_dump($dbh);
-    echo "接続失敗: " . $e->getMessage() . "\n";
+    echo "接続失敗:" . $e->getMessage();
     exit();
 }

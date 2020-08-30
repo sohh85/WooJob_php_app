@@ -1,6 +1,5 @@
 <?php
 session_start();
-
 require_once 'pdo_connect.php';
 require_once 'function.php';
 
