@@ -9,6 +9,7 @@ if (!isset($_SESSION['join'])) {
 }
 
 if (!empty($_POST)) {
+
 	header('Location: thanks.php');
 	$statement = $dbh->prepare('INSERT INTO members SET name=?, email=?, password=?, picture=?, created=NOW()');
 	echo $statement->execute(array(
