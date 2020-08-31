@@ -29,6 +29,15 @@ if (!empty($_POST)) {
 		}
 	}
 
+	//ifで値が入ってるか確認。$recordでemail
+	if (empty($error)) {
+		$member = $dbh->prepare('SELECT COUNT(*) AS cnt FROM members WHERE email=?');
+		$member->execute(array($_POST['email']));
+		$record = $member->fetch();
+		if ($record['cnt'] > 0) {
+			$error['email'] = 'duplicate';
+		}
+	}
 
 	if (empty($error)) {
 		$image = date('YmdHis') . $_FILES['image']['name']; //日付とファイル名合わせて被り防止。
@@ -83,6 +92,12 @@ if ($_REQUEST['action'] == 'rewrite' && isset($_SESSION['join'])) {
 							<p class="error">*メールアドレスを入力してください</p>
 						<?php elseif ($error['email'] === 'unfit') : ?>
 							<p class="error">*正しい形式で入力してください</p>
+						<?php endif; ?>
+						<?php if ($error['email'] === 'duplicate') : ?>
+							<p class="error">*指定されたメールアドレスは既に登録されています</p>
+						<?php endif; ?>
+						<?php if ($error['email'] === 'unfit') : ?>
+							<p class="error">*「メールアドレス」は正しい形式で入力してください</p>
 						<?php endif; ?>
 					<dt>パスワード<span class="required">必須</span></dt>
 					<dd>
