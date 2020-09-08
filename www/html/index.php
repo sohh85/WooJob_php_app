@@ -14,6 +14,7 @@ if (!empty($_POST)) {
 	} elseif (!preg_match('/^[0-9a-z_.\/?-]+@([0-9a-z-]+\.)+[0-9a-z-]+$/', $_POST['email'])) {
 		$error['email'] = 'unfit';
 	}
+
 	if (strlen($_POST['password'] < 8)) {
 		$error['password'] = 'length';
 	}
@@ -88,6 +89,8 @@ if ($_REQUEST['action'] == 'rewrite' && isset($_SESSION['join'])) {
 						<input type="text" name="email" size="35" maxlength="255" value="<?php echo (h($_POST['email'])); ?>" />
 						<?php if ($error['email'] === 'blank') : ?>
 							<p class="error">*メールアドレスを入力してください</p>
+						<?php elseif ($error['email'] === 'unfit') : ?>
+							<p class="error">*正しい形式で入力してください</p>
 						<?php endif; ?>
 						<?php if ($error['email'] === 'duplicate') : ?>
 							<p class="error">*指定されたメールアドレスは既に登録されています</p>
