@@ -73,7 +73,6 @@ if ($_REQUEST['action'] == 'rewrite' && isset($_SESSION['join'])) {
 		<div id="head">
 			<h1>会員登録</h1>
 		</div>
-
 		<div id="content">
 			<p>次のフォームに必要事項をご記入ください。</p>
 			<form action="" method="post" enctype="multipart/form-data">

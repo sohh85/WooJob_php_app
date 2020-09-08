@@ -23,6 +23,7 @@ services:
       - 3306:3306
     volumes:
       - ./mysql/data:/var/lib/mysql 
+      - ./my.cnf:/etc/mysql/conf.d/my.cnf
     environment:
       MYSQL_ROOT_PASSWORD: secret
       MYSQL_DATABASE: php_app_db
