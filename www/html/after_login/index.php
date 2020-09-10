@@ -1,7 +1,7 @@
 <?php
 session_start();
-require_once '/pdo_connect.php';
-require_once 'function.php';
+require_once '../pdo_connect.php';
+require_once '../function.php';
 
 
 if (isset($_SESSION['id']) && $_SESSION['time'] + 3600 > time()) {
@@ -32,6 +32,11 @@ if (!empty($_POST)) {
 
 $posts = $dbh->query("SELECT m.name, m.picture, p.* FROM members m, posts p WHERE m.id=p.member_id ORDER BY p.created DESC");
 
+
+if (isset($_REQUEST['res'])) {
+  //返信の処理
+
+}
 
 
 ?>
