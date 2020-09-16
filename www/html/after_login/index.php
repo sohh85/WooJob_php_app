@@ -32,13 +32,16 @@ if (!empty($_POST)) {
 
 $posts = $dbh->query("SELECT m.name, m.picture, p.* FROM members m, posts p WHERE m.id=p.member_id ORDER BY p.created DESC");
 
-
+//メッセージidからメンバーidを入手
 if (isset($_REQUEST['res'])) {
   //返信の処理
+  $response = $dbh->prepare('SELECT m.name, m.picture, p.* FROM members m, posts p WHERE m.id=p.member_id AND p.id=?');
 
+  $response->execute(array($_REQUEST['res']));
+
+  $table = $response->$fetch();
+  $message = '@' . $table['name'] . '' . $table['message'];
 }
-
-
 ?>
 <!DOCTYPE html>
 <html lang="ja">

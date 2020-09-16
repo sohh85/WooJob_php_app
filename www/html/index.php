@@ -121,7 +121,14 @@ if ($_REQUEST['action'] == 'rewrite' && isset($_SESSION['join'])) {
 				</dl>
 				<div><input type="submit" value="入力内容を確認する" /></div>
 			</form>
+
+
+			<div>
+				<a href="after_login/login.php">会員登録がお済みの方はこちら</a>
+			</div>
+
 		</div>
+
 </body>
 
 </html>
