@@ -1,3 +1,5 @@
-mysql/data
+mysql/data/
 www/html/pdo_connect.php
-.DS_Store
+www/.DS_Store
+
+#ディレクトリ名は末尾に/
