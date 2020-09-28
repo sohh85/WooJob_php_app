@@ -20,7 +20,7 @@ services:
   db:
     image: mysql:8.0.21
     ports:
-      - 3306:3306
+      - 13306:3306
     volumes:
       - ./mysql/data:/var/lib/mysql 
       - ./my.cnf:/etc/mysql/conf.d/my.cnf
@@ -33,7 +33,7 @@ services:
 
   phpmyadmin:
     image: phpmyadmin/phpmyadmin
-    container_name: phpmyadmin
+    container_name: phpmyadmin_php_app
     environment:
       - PMA_ARBITRARY=1
       - PMA_HOST=db
