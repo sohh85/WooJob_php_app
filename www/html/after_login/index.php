@@ -18,10 +18,12 @@ if (isset($_SESSION['id']) && $_SESSION['time'] + 3600 > time()) {
 
 if (!empty($_POST)) {
   if ($_POST['message'] !== "") {
-    $message = $dbh->prepare("INSERT INTO posts SET member_id=?, message=?, created=NOW()");
+    $message = $dbh->prepare("INSERT INTO posts SET member_id=?, message=?, reply_message_id=?, created=NOW()");
     $message->execute(array(
-      $member["id"],
-      $_POST["message"],
+      $member['id'],
+      $_POST['message'],
+      $_POST['reply_post_id'],
+
     ));
     // var_dump($message->errorInfo()); //デバッグ
     // exit();
@@ -35,9 +37,12 @@ $posts = $dbh->query("SELECT m.name, m.picture, p.* FROM members m, posts p WHER
 
 if (isset($_REQUEST['res'])) {
   //返信の処理
+  $response = $dbh->prepare('SELECT m.name, m.picture, p.* FROM members m, posts p WHERE m.id=p.member_id AND p.id=?');
+  $response->execute(array($_REQUEST['res']));
 
+  $table = $response->fetch();
+  $message = '@' . $table['name'] . ' ' . $table['message'];
 }
-
 
 ?>
 <!DOCTYPE html>
@@ -63,8 +68,8 @@ if (isset($_REQUEST['res'])) {
         <dl>
           <dt><?php print(h($member["name"])); ?>さん、メッセージをどうぞ</dt>
           <dd>
-            <textarea name="message" cols="50" rows="5"></textarea>
-            <input type="hidden" name="reply_post_id" value="" />
+            <textarea name="message" cols="50" rows="5"><?php print(h($message)); ?></textarea>
+            <input type="hidden" name="reply_post_id" value="<?php print(h($_REQUEST['res'])); ?>">
           </dd>
         </dl>
         <div>
