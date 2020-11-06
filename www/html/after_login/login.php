@@ -43,13 +43,13 @@ if (!empty($_POST)) {
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
   <link rel="stylesheet" type="text/css" href="../style.css" />
-  <title>ログインする</title>
+  <title>Log in</title>
 </head>
 
 <body>
   <div id="wrap">
     <div id="head">
-      <h1>ログインする</h1>
+      <h1>Log in</h1>
     </div>
     <div id="content">
       <div id="lead">
