@@ -14,32 +14,30 @@ services:
     build: ./php
     volumes:
       - ./www/html:/var/www/html
-    depends_on:
-      - db
 
-  db:
-    image: mysql:8.0.21
+  mysql:
+    image: mysql:8.0.20
     ports:
       - 13306:3306
-    volumes:
-      - ./mysql/data:/var/lib/mysql 
-      - ./my.cnf:/etc/mysql/conf.d/my.cnf
     environment:
-      MYSQL_ROOT_PASSWORD: secret
+      MYSQL_ROOT_PASSWORD: password
       MYSQL_DATABASE: php_app_db
       MYSQL_USER: php_learner
       MYSQL_PASSWORD: php_app
-      
+    volumes:
+      - ./mysql/data:/var/lib/mysql 
+      - ./my.cnf:/etc/mysql/conf.d/my.cnf
+    tty: true
 
   phpmyadmin:
     image: phpmyadmin/phpmyadmin
     container_name: phpmyadmin_php_app
     environment:
       - PMA_ARBITRARY=1
-      - PMA_HOST=db
+      - PMA_HOST=mysql
       - PMA_USER=php_learner
       - PMA_PASSWORD=php_app
     links:
-      - db
+      - mysql
     ports:
       - 8888:80

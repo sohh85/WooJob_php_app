@@ -134,7 +134,9 @@ li {
 .msg img {
 	float: left;
 	margin-right: 5px;
+	/* object-fit: cover; */
 }
+
 .msg p {
 	margin: 0;
 }

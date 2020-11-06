@@ -1,3 +1,17 @@
+<?php
+session_start();
+require_once '../pdo_connect.php';
+require_once '../function.php';
+
+if (empty($_REQUEST['id'])) {
+  header('location: index.php');
+  exit();
+}
+
+$posts = $dbh->prepare('SELECT m.name, m.picture, p.* FROM members m, posts p WHERE m.id=p.member_id AND p.id=?');
+$posts->execute(array($_REQUEST['id']));
+?>
+
 <!DOCTYPE html>
 <html lang="ja">
 
@@ -17,13 +31,16 @@
     <div id="content">
       <p>&laquo;<a href="index.php">一覧にもどる</a></p>
 
-      <div class="msg">
-        <img src="member_picture/" />
-        <p><span class="name">（）</span></p>
-        <p class="day"></p>
-      </div>
 
-      <p>その投稿は削除されたか、URLが間違えています</p>
+      <?php if ($post = $posts->fetch()) : ?>
+        <div class="msg">
+          <img src="/../member_picture/<?php print(h($post['picture'])); ?>" width="250" height="250">
+          <p><?= h($post['message']); ?><span class="name">（<?= h($post['name']); ?>）</span></p>
+          <p class="day"><?= h($post['created']); ?></p>
+        </div>
+      <?php else : ?>
+        <p>その投稿は削除されたか、URLが間違えています</p>
+      <?php endif; ?>
     </div>
   </div>
 </body>
