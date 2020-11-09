@@ -3,7 +3,7 @@ session_start();
 require_once '../pdo_connect.php';
 require_once '../function.php';
 
-
+// ログイン後1時間以上経過していたら再ログイン
 if (isset($_SESSION['id']) && $_SESSION['time'] + 3600 > time()) {
   $_SESSION['time'] = time();
 
@@ -11,7 +11,7 @@ if (isset($_SESSION['id']) && $_SESSION['time'] + 3600 > time()) {
   $members->execute(array($_SESSION['id']));
   $member = $members->fetch();
 } else {
-  header("location: login.php");
+  header("location: ../index.php");
   exit();
 }
 
@@ -62,75 +62,110 @@ if (isset($_REQUEST['res'])) {
 
 ?>
 <!DOCTYPE html>
-<html lang="ja">
+<html>
 
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>ひとこと掲示板</title>
-
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous" />
+  <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+  <script src="https://kit.fontawesome.com/82342a278b.js" crossorigin="anonymous"></script>
   <link rel="stylesheet" href="../style.css" />
 </head>
 
 <body>
   <div id="wrap">
-    <div id="head">
-      <h1>ひとこと掲示板</h1>
+    <div id="wrapper">
+      <nav id="global-navi">
+        <h2 class="top_logo">
+          ~ WooJob ~
+        </h2>
+      </nav>
     </div>
-    <div id="content">
-      <div style="text-align: right"><a href="logout.php">ログアウト</a></div>
+    <div class="content">
+      <div id="head">
+        <h1>オーストラリア仕事情報共有掲示板</h1>
+      </div>
+      <div id="content">
+        <div style="text-align: right"><a href="logout.php">ログアウト</a></div>
 
-      <form action="" method="post">
-        <dl>
-          <dt><?php print(h($member["name"])); ?>さん、メッセージをどうぞ</dt>
-          <dd>
-            <textarea name="message" cols="50" rows="5"><?php print(h($message)); ?></textarea>
-            <input type="hidden" name="reply_post_id" value="<?php print(h($_REQUEST['res'])); ?>">
-          </dd>
-        </dl>
-        <div>
-          <p>
-            <input type="submit" value="投稿する" />
-          </p>
-        </div>
-      </form>
+        <form action="" method="post">
+          <dl>
+            <dt><?php print(h($member["name"])); ?>さん、メッセージをどうぞ</dt>
+            <dd>
+              <textarea name="message" cols="70" rows="5"><?php print(h($message)); ?></textarea>
+              <input type="hidden" name="reply_post_id" value="<?php print(h($_REQUEST['res'])); ?>">
+            </dd>
+          </dl>
+          <div class="mb-2">
+            <input class="hover" type="submit" value="投稿する">
+          </div>
+        </form>
 
-      <!-- membersの名前・postsの前カラムを取得したものを -->
-      <?php foreach ($posts as $post) : ?>
-        <div class="msg">
-          <img src="/../member_picture/<?php print(h($post['picture'])); ?>" width="48" height="48" alt="<?php print(h($post['name'])); ?>" />
-          <p><?php print(h($post['message'])); ?><span class="name">（<?php print(h($post['name'])); ?>）</span>[<a href="index.php?res=<?php print(h($post['id'])); ?>">Re</a>]</p>
-          <p class="day"><a href="view.php?id=<?= h($post['id']); ?>"><?php print(h($post['created'])); ?></a>
+        <!-- membersの名前・postsの前カラムを取得したものを -->
+        <?php foreach ($posts as $post) : ?>
+          <div class="msg">
+            <!-- プロフィール写真 -->
+            <img src="/../member_picture/<?php print(h($post['picture'])); ?>" width="48" height="48" alt="<?php print(h($post['name'])); ?>" />
 
-            <?php if ($post['reply_message_id'] > 0) : ?>
-              <a href="view.php?id=<?= h($post['reply_message_id']); ?>">
-                返信元のメッセージ</a>
-            <?php endif ?>
-            <?php if ($_SESSION['id'] == $post['member_id']) : ?>
-              [<a href="delete.php?id=<?= h($post['id']); ?>" style=" color: #F33;">削除</a>]
-            <?php endif ?>
+            <div class="float_text">
+              <!-- メッセージと返信ボタン -->
+              <p>
+                <pre class="js-autolink"><?php print(h($post['message'])); ?></pre>
+                <div class="btn-radius-gradient-wrap">
+                  <a class="btn btn-radius-gradient m-0" href="index.php?res=<?php print(h($post['id'])); ?>">返信</a>
+                </div>
+              </p>
 
-          </p>
-        </div>
-      <?php endforeach; ?>
+              <!-- プロフィール写真の下に表示する項目 -->
+              <p class="under_pic mt-1"><span class="name"><i class="fas fa-user-circle"></i><?php print(h($post['name'])); ?></span><a href="view.php?id=<?= h($post['id']); ?>"><?php print(h($post['created'])); ?></a>
 
-      <ul class="paging">
-        <?php if ($page > 1) : ?>
-          <li><a href="index.php?page=<?= $page - 1; ?>">前のページへ</a></li>
-        <?php else : ?>
-          <li>前のページへ</li>
-        <?php endif; ?>
+                <!-- 特定の投稿に対しての返信の場合表示 -->
+                <?php if ($post['reply_message_id'] > 0) : ?>
+                  <span class="reply"><a href="view.php?id=<?= h($post['reply_message_id']); ?>"><i class="fas fa-eye"></i>返信元メッセージ</a></span>
+                <?php endif ?>
 
-        <?php if ($page < $maxPage) : ?>
-          <li><a href="index.php?page=<?= $page + 1; ?>">次のページへ</a></li>
-        <?php else : ?>
-          <li>次のページへ</li>
-        <?php endif; ?>
+                <!-- ユーザ自身の投稿の場合、削除ボタン表示 -->
+                <?php if ($_SESSION['id'] == $post['member_id']) : ?>
+                  <a class="text-danger" href="delete.php?id=<?= h($post['id']); ?>">【削除】</a>
+                <?php endif ?>
+              </p>
+            </div>
+          </div>
 
-      </ul>
+
+        <?php endforeach; ?>
+
+        <ul class="paging">
+          <?php if ($page > 1) : ?>
+            <li><a href="index.php?page=<?= $page - 1; ?>">前のページへ</a></li>
+          <?php else : ?>
+            <li>前のページへ</li>
+          <?php endif; ?>
+
+          <?php if ($page < $maxPage) : ?>
+            <li><a href="index.php?page=<?= $page + 1; ?>">次のページへ</a></li>
+          <?php else : ?>
+            <li>次のページへ</li>
+          <?php endif; ?>
+
+        </ul>
+      </div>
+      <footer class="footer_bottom">
+        <p>Copyright - 赤坂 壮, 2020 All Rights Reserved.</p>
+      </footer>
     </div>
   </div>
+
+  <script>
+    $(function() {
+      $('.js-autolink').each(function() {
+        $(this).html($(this).html().replace(/(\b(https?|ftp|file):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/ig, "<a href='$1' class='m-0'>$1</a>"));
+      });
+    });
+  </script>
 </body>
 
 </html>
