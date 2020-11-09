@@ -3,124 +3,104 @@ session_start();
 require_once 'pdo_connect.php';
 require_once 'function.php';
 
-if (!empty($_POST)) {
-
-    if ($_POST['name'] === '') {
-        $error['name'] = 'blank';
-    }
-    if ($_POST['email'] === '') {
-        $error['email'] = 'blank';
-    } elseif (!preg_match('/^[0-9a-z_.\/?-]+@([0-9a-z-]+\.)+[0-9a-z-]+$/', $_POST['email'])) {
-        $error['email'] = 'unfit';
-    }
-
-    if (strlen($_POST['password'] < 8)) {
-        $error['password'] = 'length';
-    }
-    if ($_POST['password'] === '') {
-        $error['password'] = 'blank';
-    }
-    $fileName = $_FILES['image']['name'];
-    if (!empty($fileName)) {
-        $ext = substr($fileName, -3); //拡張子を得る為に
-        if ($ext != 'JPG' && $ext != 'gif' && $ext != 'png') {
-            $error['image'] = 'type';
-        }
-    }
-
-    //ifで値が入ってるか確認。$recordでemail
-    if (empty($error)) {
-        $member = $dbh->prepare('SELECT COUNT(*) AS cnt FROM members WHERE email=?');
-        $member->execute(array($_POST['email']));
-        $record = $member->fetch();
-        if ($record['cnt'] > 0) {
-            $error['email'] = 'duplicate';
-        }
-    }
-
-    if (empty($error)) {
-        $image = date('YmdHis') . $_FILES['image']['name']; //日付とファイル名合わせて被り防止。
-        move_uploaded_file($_FILES['image']['tmp_name'], 'member_picture/' . $image);
-        //tmp_nameは一時的に保存してる場所。move_uploaded_file関数でちゃんと保存。一つ目のパラメータが今ある場所、二つ目が新たに保存する場所
-        $_SESSION['join'] = $_POST;
-        $_SESSION['join']['image'] = $image; //データベースに保存したいのでjoinの中にimage作って保存
-        header('Location: check.php');
-        exit();
-    }
+if ($_COOKIE['email'] !== '') {
+  $email = $_COOKIE['email'];
 }
 
+if (!empty($_POST)) {
+  $email = $_POST['email'];
 
-if ($_REQUEST['action'] == 'rewrite' && isset($_SESSION['join'])) {
-    $_POST = $_SESSION['join'];
+  if ($_POST['email'] !== '' && $_POST['password'] !== '') {
+    $login = $dbh->prepare('SELECT * FROM members WHERE email=? AND password=?');
+    $login->execute(array(
+      $_POST['email'],
+      sha1($_POST['password'])
+    ));
+    $member = $login->fetch();
+
+    if ($member) {
+      $_SESSION['id'] = $member['id'];
+      $_SESSION['time'] = time();
+
+      if ($_POST['save'] === 'on') {
+        setcookie('email', $_POST['email'], time() + 60 * 60 * 24 * 4);
+      }
+      header('Location: after_login/index.php');
+      exit();
+    } else {
+      $error['login'] = 'failed';
+    }
+  } else {
+    $error['login'] = 'blank';
+  }
 }
 ?>
 
-<!DOCTYPE html>
-<html lang="ja">
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>会員登録</title>
-
-    <link rel="stylesheet" href="style.css">
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <title>Log in</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous" />
+  <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+  <link rel="stylesheet" type="text/css" href="style.css" />
 </head>
 
 <body>
-    <div id="wrap">
-        <div id="head">
-            <h1>会員登録</h1>
+  <div id="wrap">
+    <div id="wrapper">
+      <nav id="global-navi">
+        <h1 class="top_logo">
+          オーストラリア仕事情報共有サイト
+        </h1>
+      </nav>
+    </div>
+    <div class="content">
+
+      <div id="head">
+        <h1>Log in</h1>
+      </div>
+      <div id="content">
+        <div id="lead">
+          <p>メールアドレスとパスワードを記入してログインしてください。</p>
+          <p>入会手続きがまだの方はこちらからどうぞ。</p>
+          <p>&raquo;<a href="register.php">入会手続きをする</a></p>
         </div>
-        <div id="content">
-            <p>次のフォームに必要事項をご記入ください。</p>
-            <form action="" method="post" enctype="multipart/form-data">
-                <dl>
-                    <dt>ニックネーム<span class="required">必須</span></dt>
-                    <dd>
-                        <input type="text" name="name" size="35" maxlength="255" value="<?php echo (h($_POST['name'])); ?>" />
-                        <?php if ($error['name'] === 'blank') : ?>
-                            <p class="error">*ニックネームを入力してください</p>
-                        <?php endif; ?>
-                    </dd>
-                    <dt>メールアドレス<span class="required">必須</span></dt>
-                    <dd>
-                        <input type="text" name="email" size="35" maxlength="255" value="<?php echo (h($_POST['email'])); ?>" />
-                        <?php if ($error['email'] === 'blank') : ?>
-                            <p class="error">*メールアドレスを入力してください</p>
-                        <?php elseif ($error['email'] === 'unfit') : ?>
-                            <p class="error">*正しい形式で入力してください</p>
-                        <?php endif; ?>
-                        <?php if ($error['email'] === 'duplicate') : ?>
-                            <p class="error">*指定されたメールアドレスは既に登録されています</p>
-                        <?php endif; ?>
-                        <?php if ($error['email'] === 'unfit') : ?>
-                            <p class="error">*「メールアドレス」は正しい形式で入力してください</p>
-                        <?php endif; ?>
-                    <dt>パスワード<span class="required">必須</span></dt>
-                    <dd>
-                        <input type="password" name="password" size="10" maxlength="20" value="<?php echo (h($_POST['password'])); ?>" />
-                        <?php if ($error['password'] === 'length') : ?>
-                            <p class="error">*パスワードは8文字以上入力してください</p>
-                        <?php endif; ?>
-                        <?php if ($error['password'] === 'blank') : ?>
-                            <p class="error">*パスワードを入力してください</p>
-                        <?php endif; ?>
-                    </dd>
-                    <dt>写真など</dt>
-                    <dd>
-                        <input type="file" name="image" size="35" value="test" />
-                        <?php if ($error['image'] === 'type') : ?>
-                            <p class="error">*「.gif」「.png」「.jpg」の写真を使用してください</p>
-                        <?php endif; ?>
-                        <?php if (!empty($error)) : ?>
-                            <p class="error">*もう一度ファイルを指定してください</p>
-                        <?php endif; ?>
-                    </dd>
-                </dl>
-                <div><input type="submit" value="入力内容を確認する" /></div>
-            </form>
-        </div>
+        <form action="" method="post">
+          <dl>
+            <dt>メールアドレス</dt>
+            <dd>
+
+              <input type="text" name="email" size="35" maxlength="255" value="<?php print h($email); ?>" />
+              <?php if ($error['login'] === 'blank') : ?>
+                <P class="error">*メールアドレスとパスワードを入力してください</P>
+              <?php endif; ?>
+              <?php if ($error['login'] === 'failed') : ?>
+                <P class="error">*ログインに失敗しました。正しく入力してください</P>
+              <?php endif; ?>
+            </dd>
+            <dt>パスワード</dt>
+            <dd>
+              <input type="password" name="password" size="35" maxlength="255" value="<?php print h($_POST['password']); ?>" />
+            </dd>
+            <dt>ログイン情報の記録</dt>
+            <dd>
+              <input id="save" type="checkbox" name="save" value="on">
+              <label for="save">次回からは自動的にログインする</label>
+            </dd>
+          </dl>
+          <div>
+            <input type="submit" value="ログインする" />
+          </div>
+        </form>
+        <footer class="footer_bottom">
+          <p>Copyright - 赤坂 壮, 2020 All Rights Reserved.</p>
+        </footer>
+      </div>
+    </div>
+  </div>
 </body>
 
 </html>
