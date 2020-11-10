@@ -68,7 +68,7 @@ if (isset($_REQUEST['res'])) {
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>ひとこと掲示板</title>
+  <title>オーストラリア仕事情報共有掲示板</title>
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous" />
   <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
   <script src="https://kit.fontawesome.com/82342a278b.js" crossorigin="anonymous"></script>
@@ -77,13 +77,8 @@ if (isset($_REQUEST['res'])) {
 
 <body>
   <div id="wrap">
-    <div id="wrapper">
-      <nav id="global-navi">
-        <h2 class="top_logo">
-          ~ WooJob ~
-        </h2>
-      </nav>
-    </div>
+    <!-- header読み込み -->
+    <?php include("../header.php"); ?>
     <div class="content">
       <div id="head">
         <h1>オーストラリア仕事情報共有掲示板</h1>
@@ -150,7 +145,6 @@ if (isset($_REQUEST['res'])) {
           <?php else : ?>
             <li>次のページへ</li>
           <?php endif; ?>
-
         </ul>
       </div>
       <footer class="footer_bottom">
@@ -163,6 +157,16 @@ if (isset($_REQUEST['res'])) {
     $(function() {
       $('.js-autolink').each(function() {
         $(this).html($(this).html().replace(/(\b(https?|ftp|file):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/ig, "<a href='$1' class='m-0'>$1</a>"));
+      });
+    });
+
+    $(function() {
+      $('.js-menu__item__link').each(function() {
+        $(this).on('click', function() {
+          $(this).toggleClass('on');
+          $("+.submenu", this).slideToggle()
+          return false;
+        });
       });
     });
   </script>

@@ -50,15 +50,9 @@ if (!empty($_POST)) {
 
 <body>
   <div id="wrap">
-    <div id="wrapper">
-      <nav id="global-navi">
-        <h1 class="top_logo">
-          オーストラリア仕事情報共有サイト
-        </h1>
-      </nav>
-    </div>
+    <!-- header読み込み -->
+    <?php include("header.php"); ?>
     <div class="content">
-
       <div id="head">
         <h1>Log in</h1>
       </div>

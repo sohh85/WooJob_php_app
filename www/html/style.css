@@ -41,8 +41,10 @@ h1 {
 	font-weight: bold;
 }
 
-h2 {
-	font-weight: bold;
+
+a {
+   text-decoration: none !important;
+     list-style: none;
 }
 
 #content {
@@ -112,8 +114,7 @@ th {
 }
 
 li {
-	list-style: circle;
-	margin-left: 20px;
+	margin-left: 8px;
 	margin-bottom: 0.5em;
 }
 
@@ -170,13 +171,15 @@ color: #666666;
 	color: #BB1850;
 }
 
+
+/* 返信ボタン */
 .btn,
 a.btn,
 button.btn {
   font-size: 0.5rem;
   font-weight: 500;
   line-height: 1.1;
-  position: relative;
+  /* position: relative; */
   display: inline-block;
   padding: 0.3rem 0.8rem;
   cursor: pointer;
@@ -246,12 +249,16 @@ a.btn-radius-gradient:hover {
 }
 
 .float_text { 
+  /* 投稿画面でボタンを画像下に回り込ませないように */
 	overflow:auto; zoom:1; 
 }
 
+
+/* 固定footer */
 .footer_bottom {
-  background-color: #87CEFA;
-  color: white;
+  background-color: white;
+  color: #222;
+  font-family: 'Ubuntu Mono', monospace;
   text-align: center;
   padding: 9px;
   position: fixed;
@@ -265,14 +272,16 @@ footer p {
   margin: 0;
 }
 
-.top_logo{
+
+/* 固定header */
+.top_logo a{
   font-size: 18px;
   font-family: 'Ubuntu Mono', monospace;
-  padding: 14px;
+  padding: 14px 14px 14px 40px;
   text-align: center;
   letter-spacing: 7px;
+  color: #222;
 }
-
 #global-navi {
     width: 100%;
     background:white;
@@ -281,23 +290,42 @@ footer p {
     top: 0;
     right: 0px;
 }
-
 .content{
     line-height: 1.6;
     margin: 0 auto;
     padding-top: 50px;
     width: 800px;
 }
-
 .hover {
   background-color: white;
   font-size: 11px;
   border-radius: 5px;
   padding: 2px 30px;
 }
-
 .hover:hover {
   background-color: yellow;
   font-size: 11px;
   border-radius: 5px;
+}
+.title_desc {
+  font-size: 12px;
+}
+
+/* アコーディオンメニュー */
+.menu__item {
+  cursor: pointer;
+  display: inline-block;
+
+}
+.menu__item__link {
+  display: inline-block;
+  position: relative;
+}
+.submenu {
+  background: #fff;
+  display: none;
+}
+.submenu__item {
+  padding: 5px;
+  /* display: inline-block; */
 }
