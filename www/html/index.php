@@ -3,6 +3,7 @@ session_start();
 require_once 'pdo_connect.php';
 require_once 'function.php';
 
+
 if ($_COOKIE['email'] !== '') {
   $email = $_COOKIE['email'];
 }
@@ -67,7 +68,7 @@ if (!empty($_POST)) {
             <dt>メールアドレス</dt>
             <dd>
 
-              <input type="text" name="email" size="35" maxlength="255" value="<?php print h($email); ?>" />
+              <input type="text" name="email" size="35" maxlength="255" value="<?= h($email); ?>" />
               <?php if ($error['login'] === 'blank') : ?>
                 <P class="error">*メールアドレスとパスワードを入力してください</P>
               <?php endif; ?>

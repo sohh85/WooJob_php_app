@@ -146,24 +146,31 @@ li {
 	margin-right: 5px;
 	
 }
-
 .msg a {
 	display: inline-block;
 	margin-left: 10px;
 }
-
 .msg p {
 	margin: 0;
 }
-
 .msg .under_pic,
 .msg .under_pic a {
 	font-size: 80%;
 	color: #999;
 }
-
 .msg .reply a {
 color: #666666;
+}
+
+/* 写真登録されてない場合の表示 */
+.pic_box {
+  width: 48px;
+  height: 48px;
+  background: #d3d3d3;
+  float:  left;
+  margin-right: 5px;
+  border: 2px solid;
+  border-color: white;
 }
 
 .name {

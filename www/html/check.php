@@ -9,17 +9,17 @@ if (!isset($_SESSION['join'])) {
 }
 
 if (!empty($_POST)) {
-
-	header('Location: thanks.php');
-	$statement = $dbh->prepare('INSERT INTO members SET name=?, email=?, password=?, picture=?, created=NOW()');
-	echo $statement->execute(array(
+	$stmt = $dbh->prepare('INSERT INTO members SET name=?, email=?, password=?, picture=?, created=NOW()');
+	$stmt->execute(array(
 		$_SESSION['join']['name'],
 		$_SESSION['join']['email'],
 		sha1($_SESSION['join']['password']),
-		$_SESSION['join']['image']
+		$_SESSION['image']
 	));
 	unset($_SESSION['join']);
+	unset($_SESSION['image']);
 
+	header('Location: thanks.php');
 	exit();
 }
 ?>
@@ -47,6 +47,9 @@ if (!empty($_POST)) {
 
 			<div id="content">
 				<p>記入した内容を確認して、「登録する」ボタンをクリックしてください</p>
+
+				<p><?= var_dump($_SESSION['image']); ?></p>
+
 				<form action="" method="post">
 					<input type="hidden" name="action" value="submit" />
 					<dl>
@@ -64,9 +67,11 @@ if (!empty($_POST)) {
 						</dd>
 						<dt>写真など</dt>
 						<dd>
-							<?php if ($_SESSION['join']['image'] !== '') : ?>
-								<img src="member_picture/<?php echo (h($_SESSION['join']['image'])); ?>" style="width:200px;">
+
+							<?php if (!empty($_SESSION['image'])) : ?>
+								<img src="member_picture/<?= (h($_SESSION['image'])); ?>" style="width:200px;">
 							<?php endif; ?>
+
 						</dd>
 					</dl>
 					<div><a href="register.php?action=rewrite">&laquo;&nbsp;書き直す</a> | <input type="submit" value="登録する" />

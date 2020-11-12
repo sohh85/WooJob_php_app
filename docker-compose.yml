@@ -1,5 +1,10 @@
 version: '3'
+
+volumes:
+  docker-volume:
+
 services:
+
   nginx:
     image: nginx:latest
     ports:
@@ -21,12 +26,14 @@ services:
       - 13306:3306
     environment:
       MYSQL_ROOT_PASSWORD: password
-      MYSQL_DATABASE: php_app_db
-      MYSQL_USER: php_learner
-      MYSQL_PASSWORD: php_app
+      MYSQL_DATABASE: woojob
+      MYSQL_USER: sohh
+      MYSQL_PASSWORD: woojob
     volumes:
-      - ./mysql/data:/var/lib/mysql 
-      - ./my.cnf:/etc/mysql/conf.d/my.cnf
+      - docker-volume:/var/lib/mysql
+      - ./mysql/my.cnf:/etc/mysql/conf.d/my.cnf
+      # コンテナ作成時に実行されるsqlファイルを格納するパスをdocker-entrypoint-initdb.dにマウント
+      - ./mysql/initdb.d:/docker-entrypoint-initdb.d
     tty: true
 
   phpmyadmin:
@@ -35,8 +42,8 @@ services:
     environment:
       - PMA_ARBITRARY=1
       - PMA_HOST=mysql
-      - PMA_USER=php_learner
-      - PMA_PASSWORD=php_app
+      - PMA_USER=sohh
+      - PMA_PASSWORD=woojob
     links:
       - mysql
     ports:

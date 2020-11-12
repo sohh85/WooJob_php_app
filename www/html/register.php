@@ -20,6 +20,7 @@ if (!empty($_POST)) {
     if ($_POST['password'] === '') {
         $error['password'] = 'blank';
     }
+
     $fileName = $_FILES['image']['name'];
     if (!empty($fileName)) {
         $ext = substr($fileName, -3); //拡張子を得る為に
@@ -28,7 +29,7 @@ if (!empty($_POST)) {
         }
     }
 
-    //ifで値が入ってるか確認。$recordでemail
+    // エラーがない場合は次の処理へ。メールが登録されたものと重複してないかチェック
     if (empty($error)) {
         $member = $dbh->prepare('SELECT COUNT(*) AS cnt FROM members WHERE email=?');
         $member->execute(array($_POST['email']));
@@ -38,17 +39,20 @@ if (!empty($_POST)) {
         }
     }
 
+
     if (empty($error)) {
-        $image = date('YmdHis') . $_FILES['image']['name']; //日付とファイル名合わせて被り防止。
-        move_uploaded_file($_FILES['image']['tmp_name'], 'member_picture/' . $image);
-        //tmp_nameは一時的に保存してる場所。move_uploaded_file関数でちゃんと保存。一つ目のパラメータが今ある場所、二つ目が新たに保存する場所
+        $image = 0;
+        if (!empty($_FILES['image']['name'])) {
+            $image = date('YmdHis') . $_FILES['image']['name']; //日付とファイル名合わせて被り防止
+            move_uploaded_file($_FILES['image']['tmp_name'], 'member_picture/' . $image);
+            //tmp_nameは一時的に保存してる場所。move_uploaded_file関数でちゃんと保存。一つ目のパラメータが今ある場所、二つ目が新たに保存する場所
+        }
+        $_SESSION['image'] = $image;
         $_SESSION['join'] = $_POST;
-        $_SESSION['join']['image'] = $image; //データベースに保存したいのでjoinの中にimage作って保存
         header('Location: check.php');
         exit();
     }
 }
-
 
 if ($_REQUEST['action'] == 'rewrite' && isset($_SESSION['join'])) {
     $_POST = $_SESSION['join'];
@@ -117,7 +121,7 @@ if ($_REQUEST['action'] == 'rewrite' && isset($_SESSION['join'])) {
                         </dd>
                         <dt>写真など</dt>
                         <dd>
-                            <input type="file" name="image" size="35" value="test" />
+                            <input type="file" name="image" size="35" value="test">
                             <?php if ($error['image'] === 'type') : ?>
                                 <p class="error">*「.gif」「.png」「.jpg」の写真を使用してください</p>
                             <?php endif; ?>

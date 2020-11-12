@@ -57,7 +57,8 @@ if (isset($_REQUEST['res'])) {
   $response->execute(array($_REQUEST['res']));
 
   $table = $response->fetch();
-  $message = '@' . $table['name'] . ' ' . $table['message'];
+  $message = '@' . $table['name'] . ' ';
+  // $message = '@' . $table['name'] . ' ' . $table['message'] . ' ';
 }
 
 ?>
@@ -88,10 +89,10 @@ if (isset($_REQUEST['res'])) {
 
         <form action="" method="post">
           <dl>
-            <dt><?php print(h($member["name"])); ?>さん、メッセージをどうぞ</dt>
+            <dt><?= (h($member["name"])); ?>さん、メッセージをどうぞ</dt>
             <dd>
-              <textarea name="message" cols="70" rows="5"><?php print(h($message)); ?></textarea>
-              <input type="hidden" name="reply_post_id" value="<?php print(h($_REQUEST['res'])); ?>">
+              <textarea name="message" cols="70" rows="5"><?= (h($message)); ?></textarea>
+              <input type="hidden" name="reply_post_id" value="<?= (h($_REQUEST['res'])); ?>">
             </dd>
           </dl>
           <div class="mb-2">
@@ -102,20 +103,25 @@ if (isset($_REQUEST['res'])) {
         <!-- membersの名前・postsの前カラムを取得したものを -->
         <?php foreach ($posts as $post) : ?>
           <div class="msg">
+
             <!-- プロフィール写真 -->
-            <img src="/../member_picture/<?php print(h($post['picture'])); ?>" width="48" height="48" alt="<?php print(h($post['name'])); ?>" />
+            <?php if (!empty($post['picture'])) : ?>
+              <img src="/../member_picture/<?= (h($post['picture'])); ?>" width="48" height="48" alt="<?= (h($post['name'])); ?>" />
+            <?php else : ?>
+              <div class="pic_box"></div>
+            <?php endif; ?>
 
             <div class="float_text">
               <!-- メッセージと返信ボタン -->
               <p>
-                <pre class="js-autolink"><?php print(h($post['message'])); ?></pre>
+                <pre class="js-autolink"><?= (h($post['message'])); ?></pre>
                 <div class="btn-radius-gradient-wrap">
-                  <a class="btn btn-radius-gradient m-0" href="index.php?res=<?php print(h($post['id'])); ?>">返信</a>
+                  <a class="btn btn-radius-gradient m-0" href="index.php?res=<?= (h($post['id'])); ?>">返信</a>
                 </div>
               </p>
 
               <!-- プロフィール写真の下に表示する項目 -->
-              <p class="under_pic mt-1"><span class="name"><i class="fas fa-user-circle"></i><?php print(h($post['name'])); ?></span><a href="view.php?id=<?= h($post['id']); ?>"><?php print(h($post['created'])); ?></a>
+              <p class="under_pic mt-1"><span class="name"><i class="fas fa-user-circle"></i><?= (h($post['name'])); ?></span><a href="view.php?id=<?= h($post['id']); ?>"><?= (h($post['created'])); ?></a>
 
                 <!-- 特定の投稿に対しての返信の場合表示 -->
                 <?php if ($post['reply_message_id'] > 0) : ?>
