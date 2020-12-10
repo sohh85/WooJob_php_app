@@ -63,17 +63,18 @@ if (isset($_REQUEST['res'])) {
 
 ?>
 <!DOCTYPE html>
-<html>
+<html lang="ja">
 
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>オーストラリア仕事情報共有掲示板</title>
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous" />
+  <title>WooJob掲示板</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
   <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
   <script src="https://kit.fontawesome.com/82342a278b.js" crossorigin="anonymous"></script>
-  <link rel="stylesheet" href="../css/style.css" />
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="shortcut icon" href="../images/favicon.png" type="image/vnd.microsoft.icon">
+  <link rel="icon" href="../images/favicon.png" type="image/vnd.microsoft.icon">
 </head>
 
 <body>
@@ -82,7 +83,7 @@ if (isset($_REQUEST['res'])) {
     <?php include("../header.php"); ?>
     <div class="content">
       <div id="head">
-        <h1>オーストラリア仕事情報共有掲示板</h1>
+        <h1>WooJob掲示板</h1>
       </div>
       <div id="content">
         <div style="text-align: right"><a href="logout.php">ログアウト</a></div>
@@ -106,7 +107,7 @@ if (isset($_REQUEST['res'])) {
 
             <!-- プロフィール写真 -->
             <?php if (!empty($post['picture'])) : ?>
-              <img src="/../member_picture/<?= (h($post['picture'])); ?>" width="48" height="48" alt="<?= (h($post['name'])); ?>" />
+              <img src="/../member_picture/<?= (h($post['picture'])); ?>" width="48" height="48" alt="<?= (h($post['name'])); ?>">
             <?php else : ?>
               <div class="pic_box"></div>
             <?php endif; ?>

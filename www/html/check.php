@@ -19,7 +19,7 @@ if (!empty($_POST)) {
 	unset($_SESSION['join']);
 	unset($_SESSION['image']);
 
-	header('Location: thanks.php');
+	header('Location: index.php');
 	exit();
 }
 ?>
@@ -29,11 +29,12 @@ if (!empty($_POST)) {
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<meta http-equiv="X-UA-Compatible" content="ie=edge">
 	<title>会員登録</title>
-	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous" />
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 	<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
-	<link rel="stylesheet" href="../css/style.css" />
+	<link rel="stylesheet" href="../css/style.css">
+	<link rel="shortcut icon" href="images/favicon.png" type="image/vnd.microsoft.icon">
+	<link rel="icon" href="images/favicon.png" type="image/vnd.microsoft.icon">
 </head>
 
 <body>
@@ -47,11 +48,8 @@ if (!empty($_POST)) {
 
 			<div id="content">
 				<p>記入した内容を確認して、「登録する」ボタンをクリックしてください</p>
-
-				<p><?= var_dump($_SESSION['image']); ?></p>
-
 				<form action="" method="post">
-					<input type="hidden" name="action" value="submit" />
+					<input type="hidden" name="action" value="submit">
 					<dl>
 						<dt>ニックネーム</dt>
 						<?php echo (h($_SESSION['join']['name'])); ?>
@@ -67,14 +65,12 @@ if (!empty($_POST)) {
 						</dd>
 						<dt>写真など</dt>
 						<dd>
-
 							<?php if (!empty($_SESSION['image'])) : ?>
 								<img src="member_picture/<?= (h($_SESSION['image'])); ?>" style="width:200px;">
 							<?php endif; ?>
-
 						</dd>
 					</dl>
-					<div><a href="register.php?action=rewrite">&laquo;&nbsp;書き直す</a> | <input type="submit" value="登録する" />
+					<div><a href="register.php?action=rewrite">&laquo;&nbsp;書き直す</a> | <input type="submit" value="登録する">
 					</div>
 				</form>
 			</div>

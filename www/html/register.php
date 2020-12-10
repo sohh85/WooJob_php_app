@@ -77,15 +77,17 @@ if ($_REQUEST['action'] == 'rewrite' && isset($_SESSION['join'])) {
 ?>
 
 <!DOCTYPE html>
-<html>
+<html lang="ja">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>会員登録</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
     <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="css/style.css">
+    <link rel="shortcut icon" href="images/favicon.png" type="image/vnd.microsoft.icon">
+    <link rel="icon" href="images/favicon.png" type="image/vnd.microsoft.icon">
 </head>
 
 <body>
@@ -95,7 +97,7 @@ if ($_REQUEST['action'] == 'rewrite' && isset($_SESSION['join'])) {
         <div class="content">
 
             <div id="head">
-                <h1>Register</h1>
+                <h1>登録する</h1>
             </div>
             <div id="content">
                 <p>次のフォームに必要事項をご記入ください。</p>
@@ -106,14 +108,14 @@ if ($_REQUEST['action'] == 'rewrite' && isset($_SESSION['join'])) {
                     <dl>
                         <dt>ニックネーム<span class="required">必須</span></dt>
                         <dd>
-                            <input class="check_user" type="text" name="name" size="35" maxlength="255" value="<?php echo (h($_POST['name'])); ?>" />
+                            <input class="check_user" type="text" name="name" size="35" maxlength="255" value="<?php echo (h($_POST['name'])); ?>">
                             <?php if ($error['name'] === 'blank') : ?>
                                 <p class="error">*ニックネームを入力してください</p>
                             <?php endif; ?>
                         </dd>
                         <dt>メールアドレス<span class="required">必須</span></dt>
                         <dd>
-                            <input class="check_user" type="text" name="email" size="35" maxlength="255" value="<?php echo (h($_POST['email'])); ?>" />
+                            <input class="check_user" type="text" name="email" size="35" maxlength="255" value="<?php echo (h($_POST['email'])); ?>">
                             <?php if ($error['email'] === 'blank') : ?>
                                 <p class="error">*メールアドレスを入力してください</p>
                             <?php elseif ($error['email'] === 'unfit') : ?>
@@ -146,7 +148,7 @@ if ($_REQUEST['action'] == 'rewrite' && isset($_SESSION['join'])) {
                             <?php endif; ?>
                         </dd>
                     </dl>
-                    <div><input type="submit" value="入力内容を確認する" /></div>
+                    <div><input type="submit" value="入力内容を確認する"></div>
                 </form>
                 <footer class="footer_bottom">
                     <p>Copyright - 赤坂 壮, 2020 All Rights Reserved.</p>

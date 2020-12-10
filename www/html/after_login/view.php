@@ -18,11 +18,12 @@ $posts->execute(array($_REQUEST['id']));
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>オーストラリア仕事情報共有掲示板</title>
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous" />
+  <title>WooJob掲示板</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
   <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
-  <link rel="stylesheet" href="/../css/style.css" />
+  <link rel="stylesheet" href="/../css/style.css">
+  <link rel="shortcut icon" href="../images/favicon.png" type="image/vnd.microsoft.icon">
+  <link rel="icon" href="../images/favicon.png" type="image/vnd.microsoft.icon">
 </head>
 
 <body>
@@ -31,7 +32,7 @@ $posts->execute(array($_REQUEST['id']));
     <?php include("../header.php"); ?>
     <div class="content">
       <div id="head">
-        <h1>ひとこと掲示板</h1>
+        <h1>WooJob掲示板</h1>
       </div>
       <div id="content">
         <p>&laquo;<a href="index.php">一覧にもどる</a></p>
