@@ -85,7 +85,7 @@ if ($_REQUEST['action'] == 'rewrite' && isset($_SESSION['join'])) {
     <title>会員登録</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous" />
     <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="css/style.css">
 </head>
 
 <body>
@@ -106,14 +106,14 @@ if ($_REQUEST['action'] == 'rewrite' && isset($_SESSION['join'])) {
                     <dl>
                         <dt>ニックネーム<span class="required">必須</span></dt>
                         <dd>
-                            <input type="text" name="name" size="35" maxlength="255" value="<?php echo (h($_POST['name'])); ?>" />
+                            <input class="check_user" type="text" name="name" size="35" maxlength="255" value="<?php echo (h($_POST['name'])); ?>" />
                             <?php if ($error['name'] === 'blank') : ?>
                                 <p class="error">*ニックネームを入力してください</p>
                             <?php endif; ?>
                         </dd>
                         <dt>メールアドレス<span class="required">必須</span></dt>
                         <dd>
-                            <input type="text" name="email" size="35" maxlength="255" value="<?php echo (h($_POST['email'])); ?>" />
+                            <input class="check_user" type="text" name="email" size="35" maxlength="255" value="<?php echo (h($_POST['email'])); ?>" />
                             <?php if ($error['email'] === 'blank') : ?>
                                 <p class="error">*メールアドレスを入力してください</p>
                             <?php elseif ($error['email'] === 'unfit') : ?>
@@ -127,7 +127,7 @@ if ($_REQUEST['action'] == 'rewrite' && isset($_SESSION['join'])) {
                             <?php endif; ?>
                         <dt>パスワード<span class="required">必須</span></dt>
                         <dd>
-                            <input type="password" name="password" size="10" maxlength="20" value="<?php echo (h($_POST['password'])); ?>" />
+                            <input class="check_user" type="password" name="password" size="10" maxlength="20" value="<?php echo (h($_POST['password'])); ?>" />
                             <?php if ($error['password'] === 'length') : ?>
                                 <p class="error">*パスワードは8文字以上入力してください</p>
                             <?php endif; ?>
