@@ -21,13 +21,30 @@ if (!empty($_POST)) {
         $error['password'] = 'blank';
     }
 
+
+    function getExt($filename) //ファイル名から拡張子を取得する関数
+    {
+        return pathinfo($filename, PATHINFO_EXTENSION);
+    }
+
+    function checkExt($filename) //アップロードされたファイルの拡張子が許可されているか確認する関数
+    {
+        global $cfg;
+        $ext = strtolower(getExt($filename)); // strtolower関数で大文字の場合は小文字に変換
+        return in_array($ext, $cfg['ALLOW_EXTS']);
+    }
+
+
+    $cfg['ALLOW_EXTS'] = array('jpg', 'jpeg', 'png', 'gif'); //アップロードを許可する拡張子
     $fileName = $_FILES['image']['name'];
+
     if (!empty($fileName)) {
-        $ext = substr($fileName, -3); //拡張子を得る為に
-        if ($ext != 'JPG' && $ext != 'gif' && $ext != 'png') {
+        // $ext = substr($fileName, -3); //拡張子を得る為に
+        if (!checkExt($fileName)) {
             $error['image'] = 'type';
         }
     }
+
 
     // エラーがない場合は次の処理へ。メールが登録されたものと重複してないかチェック
     if (empty($error)) {
@@ -65,7 +82,6 @@ if ($_REQUEST['action'] == 'rewrite' && isset($_SESSION['join'])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>会員登録</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous" />
     <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -123,7 +139,7 @@ if ($_REQUEST['action'] == 'rewrite' && isset($_SESSION['join'])) {
                         <dd>
                             <input type="file" name="image" size="35" value="test">
                             <?php if ($error['image'] === 'type') : ?>
-                                <p class="error">*「.gif」「.png」「.jpg」の写真を使用してください</p>
+                                <p class="error">*「.gif」「.png」「.jpg」「.jpeg」の写真を使用してください</p>
                             <?php endif; ?>
                             <?php if (!empty($error)) : ?>
                                 <p class="error">*もう一度ファイルを指定してください</p>

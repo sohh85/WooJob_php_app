@@ -1,23 +1,10 @@
-/*
-Copyright (c) 2010, Yahoo! Inc. All rights reserved.
-Code licensed under the BSD License:
-http://developer.yahoo.com/yui/license.html
-version: 2.8.1
-*/
 body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,code,form,fieldset,legend,input,button,textarea,p,blockquote,th,td{margin:0;padding:0;}table{border-collapse:collapse;border-spacing:0;}fieldset,img{border:0;}address,caption,cite,code,dfn,em,strong,th,var,optgroup{font-style:inherit;font-weight:inherit;}del,ins{text-decoration:none;}li{list-style:none;}caption,th{text-align:left;}h1,h2,h3,h4,h5,h6{font-size:100%;font-weight:normal;}q:before,q:after{content:'';}abbr,acronym{border:0;font-variant:normal;}sup{vertical-align:baseline;}sub{vertical-align:baseline;}legend{color:#000;}input,button,textarea,select,optgroup,option{font-family:inherit;font-size:inherit;font-style:inherit;font-weight:inherit;}input,button,textarea,select{*font-size:100%;}
-
-/*
-Copyright (c) 2010, Yahoo! Inc. All rights reserved.
-Code licensed under the BSD License:
-http://developer.yahoo.com/yui/license.html
-version: 2.8.1
-*/
-body{font:12px/1.231 arial,helvetica,clean,sans-serif;*font-size:small;*font:x-small;}select,input,button,textarea,button{font:99% arial,helvetica,clean,sans-serif;}table{font-size:inherit;font:100%;}pre,code,kbd,samp,tt{font-family:monospace;*font-size:108%;line-height:100%;}
 
 
 body {
-	background: url(images/bg_main.png) top center repeat-y #eeeeee;
-	color: #333;
+	background: url(/images/bg_main.png) top center repeat-y #eeeeee;
+  color: #333;
+  font-size: 12px;
 }
 
 #wrap {
@@ -29,18 +16,18 @@ body {
 	border-left: 1px solid #d4d4d4;
 	border-right: 1px solid #d4d4d4;
 	border-bottom: 1px solid #d4d4d4;
-	background: url(images/sp.jpg) bottom left repeat-x #106eb7;
+	background: url(/images/sp.jpg) bottom left repeat-x #106eb7;
 	color: #fff;
 	padding: 20px;
-	margin-bottom: 20px;
+  margin-bottom: 20px;
 }
 
 h1 {
-	padding-left: 25px;
+	padding-left: 20px;
 	font-size: 197%;
-	font-weight: bold;
+  font-weight: bold;
+  margin: 0;
 }
-
 
 a {
    text-decoration: none !important;
@@ -50,7 +37,7 @@ a {
 #content {
 	padding: 20px;
 	background:#f8f8f8;
-	width: 720px;
+	width: 730px;
 	min-height: 490px;
 	margin: 0 auto;
 	margin-bottom: 10px;
@@ -80,8 +67,6 @@ dl {
 }
 
 dt {
-	border-left: 5px solid #106eb7;
-	padding-left: 5px;
 	margin-bottom: 5px;
 }
 
@@ -130,6 +115,11 @@ li {
 .error {
 	font-size: 90%;
 	color: #BB1850;
+}
+
+.check_user {
+  width: 70%;
+  height: 30px;
 }
 
 #lead {
@@ -280,7 +270,332 @@ footer p {
 }
 
 
-/* 固定header */
+/* header */
+.top_logo a{
+  font-size: 18px;
+  font-family: 'Ubuntu Mono', monospace;
+  padding: 14px 14px 14px 40px;
+  text-align: center;
+  letter-spacing: 7px;
+  color: #222;
+}
+#global-navi {
+    width: 100%;
+    background:white;
+    box-shadow: 0 3px 10px 0 rgba(0, 0, 0, .5);
+    position: fixed;
+    top: 0;
+    right: 0px;
+}
+.content{
+    line-height: 1.6;
+    margin: 0 auto;
+    padding-top: 50px;
+    width: 800px;
+}
+.hover {
+  background-color: white;
+  font-size: 11px;
+  border-radius: 5px;
+  padding: 2px 30px;
+}
+.hover:hover {
+  background-color: yellow;
+  font-size: 11px;
+  border-radius: 5px;
+}
+.title_desc {
+  font-size: 12px;
+}
+
+/* アコーディオンメニュー */
+.menu__item {
+  cursor: pointer;
+  display: inline-block;
+
+}
+.menu__item__link {
+  display: inline-block;
+  position: relative;
+}
+.submenu {
+  background: #fff;
+  display: none;
+}
+.submenu__item {
+  padding: 5px;
+  /* display: inline-block; */
+}
+body {
+	background: url(/images/bg_main.png) top center repeat-y #eeeeee;
+  color: #333;
+  font-size: 12px;
+}
+
+#wrap {
+	width: 802px;
+	margin: 0 auto;
+}
+
+#head {
+	border-left: 1px solid #d4d4d4;
+	border-right: 1px solid #d4d4d4;
+	border-bottom: 1px solid #d4d4d4;
+	background: url(/images/sp.jpg) bottom left repeat-x #106eb7;
+	color: #fff;
+	padding: 20px;
+  margin-bottom: 20px;
+}
+
+h1 {
+	padding-left: 20px;
+	font-size: 197%;
+  font-weight: bold;
+  margin: 0;
+}
+
+a {
+   text-decoration: none !important;
+     list-style: none;
+}
+
+#content {
+	padding: 20px;
+	background:#f8f8f8;
+	width: 730px;
+	min-height: 490px;
+	margin: 0 auto;
+	margin-bottom: 10px;
+	font-size: 130.9%;
+}
+
+* html #content {
+	height: 490px;
+}
+
+p {
+	line-height: 1.2em;
+	margin-bottom: 0.5em;
+}
+
+pre {
+	line-height: 1.1em;
+	margin-bottom: 0.4em;
+	white-space: pre-wrap ;
+	font-family: inherit;
+	font-size: 18px;
+	font-weight: 300;
+}
+
+dl {
+	margin-bottom: 10px;
+}
+
+dt {
+	margin-bottom: 5px;
+}
+
+dd {
+	margin-bottom: 0.5em;
+}
+
+.required {
+	background-color: #BB1850;
+	color: #fff;
+	font-size: 90%;
+	padding: 2px;
+	margin-left: 10px;
+}
+
+#foot {
+	width: 780px;
+	text-align: right;
+}
+
+th, td {
+	border: 1px solid #999;
+	padding: 3px;
+}
+
+th {
+	background-color: #106eb7;
+	color: #fff;
+	font-weight: bold;
+}
+
+li {
+	margin-left: 8px;
+	margin-bottom: 0.5em;
+}
+
+.paging {
+	margin: 15px 0;
+	text-align: center;
+}
+.paging li {
+	display: inline;
+	list-style: none;
+}
+
+.error {
+	font-size: 90%;
+	color: #BB1850;
+}
+
+.check_user {
+  width: 70%;
+  height: 30px;
+}
+
+#lead {
+	margin-bottom: 1em;
+}
+
+.msg {
+	clear: both;
+	border-top: 1px solid #ccc;
+	padding: 10px 0;
+}
+.msg img {
+	float: left;
+	margin-right: 5px;
+	
+}
+.msg a {
+	display: inline-block;
+	margin-left: 10px;
+}
+.msg p {
+	margin: 0;
+}
+.msg .under_pic,
+.msg .under_pic a {
+	font-size: 80%;
+	color: #999;
+}
+.msg .reply a {
+color: #666666;
+}
+
+/* 写真登録されてない場合の表示 */
+.pic_box {
+  width: 48px;
+  height: 48px;
+  background: #d3d3d3;
+  float:  left;
+  margin-right: 5px;
+  border: 2px solid;
+  border-color: white;
+}
+
+.name {
+	font-size: 10px;
+	color: #BB1850;
+}
+
+
+/* 返信ボタン */
+.btn,
+a.btn,
+button.btn {
+  font-size: 0.5rem;
+  font-weight: 500;
+  line-height: 1.1;
+  /* position: relative; */
+  display: inline-block;
+  padding: 0.3rem 0.8rem;
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  -webkit-transition: all 0.3s;
+  transition: all 0.3s;
+  text-align: center;
+  vertical-align: middle;
+  text-decoration: none;
+  letter-spacing: 0.1em;
+  color: #212529;
+  border-radius: 0.5rem;
+}
+
+.btn-radius-gradient-wrap {
+  display: inline-block;
+  padding: 0.2rem;
+  border-radius: 100vh;
+  background: #f2f5f6;
+  background: -webkit-linear-gradient(
+    to top,
+    #f2f5f6 0%,
+    #e3eaed 37%,
+    #96a1a5 100%
+  );
+  background: -webkit-gradient(
+    linear,
+    left top,
+    left bottom,
+    from(#f2f5f6),
+    color-stop(37%, #e3eaed),
+    to(#96a1a5)
+  );
+  background: -webkit-linear-gradient(
+    top,
+    #f2f5f6 0%,
+    #e3eaed 37%,
+    #96a1a5 100%
+  );
+  background: linear-gradient(to bottom, #f2f5f6 0%, #e3eaed 37%, #96a1a5 100%);
+
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#f2f5f6', endColorstr='#96a1a5', GradientType=0);
+}
+
+a.btn-radius-gradient {
+  border-radius: 100vh;
+  background: #e3eaed;
+  background: -webkit-gradient(
+    linear,
+    left top,
+    left bottom,
+    from(#e3eaed),
+    to(#f2f5f6)
+  );
+  background: -webkit-linear-gradient(top, #e3eaed 0%, #f2f5f6 100%);
+  background: linear-gradient(to bottom, #e3eaed 0%, #f2f5f6 100%);
+
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#e3eaed', endColorstr='#f2f5f6', GradientType=0);
+}
+
+a.btn-radius-gradient:hover {
+  -webkit-transform: scale(1.05);
+  transform: scale(1.05);
+}
+
+.float_text { 
+  /* 投稿画面でボタンを画像下に回り込ませないように */
+	overflow:auto; zoom:1; 
+}
+
+
+/* 固定footer */
+.footer_bottom {
+  background-color: white;
+  color: #222;
+  font-family: 'Ubuntu Mono', monospace;
+  text-align: center;
+  padding: 9px;
+  position: fixed;
+  bottom: 0;
+  right: 0px;
+  width: 100%;
+  font-size: 12px;
+}
+
+footer p {
+  margin: 0;
+}
+
+
+/* header */
 .top_logo a{
   font-size: 18px;
   font-family: 'Ubuntu Mono', monospace;
