@@ -14,11 +14,10 @@ if (!empty($_POST)) {
         $error['email'] = 'unfit';
     }
 
-    if (strlen($_POST['password'] < 8)) {
-        $error['password'] = 'length';
-    }
     if ($_POST['password'] === '') {
         $error['password'] = 'blank';
+    } elseif (strlen($_POST['password'] < 4)) {
+        $error['password'] = 'length';
     }
 
 
@@ -62,7 +61,7 @@ if (!empty($_POST)) {
         if (!empty($_FILES['image']['name'])) {
             $image = date('YmdHis') . $_FILES['image']['name']; //日付とファイル名合わせて被り防止
             move_uploaded_file($_FILES['image']['tmp_name'], 'member_picture/' . $image);
-            //tmp_nameは一時的に保存してる場所。move_uploaded_file関数でちゃんと保存。一つ目のパラメータが今ある場所、二つ目が新たに保存する場所
+            //tmp_nameは一時的に保存してる場所。move_uploaded_file関数で正式に保存。一つ目のパラメータが今ある場所、二つ目が新たに保存する場所
         }
         $_SESSION['image'] = $image;
         $_SESSION['join'] = $_POST;
@@ -119,22 +118,18 @@ if ($_REQUEST['action'] == 'rewrite' && isset($_SESSION['join'])) {
                             <?php if ($error['email'] === 'blank') : ?>
                                 <p class="error">*メールアドレスを入力してください</p>
                             <?php elseif ($error['email'] === 'unfit') : ?>
-                                <p class="error">*正しい形式で入力してください</p>
+                                <p class="error">*メールアドレスは正しい形式で入力してください</p>
                             <?php endif; ?>
                             <?php if ($error['email'] === 'duplicate') : ?>
                                 <p class="error">*指定されたメールアドレスは既に登録されています</p>
                             <?php endif; ?>
-                            <?php if ($error['email'] === 'unfit') : ?>
-                                <p class="error">*「メールアドレス」は正しい形式で入力してください</p>
-                            <?php endif; ?>
                         <dt>パスワード<span class="required">必須</span></dt>
                         <dd>
-                            <input class="check_user" type="password" name="password" size="10" maxlength="20" value="<?php echo (h($_POST['password'])); ?>" />
-                            <?php if ($error['password'] === 'length') : ?>
-                                <p class="error">*パスワードは8文字以上入力してください</p>
-                            <?php endif; ?>
+                            <input class="check_user" type="password" name="password" maxlength="20" value="<?php echo (h($_POST['password'])); ?>" />
                             <?php if ($error['password'] === 'blank') : ?>
                                 <p class="error">*パスワードを入力してください</p>
+                            <?php elseif ($error['password'] === 'length') : ?>
+                                <p class="error">*パスワードは4文字以上入力してください</p>
                             <?php endif; ?>
                         </dd>
                         <dt>写真など</dt>
