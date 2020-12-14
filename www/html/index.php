@@ -6,24 +6,23 @@ require_once 'function.php';
 // エラーに使用する変数をグローバルスコープに定義
 $errors = [];
 
-$mail = isset($_POST['mail']) ? $_POST['mail'] : $_SESSION['join']['mail'];
-
 if ($_COOKIE['mail'] !== '') {
-  $email = $_COOKIE['mail'];
+  $mail = $_COOKIE['mail'];
 }
-
+// 自動ログインボタン押されたらクッキーにメール格納
 if ($_POST['save'] === 'on') {
   setcookie('mail', $_POST['mail'], time() + 60 * 60 * 24 * 4);
 }
 
+
 // ログインボタンが押されたら次の処理へ
 if (isset($_POST['login'])) {
-  // $mail = $_POST['mail'];
+  $mail = $_POST['mail'];
 
   if (checkPassword() && checkMail($mail)) {   //メール形式確認
     $user = getUserByMail($mail);  //登録済みメールか確認
     if (empty($user)) {
-      $errors_mail = '<p class="text-danger">*登録されていないメールアドレスです</p>';
+      $errors['mail'] = '<p class="text-danger">*登録されていないメールアドレスです</p>';
     } elseif (verifyPassword($user)) {
       $_SESSION['id'] = $user['id'];  //ユーザ情報を配列でセッションに格納
       $_SESSION['time'] = time();
