@@ -8,20 +8,48 @@ if (!isset($_SESSION['join'])) {
 	exit();
 }
 
-if (!empty($_POST)) {
-	$stmt = $dbh->prepare('INSERT INTO members SET name=?, email=?, password=?, picture=?, created=NOW()');
-	$stmt->execute(array(
-		$_SESSION['join']['name'],
-		$_SESSION['join']['email'],
-		sha1($_SESSION['join']['password']),
-		$_SESSION['image']
-	));
-	unset($_SESSION['join']);
-	unset($_SESSION['image']);
+// パスワードの文字数分「＊」を表示
+$password = $_SESSION['join']['password'];
+$password_hide = str_repeat('*', strlen($password));
 
-	header('Location: index.php');
-	exit();
+
+
+// 登録ボタン押されたら次の処理へ
+if (isset($_POST['register'])) {
+
+	try {
+		$dbh->beginTransaction();
+		//パスワードのハッシュ化
+		$password_hash =  password_hash($_SESSION['join']['password'], PASSWORD_DEFAULT);
+
+		$stmt = $dbh->prepare('INSERT INTO members SET name=?, email=?, password=?, picture=?, created=NOW()');
+		$stmt->execute(array(
+			$_SESSION['join']['name'],
+			$_SESSION['join']['mail'],
+			$password_hash,
+			$_SESSION['image']
+		));
+
+		//セッション削除
+		unset($_SESSION['join']);
+		unset($_SESSION['image']);
+		$_SESSION = array();
+
+		$dbh->commit();
+
+		// ログイン画面へリダイレクト
+		header('Location: index.php?after_register');
+		exit();
+	} catch (PDOException $e) {
+		$dbh->rollBack();
+		$error = "登録に失敗しました。もう一度お願いします。";
+		echo $e->getMessage();
+		exit();
+	}
+	//データベース接続切断
+	$dbh = null;
 }
+
 ?>
 <!DOCTYPE html>
 <html lang="ja">
@@ -52,16 +80,16 @@ if (!empty($_POST)) {
 					<input type="hidden" name="action" value="submit">
 					<dl>
 						<dt>ニックネーム</dt>
-						<?php echo (h($_SESSION['join']['name'])); ?>
+						<?= h($_SESSION['join']['name']); ?>
 						<dd>
 						</dd>
 						<dt>メールアドレス</dt>
-						<?php echo (h($_SESSION['join']['email'])); ?>
+						<?= h($_SESSION['join']['mail']); ?>
 						<dd>
 						</dd>
 						<dt>パスワード</dt>
 						<dd>
-							【表示されません】
+							<?= $password_hide ?>
 						</dd>
 						<dt>写真など</dt>
 						<dd>
@@ -70,7 +98,7 @@ if (!empty($_POST)) {
 							<?php endif; ?>
 						</dd>
 					</dl>
-					<div><a href="register.php?action=rewrite">&laquo;&nbsp;書き直す</a> | <input type="submit" value="登録する">
+					<div><a href="register.php">&laquo;&nbsp;書き直す</a> | <input type="submit" name='register' value="登録する">
 					</div>
 				</form>
 			</div>

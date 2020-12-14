@@ -24,8 +24,6 @@ if (!empty($_POST)) {
       $_POST['message'],
       $_POST['reply_post_id'],
     ));
-    // var_dump($message->errorInfo()); // デバッグ
-    // exit();
     header('Location: index.php');
     exit();
   }
@@ -58,7 +56,6 @@ if (isset($_REQUEST['res'])) {
 
   $table = $response->fetch();
   $message = '@' . $table['name'] . ' ';
-  // $message = '@' . $table['name'] . ' ' . $table['message'] . ' ';
 }
 
 ?>
