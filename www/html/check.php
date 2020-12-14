@@ -38,7 +38,7 @@ if (isset($_POST['register'])) {
 		exit();
 	} catch (PDOException $e) {
 		$dbh->rollBack();
-		$error = "登録に失敗しました。もう一度お願いします。";
+		$error = '<div class="alert alert-primary" role="alert"> 登録に失敗しました。もう一度お願いします。</div>';
 		echo $e->getMessage();
 		exit();
 	}
@@ -71,6 +71,7 @@ if (isset($_POST['register'])) {
 			</div>
 
 			<div id="content">
+				<?= $error ?>
 				<p>記入した内容を確認して、「登録する」ボタンをクリックしてください</p>
 				<form action="" method="post">
 					<input type="hidden" name="action" value="submit">
