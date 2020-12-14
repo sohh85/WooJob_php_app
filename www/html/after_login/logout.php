@@ -8,8 +8,8 @@ if (ini_get('session.use_cookies')) {
     setcookie(session_name(), '', time() - 42000, $params['path'], $params['domain'], $params['secure'], $params['httponly']);
 }
 
-session_destroy();
+// session_destroy();
 setcookie('email', '', time() - 3600);
 
-header('Location: ../index.php');
+header('Location: ../index.php?logout');
 exit();
