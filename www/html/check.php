@@ -13,7 +13,6 @@ $password = $_SESSION['join']['password'];
 $password_hide = str_repeat('*', strlen($password));
 
 
-
 // 登録ボタン押されたら次の処理へ
 if (isset($_POST['register'])) {
 
@@ -29,10 +28,7 @@ if (isset($_POST['register'])) {
 			$password_hash,
 			$_SESSION['image']
 		));
-
 		//セッション削除
-		unset($_SESSION['join']);
-		unset($_SESSION['image']);
 		$_SESSION = array();
 
 		$dbh->commit();
