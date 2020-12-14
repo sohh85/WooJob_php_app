@@ -17,6 +17,7 @@ $mail = spaceTrim($mail);
 //アップロードを許可する拡張子
 $cfg['ALLOW_EXTS'] = array('jpg', 'jpeg', 'png', 'gif');
 $fileName = $_FILES['image']['name'];
+$image = 0; // NULLが格納されないように
 
 
 // 内容確認ボタンが押されたら次の処理へ
