@@ -68,7 +68,6 @@ if (isset($_POST['register'])) {
 			<div id="head">
 				<h1>会員登録</h1>
 			</div>
-
 			<div id="content">
 				<?= $error ?>
 				<p>記入した内容を確認して、「登録する」ボタンをクリックしてください</p>
@@ -91,6 +90,9 @@ if (isset($_POST['register'])) {
 						<dd>
 							<?php if (!empty($_SESSION['image'])) : ?>
 								<img src="member_picture/<?= (h($_SESSION['image'])); ?>" style="width:200px;">
+							<?php endif; ?>
+							<?php if ($_SESSION['Ext'] == 'error') : ?>
+								<p class="text-danger">*「.gif」「.png」「.jpg」「.jpeg」の写真を使用してください</p>
 							<?php endif; ?>
 						</dd>
 					</dl>

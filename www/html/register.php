@@ -18,7 +18,7 @@ $mail = spaceTrim($mail);
 $cfg['ALLOW_EXTS'] = array('jpg', 'jpeg', 'png', 'gif');
 $fileName = $_FILES['image']['name'];
 $image = 0; // NULLが格納されないように
-
+unset($_SESSION['Ext']); // 画像拡張子に関するセッションを削除
 
 // 内容確認ボタンが押されたら次の処理へ
 if (isset($_POST['check'])) {
@@ -27,16 +27,17 @@ if (isset($_POST['check'])) {
     checkPwd($password);
     checkMail($mail);
 
-    if ($_FILES['image']['name']) { // 画像選択済み + 指定の拡張子 = 保存
-        if (checkExt($fileName)) {
-            $image = date('YmdHis') . $_FILES['image']['name'];
-            move_uploaded_file($_FILES['image']['tmp_name'], 'member_picture/' . $image);
-        } else {
-            $errors['image'] = '<p class="text-danger">*「.gif」「.png」「.jpg」「.jpeg」の写真を使用してください</p>';
-        }
-    }
-
     if (empty($errors)) { // エラーなければ確認ページへ
+
+        if ($_FILES['image']['name']) { // 画像選択済み + 指定の拡張子 = 保存
+            if (checkExt($fileName)) {
+                $image = date('YmdHis') . $_FILES['image']['name'];
+                move_uploaded_file($_FILES['image']['tmp_name'], 'member_picture/' . $image);
+            } else {
+                $_SESSION['Ext'] = 'error';
+            }
+        }
+
         $_SESSION['image'] = $image;
         $_SESSION['join'] = $_POST;
         header('Location: check.php');
