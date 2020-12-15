@@ -17,8 +17,9 @@ $mail = spaceTrim($mail);
 //アップロードを許可する拡張子
 $cfg['ALLOW_EXTS'] = array('jpg', 'jpeg', 'png', 'gif');
 $fileName = $_FILES['image']['name'];
-$image = 0; // NULLが格納されないように
-unset($_SESSION['Ext']); // 画像拡張子に関するセッションを削除
+// 画像拡張子に関するセッションを削除
+unset($_SESSION['Ext']);
+
 
 // 内容確認ボタンが押されたら次の処理へ
 if (isset($_POST['check'])) {
@@ -27,8 +28,9 @@ if (isset($_POST['check'])) {
     checkPwd($password);
     checkMail($mail);
 
-    if (empty($errors)) { // エラーなければ確認ページへ
-
+    if (empty($errors)) { // エラーなければ次の処理へ
+        // 表示できない拡張子 or 選択されなかった場合のデフォルト画像 。NULLでDB保存させない
+        $image = 'human.png';
         if ($_FILES['image']['name']) { // 画像選択済み + 指定の拡張子 = 保存
             if (checkExt($fileName)) {
                 $image = date('YmdHis') . $_FILES['image']['name'];
