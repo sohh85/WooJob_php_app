@@ -66,7 +66,6 @@ function checkPassword()
 
   if (empty($_POST['password'])) {
     $errors['password'] = '<p class="text-danger">*パスワードは必須項目です</p>';
-    return false;
   }
   return true;
 }
