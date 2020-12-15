@@ -32,7 +32,6 @@ if (isset($_POST['register'])) {
 		$_SESSION = array();
 
 		$dbh->commit();
-
 		// ログイン画面へリダイレクト
 		header('Location: index.php?after_register');
 		exit();

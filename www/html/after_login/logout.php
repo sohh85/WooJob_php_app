@@ -9,7 +9,7 @@ if (ini_get('session.use_cookies')) {
 }
 
 session_destroy();
-setcookie('email', '', time() - 3600);
+setcookie("mail", "", time() - 60 * 60 * 24 * 4, '/');
 
-header('Location: ../index.php');
+header('Location: ../index.php?logout');
 exit();
