@@ -3,6 +3,7 @@ session_start();
 require_once 'pdo_connect.php';
 require_once 'function.php';
 
+// セッションに値が無い場合
 if (!isset($_SESSION['join'])) {
 	header('Location: register.php');
 	exit();
@@ -46,65 +47,101 @@ if (isset($_POST['register'])) {
 }
 
 ?>
+
 <!DOCTYPE html>
 <html lang="ja">
 
 <head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>会員登録</title>
-	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-	<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
-	<link rel="stylesheet" href="../css/style.css">
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<title>登録内容確認</title>
+	<!-- ファビコン -->
 	<link rel="shortcut icon" href="images/favicon.png" type="image/vnd.microsoft.icon">
 	<link rel="icon" href="images/favicon.png" type="image/vnd.microsoft.icon">
+
+	<!-- Bootstrap CSSの読み込み -->
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+
+	<!-- <link rel="stylesheet" href="css/style.css"> -->
 </head>
 
 <body>
-	<div id="wrap">
-		<!-- header読み込み -->
-		<?php include("header.php"); ?>
-		<div class="content">
-			<div id="head">
-				<h1>会員登録</h1>
-			</div>
-			<div id="content">
-				<?= $error ?>
-				<p>記入した内容を確認して、「登録する」ボタンをクリックしてください</p>
-				<form action="" method="post">
-					<input type="hidden" name="action" value="submit">
-					<dl>
-						<dt>ニックネーム</dt>
-						<?= h($_SESSION['join']['name']); ?>
-						<dd>
-						</dd>
-						<dt>メールアドレス</dt>
-						<?= h($_SESSION['join']['mail']); ?>
-						<dd>
-						</dd>
-						<dt>パスワード</dt>
-						<dd>
-							<?= $password_hide ?>
-						</dd>
-						<dt>写真など</dt>
-						<dd>
-							<?php if (!empty($_SESSION['image'])) : ?>
-								<img src="member_picture/<?= (h($_SESSION['image'])); ?>" style="width:200px;">
-							<?php endif; ?>
-							<?php if ($_SESSION['Ext'] == 'error') : ?>
-								<p class="text-danger">*「.gif」「.png」「.jpg」「.jpeg」の写真を使用してください</p>
-							<?php endif; ?>
-						</dd>
-					</dl>
-					<div><a href="register.php">&laquo;&nbsp;書き直す</a> | <input type="submit" name='register' value="登録する">
+	<!------- Header ------->
+	<nav class="navbar navbar-expand-sm navbar-dark bg-dark mb-5">
+		<a class="navbar-brand px-4" href="#">WooJob</a>
+		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+		<div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+			<ul class="navbar-nav">
+				<li class="nav-item">
+					<a class="nav-link" href="#">新規登録</span></a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="#">ログイン</a>
+				</li>
+				<li class="nav-item dropdown">
+					<a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+						コンテンツ
+					</a>
+					<div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+						<a class="dropdown-item" href="#">ジョブを追加</a>
+						<a class="dropdown-item" href="#">ジョブを見る</a>
 					</div>
-				</form>
-			</div>
-			<footer class="footer_bottom">
-				<p>Copyright - 赤坂 壮, 2020 All Rights Reserved.</p>
-			</footer>
+				</li>
+			</ul>
 		</div>
+	</nav>
+
+
+	<!-- ログインフォーム -->
+	<div class="container py-5" id="contact">
+		<!-- 登録失敗エラー表示 -->
+		<?= $error ?>
+
+		<h2 class="mb-4">登録内容確認</h2>
+		<p>記入した内容を確認して、「登録する」ボタンをクリックしてください</p>
+
+		<form action="" method="post">
+			<input type="hidden" name="action" value="submit">
+
+			<dl>
+				<dt>ニックネーム</dt>
+				<?= h($_SESSION['join']['name']); ?>
+				<dd>
+				</dd>
+				<dt>メールアドレス</dt>
+				<?= h($_SESSION['join']['mail']); ?>
+				<dd>
+				</dd>
+				<dt>パスワード</dt>
+				<dd>
+					<?= $password_hide ?>
+				</dd>
+				<dt>写真など</dt>
+				<dd>
+					<?php if (!empty($_SESSION['image'])) : ?>
+						<img src="member_picture/<?= (h($_SESSION['image'])); ?>" style="width:200px;">
+					<?php endif; ?>
+					<?php if ($_SESSION['Ext'] == 'error') : ?>
+						<p class="text-danger">*「.gif」「.png」「.jpg」「.jpeg」の写真を使用してください</p>
+					<?php endif; ?>
+				</dd>
+			</dl>
+
+
+			<div class="mt-4"><a href="register.php" class="btn btn-light mr-2">書き直す</a><input type="submit" name="register" class="btn btn-secondary" value="登録する">
+			</div>
+		</form>
+
 	</div>
+
+
+	<!-- Optional JavaScript -->
+	<!-- jQuery first, Popper.js, Bootstrap JSの順番に読み込む -->
+	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
 </body>
 
 </html>

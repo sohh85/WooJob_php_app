@@ -118,72 +118,103 @@ function spaceTrim($str) // 前後にある半角全角スペースを削除す�
 }
 
 ?>
-
 <!DOCTYPE html>
 <html lang="ja">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>会員登録</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="css/style.css">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>新規登録</title>
+    <!-- ファビコン -->
     <link rel="shortcut icon" href="images/favicon.png" type="image/vnd.microsoft.icon">
     <link rel="icon" href="images/favicon.png" type="image/vnd.microsoft.icon">
+
+
+    <!-- Bootstrap CSSの読み込み -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+
+    <!-- <link rel="stylesheet" href="css/style.css"> -->
 </head>
 
 <body>
-    <div id="wrap">
-        <!-- header読み込み -->
-        <?php include("header.php"); ?>
-        <div class="content">
-
-            <div id="head">
-                <h1>登録する</h1>
-            </div>
-            <div id="content">
-                <p>次のフォームに必要事項をご記入ください。</p>
-                <p>既に登録済の方はこちらからどうぞ。</p>
-                <p class="mb-3">&raquo;<a href="index.php">ログインする</a></p>
-
-                <form action="" method="post" enctype="multipart/form-data">
-                    <dl>
-
-                        <dt>ニックネーム<span class="required">必須</span></dt>
-                        <dd>
-                            <input class="check_user" type="text" name="name" value="<?= h($name); ?>">
-                            <?= $errors['name']; ?>
-                        </dd>
-
-                        <dt>メールアドレス<span class="required">必須</span></dt>
-                        <dd>
-                            <input class="check_user" type="text" name="mail" value="<?= h($mail); ?>">
-                            <?= $errors['mail']; ?>
-                        </dd>
-
-                        <dt>パスワード<span class="required">必須</span></dt>
-                        <dd>
-                            <input class="check_user" type="password" name="password" value="<?= h($password); ?>">
-                            <?= $errors['password']; ?>
-                        </dd>
-
-                        <dt>写真など</dt>
-                        <dd>
-                            <input type="file" name="image" value="">
-                            <?= $errors['image'];  ?>
-                        </dd>
-
-                    </dl>
-                    <input type="submit" name="check" value="入力内容を確認する">
-
-                </form>
-                <footer class="footer_bottom">
-                    <p>Copyright - 赤坂 壮, 2020 All Rights Reserved.</p>
-                </footer>
-            </div>
+    <!------- Header ------->
+    <nav class="navbar navbar-expand-sm navbar-dark bg-dark mb-5">
+        <a class="navbar-brand px-4" href="#">WooJob</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" href="#">新規登録</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">ログイン</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">コンテンツ
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                        <a class="dropdown-item" href="#">ジョブを追加</a>
+                        <a class="dropdown-item" href="#">ジョブを見る</a>
+                    </div>
+                </li>
+            </ul>
         </div>
+    </nav>
+
+
+    <!-- 会員登録フォーム -->
+    <div class="container py-5" id="contact">
+
+        <h2 class="mb-4">登録する</h2>
+        <form action="" method="post" enctype="multipart/form-data">
+
+            <div class="form-group">
+                <label for="Name">ニックネーム<span class="required">必須</span></label>
+                <input type="text" class="form-control" name="name" id="Name" value="<?= h($name); ?>">
+                <!-- エラー表示 -->
+                <?= $errors['name']; ?>
+            </div>
+
+
+            <div class="form-group">
+                <label for="Email">メールアドレス<span class="required">必須</span></label>
+                <input type="email" class="form-control" name="mail" id="Email" value="<?= h($mail); ?>" aria-describedby="emailHelp">
+                <!-- エラー表示 -->
+                <?= $errors['mail']; ?>
+            </div>
+
+
+            <div class="form-group">
+                <label for="Password">パスワード<span class="required">必須</span></label>
+                <input type="password" name="password" class="form-control" id="Password" value="<?= h($password); ?>">
+                <!-- エラー表示 -->
+                <?= $errors['password']; ?>
+            </div>
+
+            <div class="input-group">
+                <label class="input-group-btn">
+                    <span class="btn btn-primary">
+                        画像を選択<input type="file" style="display:none">
+                    </span>
+                </label>
+                <input type="text" name="image" class="form-control" readonly="">
+                <!-- エラー表示 -->
+                <?= $errors['image']; ?>
+            </div>
+
+            <input class="btn btn-secondary mt-3" type="submit" name="check" value="入力内容を確認">
+
+        </form>
     </div>
+
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, Popper.js, Bootstrap JSの順番に読み込む -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
 </body>
 
 </html>
