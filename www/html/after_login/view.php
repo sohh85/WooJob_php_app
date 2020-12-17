@@ -21,15 +21,13 @@ $posts->execute(array($_REQUEST['id']));
   <title>WooJob掲示板</title>
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
   <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
-  <link rel="stylesheet" href="/../css/style.css">
+  <link rel="stylesheet" href="/../css/sns_style.css">
   <link rel="shortcut icon" href="../images/favicon.png" type="image/vnd.microsoft.icon">
   <link rel="icon" href="../images/favicon.png" type="image/vnd.microsoft.icon">
 </head>
 
 <body>
   <div id="wrap">
-    <!-- header読み込み -->
-    <?php include("../header.php"); ?>
     <div class="content">
       <div id="head">
         <h1>WooJob掲示板</h1>
@@ -40,7 +38,7 @@ $posts->execute(array($_REQUEST['id']));
 
         <?php if ($post = $posts->fetch()) : ?>
           <div class="msg">
-            <img src="/../member_picture/<?php print(h($post['picture'])); ?>" width="250" height="250">
+            <img src="/../images/member_picture/<?php print(h($post['picture'])); ?>" width="250" height="250">
             <p><?= h($post['message']); ?><span class="name">（<?= h($post['name']); ?>）</span></p>
             <p class="day"><?= h($post['created']); ?></p>
           </div>
@@ -48,9 +46,6 @@ $posts->execute(array($_REQUEST['id']));
           <p>その投稿は削除されたか、URLが間違えています</p>
         <?php endif; ?>
       </div>
-      <footer class="footer_bottom">
-        <p>Copyright - 赤坂 壮, 2020 All Rights Reserved.</p>
-      </footer>
     </div>
   </div>
 </body>
