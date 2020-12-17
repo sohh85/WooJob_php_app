@@ -1,6 +1,5 @@
 mysql/data/
 www/html/pdo_connect.php
 www/html/images/member_picture/
-www/.DS_Store
+www/html/.DS_Store
 .DS_Store
-www/html/next/
