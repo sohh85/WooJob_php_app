@@ -4,8 +4,6 @@ WooJob is a internet forum that you can share infomation about part-time job in 
  
 # DEMO
 
-<img width="1440" alt="スクリーンショット 2020-11-25 0 44 04" src="https://user-images.githubusercontent.com/67961122/100117267-f8067e00-2eb7-11eb-8a45-2c800a184e06.png">
-
 <img width="1440" alt="スクリーンショット 2020-11-25 0 44 18" src="https://user-images.githubusercontent.com/67961122/100117126-d60cfb80-2eb7-11eb-8a14-1d1da4e366ee.png">
 
 # Features
