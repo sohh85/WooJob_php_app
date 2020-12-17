@@ -172,7 +172,7 @@ function spaceTrim($str) // 前後にある半角全角スペースを削除す�
         <form action="" method="post" enctype="multipart/form-data">
 
             <div class="form-group">
-                <label for="Name">ニックネーム<span class="required">必須</span></label>
+                <label for="Name">ニックネーム</label>
                 <input type="text" class="form-control col-md-9" name="name" id="Name" value="<?= h($name); ?>">
                 <!-- エラー表示 -->
                 <?= $errors['name']; ?>
@@ -180,7 +180,7 @@ function spaceTrim($str) // 前後にある半角全角スペースを削除す�
 
 
             <div class="form-group">
-                <label for="Email">メールアドレス<span class="required">必須</span></label>
+                <label for="Email">メールアドレス</label>
                 <input type="email" class="form-control col-md-9" name="mail" id="Email" value="<?= h($mail); ?>" aria-describedby="emailHelp">
                 <!-- エラー表示 -->
                 <?= $errors['mail']; ?>
@@ -188,7 +188,7 @@ function spaceTrim($str) // 前後にある半角全角スペースを削除す�
 
 
             <div class="form-group">
-                <label for="Password">パスワード<span class="required">必須</span></label>
+                <label for="Password">パスワード</label>
                 <input type="password" name="password" class="form-control col-md-9" id="Password" value="<?= h($password); ?>">
                 <!-- エラー表示 -->
                 <?= $errors['password']; ?>
@@ -209,7 +209,6 @@ function spaceTrim($str) // 前後にある半角全角スペースを削除す�
 
         </form>
 
-        <?= var_dump($_FILES['image']) ?>
     </div>
 
 
