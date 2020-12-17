@@ -67,35 +67,35 @@ if (isset($_POST['register'])) {
 
 <body>
 	<!------- Header ------->
-	<nav class="navbar navbar-expand-sm navbar-dark bg-dark mb-5">
-		<a class="navbar-brand px-4" href="#">WooJob</a>
-		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-			<span class="navbar-toggler-icon"></span>
-		</button>
-		<div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-			<ul class="navbar-nav">
-				<li class="nav-item">
-					<a class="nav-link" href="register.php">新規登録</span></a>
-				</li>
-				<li class="nav-item">
-					<a class="nav-link" href="login.php">ログイン</a>
-				</li>
-				<li class="nav-item dropdown">
-					<a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-						コンテンツ
-					</a>
-					<div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-						<a class="dropdown-item" href="#">ジョブを追加</a>
-						<a class="dropdown-item" href="#">ジョブを見る</a>
-					</div>
-				</li>
-			</ul>
+	<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+		<div class="container">
+			<a class="navbar-brand" href="#">WooJob</a>
+			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<div class="collapse navbar-collapse" id="navbarResponsive">
+				<ul class="navbar-nav ml-auto">
+					<li class="nav-item">
+						<a class="nav-link" href="#">Home</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="#">About</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="index.php">Login</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="register.php">Register</a>
+					</li>
+				</ul>
+			</div>
 		</div>
 	</nav>
 
 
+
 	<!-- ログインフォーム -->
-	<div class="container py-5" id="contact">
+	<div class="container" id="contact">
 		<!-- 登録失敗エラー表示 -->
 		<?= $error ?>
 
