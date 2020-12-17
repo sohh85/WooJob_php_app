@@ -20,7 +20,7 @@ $jobData = getJobData($_GET);
 </head>
 
 <body>
-    <h1 class="col-xs-6 col-xs-offset-3">検索フォーム</h1>
+    <h1 class="col-xs-6 col-xs-offset-3">条件検索フォーム</h1>
     <div class="col-xs-6 col-xs-offset-3 well">
 
         <!-- 条件検索フォーム  -->
@@ -37,6 +37,10 @@ $jobData = getJobData($_GET);
                     <option value="0" <?= empty($_GET['city']) ? 'selected' : '' ?>>選択しない</option>
                     <option value="1" <?= isset($_GET['city']) && $_GET['city'] == '1' ? 'selected' : '' ?>>シドニー</option>
                     <option value="2" <?= isset($_GET['city']) && $_GET['city'] == '2' ? 'selected' : '' ?>>メルボルン</option>
+                    <option value="3" <?= isset($_GET['city']) && $_GET['city'] == '3' ? 'selected' : '' ?>>ケアンズ</option>
+                    <option value="4" <?= isset($_GET['city']) && $_GET['city'] == '4' ? 'selected' : '' ?>>ゴールドコースト</option>
+                    <option value="5" <?= isset($_GET['city']) && $_GET['city'] == '5' ? 'selected' : '' ?>>ブリズベン</option>
+                    <option value="6" <?= isset($_GET['city']) && $_GET['city'] == '6' ? 'selected' : '' ?>>パース</option>
                 </select>
             </div>
 
