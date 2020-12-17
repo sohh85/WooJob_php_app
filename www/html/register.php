@@ -147,19 +147,17 @@ function spaceTrim($str) // 前後にある半角全角スペースを削除す�
             </button>
             <div class="collapse navbar-collapse" id="navbarResponsive">
                 <ul class="navbar-nav ml-auto">
-                    <li class="nav-item active">
-                        <a class="nav-link" href="#">Home
-                            <span class="sr-only">(current)</span>
-                        </a>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Home</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#">About</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Services</a>
+                        <a class="nav-link" href="index.php">Login</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Contact</a>
+                    <li class="nav-item active">
+                        <a class="nav-link" href="#">Register<span class="sr-only">(current)</span></a>
                     </li>
                 </ul>
             </div>
@@ -168,7 +166,7 @@ function spaceTrim($str) // 前後にある半角全角スペースを削除す�
 
 
     <!-- 会員登録フォーム -->
-    <div class="container py-4" id="contact">
+    <div class="container" id="contact">
 
         <h2 class="mb-4">登録する</h2>
         <form action="" method="post" enctype="multipart/form-data">

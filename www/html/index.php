@@ -112,19 +112,17 @@ function verifyPassword($user)
             </button>
             <div class="collapse navbar-collapse" id="navbarResponsive">
                 <ul class="navbar-nav ml-auto">
-                    <li class="nav-item active">
-                        <a class="nav-link" href="#">Home
-                            <span class="sr-only">(current)</span>
-                        </a>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Home</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#">About</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Services</a>
+                    <li class="nav-item active">
+                        <a class="nav-link" href="#">Login<span class="sr-only">(current)</span></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Contact</a>
+                        <a class="nav-link" href="register.php">Register</a>
                     </li>
                 </ul>
             </div>
@@ -134,7 +132,7 @@ function verifyPassword($user)
 
 
     <!-- ログインフォーム -->
-    <div class="container py-4" id="contact">
+    <div class="container" id="contact">
 
         <!-- アラート表示 -->
         <?php if (isset($_GET['logout'])) : ?>

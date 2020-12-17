@@ -75,19 +75,17 @@ if (isset($_POST['register'])) {
 			</button>
 			<div class="collapse navbar-collapse" id="navbarResponsive">
 				<ul class="navbar-nav ml-auto">
-					<li class="nav-item active">
-						<a class="nav-link" href="#">Home
-							<span class="sr-only">(current)</span>
-						</a>
+					<li class="nav-item">
+						<a class="nav-link" href="#">Home</a>
 					</li>
 					<li class="nav-item">
 						<a class="nav-link" href="#">About</a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link" href="#">Services</a>
+						<a class="nav-link" href="index.php">Login</a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link" href="#">Contact</a>
+						<a class="nav-link" href="register.php">Register</a>
 					</li>
 				</ul>
 			</div>
@@ -97,7 +95,7 @@ if (isset($_POST['register'])) {
 
 
 	<!-- ログインフォーム -->
-	<div class="container py-5" id="contact">
+	<div class="container" id="contact">
 		<!-- 登録失敗エラー表示 -->
 		<?= $error ?>
 
