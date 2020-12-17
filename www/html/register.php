@@ -34,7 +34,7 @@ if (isset($_POST['check'])) {
         if ($_FILES['image']['name']) { // 画像選択済み + 指定の拡張子 = 保存
             if (checkExt($fileName)) {
                 $image = date('YmdHis') . $_FILES['image']['name'];
-                move_uploaded_file($_FILES['image']['tmp_name'], 'member_picture/' . $image);
+                move_uploaded_file($_FILES['image']['tmp_name'], 'images/member_picture/' . $image);
             } else {
                 $_SESSION['Ext'] = 'error';
             }
@@ -129,11 +129,12 @@ function spaceTrim($str) // 前後にある半角全角スペースを削除す�
     <link rel="shortcut icon" href="images/favicon.png" type="image/vnd.microsoft.icon">
     <link rel="icon" href="images/favicon.png" type="image/vnd.microsoft.icon">
 
-
     <!-- Bootstrap CSSの読み込み -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/style.css">
 
-    <!-- <link rel="stylesheet" href="css/style.css"> -->
+    <!-- Font Awesome -->
+    <script src="https://kit.fontawesome.com/82342a278b.js" crossorigin="anonymous"></script>
 </head>
 
 <body>
@@ -149,7 +150,7 @@ function spaceTrim($str) // 前後にある半角全角スペースを削除す�
                     <a class="nav-link" href="#">新規登録</span></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">ログイン</a>
+                    <a class="nav-link" href="index.php">ログイン</a>
                 </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">コンテンツ
@@ -165,14 +166,14 @@ function spaceTrim($str) // 前後にある半角全角スペースを削除す�
 
 
     <!-- 会員登録フォーム -->
-    <div class="container py-5" id="contact">
+    <div class="container py-4" id="contact">
 
         <h2 class="mb-4">登録する</h2>
         <form action="" method="post" enctype="multipart/form-data">
 
             <div class="form-group">
                 <label for="Name">ニックネーム<span class="required">必須</span></label>
-                <input type="text" class="form-control" name="name" id="Name" value="<?= h($name); ?>">
+                <input type="text" class="form-control col-md-9" name="name" id="Name" value="<?= h($name); ?>">
                 <!-- エラー表示 -->
                 <?= $errors['name']; ?>
             </div>
@@ -180,7 +181,7 @@ function spaceTrim($str) // 前後にある半角全角スペースを削除す�
 
             <div class="form-group">
                 <label for="Email">メールアドレス<span class="required">必須</span></label>
-                <input type="email" class="form-control" name="mail" id="Email" value="<?= h($mail); ?>" aria-describedby="emailHelp">
+                <input type="email" class="form-control col-md-9" name="mail" id="Email" value="<?= h($mail); ?>" aria-describedby="emailHelp">
                 <!-- エラー表示 -->
                 <?= $errors['mail']; ?>
             </div>
@@ -188,25 +189,27 @@ function spaceTrim($str) // 前後にある半角全角スペースを削除す�
 
             <div class="form-group">
                 <label for="Password">パスワード<span class="required">必須</span></label>
-                <input type="password" name="password" class="form-control" id="Password" value="<?= h($password); ?>">
+                <input type="password" name="password" class="form-control col-md-9" id="Password" value="<?= h($password); ?>">
                 <!-- エラー表示 -->
                 <?= $errors['password']; ?>
             </div>
 
-            <div class="input-group">
-                <label class="input-group-btn">
+            <div class="input-group my-4">
+                <label class="input-group-btn" for="Image">
                     <span class="btn btn-primary">
-                        画像を選択<input type="file" style="display:none">
+                        画像を選択<input type="file" name="image" id="Image" style="display:none">
                     </span>
                 </label>
-                <input type="text" name="image" class="form-control" readonly="">
+                <input type="text" class="form-control col-md-5" readonly="">
                 <!-- エラー表示 -->
                 <?= $errors['image']; ?>
             </div>
 
-            <input class="btn btn-secondary mt-3" type="submit" name="check" value="入力内容を確認">
+            <input class="btn btn-secondary btn-lg mt-3" type="submit" name="check" value="入力内容を確認">
 
         </form>
+
+        <?= var_dump($_FILES['image']) ?>
     </div>
 
 
@@ -215,6 +218,14 @@ function spaceTrim($str) // 前後にある半角全角スペースを削除す�
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+    <script>
+        $(document).on('change', ':file', function() {
+            var input = $(this),
+                numFiles = input.get(0).files ? input.get(0).files.length : 1,
+                label = input.val().replace(/\\/g, '/').replace(/.*\//, '');
+            input.parent().parent().next(':text').val(label);
+        });
+    </script>
 </body>
 
 </html>

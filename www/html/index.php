@@ -96,8 +96,10 @@ function verifyPassword($user)
 
     <!-- Bootstrap CSSの読み込み -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/style.css">
 
-    <!-- <link rel="stylesheet" href="css/style.css"> -->
+    <!-- Font Awesome -->
+    <script src="https://kit.fontawesome.com/82342a278b.js" crossorigin="anonymous"></script>
 </head>
 
 <body>
@@ -110,7 +112,7 @@ function verifyPassword($user)
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link" href="#">新規登録</span></a>
+                    <a class="nav-link" href="register.php">新規登録</span></a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#">ログイン</a>
@@ -130,14 +132,14 @@ function verifyPassword($user)
 
 
     <!-- ログインフォーム -->
-    <div class="container py-5" id="contact">
+    <div class="container py-4" id="contact">
 
         <!-- アラート表示 -->
         <?php if (isset($_GET['logout'])) : ?>
-            <div class="alert alert-primary" role="alert">ログアウトしました</div>
+            <div class="alert alert-primary mb-4 col-md-9" role="alert">ログアウトしました</div>
         <?php endif; ?>
         <?php if (isset($_GET['after_register'])) : ?>
-            <div class="alert alert-primary" role="alert">登録ありがとうございます<br>下記フォームよりログインしてください</div>
+            <div class="alert alert-primary mb-4 col-md-9" role="alert">登録ありがとうございます<br>下記フォームよりログインしてください</div>
         <?php endif; ?>
 
         <h2 class="mb-4">ログインする</h2>
@@ -145,14 +147,14 @@ function verifyPassword($user)
 
             <div class="form-group">
                 <label for="Email">メールアドレス</label>
-                <input type="email" class="form-control" name="mail" id="Email" value="<?= h($mail); ?>" aria-describedby="emailHelp">
+                <input type="email" class="form-control col-md-9" name="mail" id="Email" value="<?= h($mail); ?>" aria-describedby="emailHelp">
                 <!-- エラー表示 -->
                 <?= $errors['mail']; ?>
             </div>
 
             <div class="form-group">
                 <label for="Password">パスワード</label>
-                <input type="password" name="password" class="form-control" id="Password" value="<?= h($_POST['password']); ?>">
+                <input type="password" name="password" class="form-control col-md-9" id="Password" value="<?= h($_POST['password']); ?>">
                 <!-- エラー表示 -->
                 <?= $errors['password']; ?>
             </div>
@@ -161,7 +163,7 @@ function verifyPassword($user)
                 <input id="save" type="checkbox" name="save" value="on" style="transform:scale(1.5);">
                 <label for="save" class="pl-1">ログイン情報を記録する</label>
             </div>
-            <input class="btn btn-secondary mt-3" name="login" type="submit" value="ログインする">
+            <input class="btn btn-secondary btn-lg mt-3" name="login" type="submit" value="ログインする">
 
         </form>
 

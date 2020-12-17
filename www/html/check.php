@@ -75,10 +75,10 @@ if (isset($_POST['register'])) {
 		<div class="collapse navbar-collapse" id="navbarNavAltMarkup">
 			<ul class="navbar-nav">
 				<li class="nav-item">
-					<a class="nav-link" href="#">新規登録</span></a>
+					<a class="nav-link" href="register.php">新規登録</span></a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link" href="#">ログイン</a>
+					<a class="nav-link" href="login.php">ログイン</a>
 				</li>
 				<li class="nav-item dropdown">
 					<a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -102,6 +102,8 @@ if (isset($_POST['register'])) {
 		<h2 class="mb-4">登録内容確認</h2>
 		<p>記入した内容を確認して、「登録する」ボタンをクリックしてください</p>
 
+
+
 		<form action="" method="post">
 			<input type="hidden" name="action" value="submit">
 
@@ -121,7 +123,7 @@ if (isset($_POST['register'])) {
 				<dt>写真など</dt>
 				<dd>
 					<?php if (!empty($_SESSION['image'])) : ?>
-						<img src="member_picture/<?= (h($_SESSION['image'])); ?>" style="width:200px;">
+						<img src="images/member_picture/<?= (h($_SESSION['image'])); ?>" style="width:200px;">
 					<?php endif; ?>
 					<?php if ($_SESSION['Ext'] == 'error') : ?>
 						<p class="text-danger">*「.gif」「.png」「.jpg」「.jpeg」の写真を使用してください</p>
@@ -130,7 +132,7 @@ if (isset($_POST['register'])) {
 			</dl>
 
 
-			<div class="mt-4"><a href="register.php" class="btn btn-light mr-2">書き直す</a><input type="submit" name="register" class="btn btn-secondary" value="登録する">
+			<div class="mt-4"><a href="register.php" class="btn btn-light btn-lg mr-2">書き直す</a><input type="submit" name="register" class="btn btn-secondary btn-lg" value="登録する">
 			</div>
 		</form>
 
