@@ -21,8 +21,8 @@ function getJobData($params)
         $where[] = 'wage >= ' . (int)$params['wage'];
     }
     // 英語使用頻度
-    if (!empty($params['lang'])) {
-        $where[] = 'lang = ' . $params['lang'];
+    if (!empty($params['language'])) {
+        $where[] = 'language = ' . $params['language'];
     }
 
     if ($where) {

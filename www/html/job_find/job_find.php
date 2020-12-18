@@ -84,6 +84,8 @@ require_once '../function.php';
                                 <option value="4" <?= isset($_GET['city']) && $_GET['city'] == '4' ? 'selected' : '' ?>>ゴールドコースト</option>
                                 <option value="5" <?= isset($_GET['city']) && $_GET['city'] == '5' ? 'selected' : '' ?>>ブリズベン</option>
                                 <option value="6" <?= isset($_GET['city']) && $_GET['city'] == '6' ? 'selected' : '' ?>>パース</option>
+                                <option value="7" <?= isset($_GET['city']) && $_GET['city'] == '7' ? 'selected' : '' ?>>キャンベラ</option>
+                                <option value="8" <?= isset($_GET['city']) && $_GET['city'] == '8' ? 'selected' : '' ?>>アデレード</option>
                             </select>
                         </div>
 
@@ -98,12 +100,12 @@ require_once '../function.php';
                         </div>
 
                         <div class="form-group">
-                            <label for="Lang">英語使用頻度</label>
-                            <select name="lang" class="form-control form-control-sm" id="Lang">
-                                <option value="0" <?= empty($_GET['lang']) ? 'selected' : '' ?>>選択しない</option>
-                                <option value="1" <?= isset($_GET['lang']) && $_GET['lang'] == '1' ? 'selected' : '' ?>>ほぼない</option>
-                                <option value="2" <?= isset($_GET['lang']) && $_GET['lang'] == '2' ? 'selected' : '' ?>>たまに</option>
-                                <option value="3" <?= isset($_GET['lang']) && $_GET['lang'] == '3' ? 'selected' : '' ?>>頻繁に</option>
+                            <label for="Language">英語使用頻度</label>
+                            <select name="language" class="form-control form-control-sm" id="Language">
+                                <option value="0" <?= empty($_GET['language']) ? 'selected' : '' ?>>選択しない</option>
+                                <option value="1" <?= isset($_GET['language']) && $_GET['language'] == '1' ? 'selected' : '' ?>>ほぼない</option>
+                                <option value="2" <?= isset($_GET['language']) && $_GET['language'] == '2' ? 'selected' : '' ?>>たまに</option>
+                                <option value="3" <?= isset($_GET['language']) && $_GET['language'] == '3' ? 'selected' : '' ?>>頻繁に</option>
                             </select>
                         </div>
 
@@ -118,16 +120,10 @@ require_once '../function.php';
 
             <div class="col-lg-8">
 
-                <!-- <div class="card mt-4">
+                <div class="card mt-4">
+                    <!-- 選んだ地域の画像を表示 -->
                     <img class="card-img-top img-fluid" src="http://placehold.it/900x400" alt="">
-                    <div class="card-body">
-                        <h3 class="card-title">Product Name</h3>
-                        <h4>$24.99</h4>
-                        <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sapiente dicta fugit fugiat hic aliquam itaque facere, soluta. Totam id dolores, sint aperiam sequi pariatur praesentium animi perspiciatis molestias iure, ducimus!</p>
-                        <span class="text-warning">&#9733; &#9733; &#9733; &#9733; &#9734;</span>
-                        4.0 stars
-                    </div>
-                </div> -->
+                </div>
                 <!-- /.card -->
 
                 <div class="card card-outline-secondary my-4">
@@ -154,7 +150,7 @@ require_once '../function.php';
                                             <td><?= h($row['name']) ?></td>
                                             <td><?= h($row['city']) ?></td>
                                             <td><?= h($row['wage']) ?></td>
-                                            <td><?= h($row['lang']) ?></td>
+                                            <td><?= h($row['language']) ?></td>
                                         </tr>
                                     <?php endforeach; ?>
                                 </tbody>
