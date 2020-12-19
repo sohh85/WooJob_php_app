@@ -137,9 +137,10 @@ $cities = array(1 => "シドニー", 2 => "メルボルン", 3 => "ケアンズ"
                             <table class="table">
                                 <thead>
                                     <tr>
-                                        <th>名前</th>
-                                        <th>性別</th>
-                                        <th>年齢</th>
+                                        <th>企業名</th>
+                                        <th>都市名</th>
+                                        <th>時給</th>
+                                        <th>英語使用頻度</th>
                                     </tr>
                                 </thead>
                                 <tbody>
