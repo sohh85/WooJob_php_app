@@ -71,12 +71,12 @@ $cities = array(1 => "シドニー", 2 => "メルボルン", 3 => "ケアンズ"
                     <form method="get">
 
                         <div class="form-group">
-                            <label for="Name">企業・店の名前</label>
+                            <label for="Name" class="mb-1 small">企業・店の名前</label>
                             <input name="name" class="form-control form-control-sm" id="Name" value="<?= isset($_GET['name']) ? h($_GET['name']) : '' ?>">
                         </div>
 
                         <div class="form-group">
-                            <label for="City">地域</label>
+                            <label for="City" class="mb-1 small">地域</label>
                             <select name="city" class="form-control form-control-sm" id="City">
                                 <option value="0" <?= empty($_GET['city']) ? 'selected' : '' ?>>選択しない</option>
 
@@ -88,7 +88,7 @@ $cities = array(1 => "シドニー", 2 => "メルボルン", 3 => "ケアンズ"
                         </div>
 
                         <div class="form-group">
-                            <label for="Wage">時給</label>
+                            <label for="Wage" class="mb-1 small">時給</label>
                             <select name="wage" class="form-control form-control-sm" id="Wage">
                                 <option value="0" <?= empty($_GET['wage']) ? 'selected' : '' ?>>選択しない</option>
                                 <option value="15" <?= isset($_GET['wage']) && $_GET['wage'] == '15' ? 'selected' : '' ?>>15ドル以上</option>
@@ -98,7 +98,7 @@ $cities = array(1 => "シドニー", 2 => "メルボルン", 3 => "ケアンズ"
                         </div>
 
                         <div class="form-group">
-                            <label for="Language">英語使用頻度</label>
+                            <label for="Language" class="mb-1 small">英語使用頻度</label>
                             <select name="language" class="form-control form-control-sm" id="Language">
                                 <option value="0" <?= empty($_GET['language']) ? 'selected' : '' ?>>選択しない</option>
                                 <option value="1" <?= isset($_GET['language']) && $_GET['language'] == '1' ? 'selected' : '' ?>>ほぼない</option>
