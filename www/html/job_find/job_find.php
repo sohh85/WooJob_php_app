@@ -1,12 +1,13 @@
 <?php
 require_once '../function.php';
+require_once '../pdo_connect.php';
 
 // データ取得ロジック呼び出し
 // include_once('model.php');
 
 // フォームで選ばれた$_GETの値を関数使用し検索
 // $jobData = getJobData($_GET);
-
+$cities = array(1 => "シドニー", 2 => "メルボルン", 3 => "ケアンズ", 4 => "ゴールドコースト", 5 => "ブリズベン", 6 => "パース", 7 => "キャンベラ", 8 => "アデレード");
 ?>
 
 <!DOCTYPE html>
@@ -70,25 +71,24 @@ require_once '../function.php';
                     <form method="get">
 
                         <div class="form-group">
-                            <label for="Name">企業・店の名前</label>
+                            <label for="Name" class="mb-1 small">企業・店の名前</label>
                             <input name="name" class="form-control form-control-sm" id="Name" value="<?= isset($_GET['name']) ? h($_GET['name']) : '' ?>">
                         </div>
 
                         <div class="form-group">
-                            <label for="City">地域</label>
+                            <label for="City" class="mb-1 small">地域</label>
                             <select name="city" class="form-control form-control-sm" id="City">
                                 <option value="0" <?= empty($_GET['city']) ? 'selected' : '' ?>>選択しない</option>
-                                <option value="1" <?= isset($_GET['city']) && $_GET['city'] == '1' ? 'selected' : '' ?>>シドニー</option>
-                                <option value="2" <?= isset($_GET['city']) && $_GET['city'] == '2' ? 'selected' : '' ?>>メルボルン</option>
-                                <option value="3" <?= isset($_GET['city']) && $_GET['city'] == '3' ? 'selected' : '' ?>>ケアンズ</option>
-                                <option value="4" <?= isset($_GET['city']) && $_GET['city'] == '4' ? 'selected' : '' ?>>ゴールドコースト</option>
-                                <option value="5" <?= isset($_GET['city']) && $_GET['city'] == '5' ? 'selected' : '' ?>>ブリズベン</option>
-                                <option value="6" <?= isset($_GET['city']) && $_GET['city'] == '6' ? 'selected' : '' ?>>パース</option>
+
+                                <?php foreach ($cities as $key => $value) : ?>
+                                    <option value="<?= $key; ?>" <?php if (isset($_GET['city']) && $_GET['city'] == "{$key}") echo 'selected' ?>><?= $value; ?></option>
+                                <?php endforeach; ?>
+
                             </select>
                         </div>
 
                         <div class="form-group">
-                            <label for="Wage">時給</label>
+                            <label for="Wage" class="mb-1 small">時給</label>
                             <select name="wage" class="form-control form-control-sm" id="Wage">
                                 <option value="0" <?= empty($_GET['wage']) ? 'selected' : '' ?>>選択しない</option>
                                 <option value="15" <?= isset($_GET['wage']) && $_GET['wage'] == '15' ? 'selected' : '' ?>>15ドル以上</option>
@@ -98,12 +98,12 @@ require_once '../function.php';
                         </div>
 
                         <div class="form-group">
-                            <label for="Lang">英語使用頻度</label>
-                            <select name="lang" class="form-control form-control-sm" id="Lang">
-                                <option value="0" <?= empty($_GET['lang']) ? 'selected' : '' ?>>選択しない</option>
-                                <option value="1" <?= isset($_GET['lang']) && $_GET['lang'] == '1' ? 'selected' : '' ?>>ほぼない</option>
-                                <option value="2" <?= isset($_GET['lang']) && $_GET['lang'] == '2' ? 'selected' : '' ?>>たまに</option>
-                                <option value="3" <?= isset($_GET['lang']) && $_GET['lang'] == '3' ? 'selected' : '' ?>>頻繁に</option>
+                            <label for="Language" class="mb-1 small">英語使用頻度</label>
+                            <select name="language" class="form-control form-control-sm" id="Language">
+                                <option value="0" <?= empty($_GET['language']) ? 'selected' : '' ?>>選択しない</option>
+                                <option value="1" <?= isset($_GET['language']) && $_GET['language'] == '1' ? 'selected' : '' ?>>ほぼない</option>
+                                <option value="2" <?= isset($_GET['language']) && $_GET['language'] == '2' ? 'selected' : '' ?>>たまに</option>
+                                <option value="3" <?= isset($_GET['language']) && $_GET['language'] == '3' ? 'selected' : '' ?>>頻繁に</option>
                             </select>
                         </div>
 
@@ -118,16 +118,10 @@ require_once '../function.php';
 
             <div class="col-lg-8">
 
-                <!-- <div class="card mt-4">
+                <div class="card mt-4">
+                    <!-- 選んだ地域の画像を表示 -->
                     <img class="card-img-top img-fluid" src="http://placehold.it/900x400" alt="">
-                    <div class="card-body">
-                        <h3 class="card-title">Product Name</h3>
-                        <h4>$24.99</h4>
-                        <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sapiente dicta fugit fugiat hic aliquam itaque facere, soluta. Totam id dolores, sint aperiam sequi pariatur praesentium animi perspiciatis molestias iure, ducimus!</p>
-                        <span class="text-warning">&#9733; &#9733; &#9733; &#9733; &#9734;</span>
-                        4.0 stars
-                    </div>
-                </div> -->
+                </div>
                 <!-- /.card -->
 
                 <div class="card card-outline-secondary my-4">
@@ -143,9 +137,10 @@ require_once '../function.php';
                             <table class="table">
                                 <thead>
                                     <tr>
-                                        <th>名前</th>
-                                        <th>性別</th>
-                                        <th>年齢</th>
+                                        <th>企業名</th>
+                                        <th>都市名</th>
+                                        <th>時給</th>
+                                        <th>英語使用頻度</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -154,7 +149,7 @@ require_once '../function.php';
                                             <td><?= h($row['name']) ?></td>
                                             <td><?= h($row['city']) ?></td>
                                             <td><?= h($row['wage']) ?></td>
-                                            <td><?= h($row['lang']) ?></td>
+                                            <td><?= h($row['language']) ?></td>
                                         </tr>
                                     <?php endforeach; ?>
                                 </tbody>
@@ -163,17 +158,14 @@ require_once '../function.php';
                             <p class="alert alert-danger">検索対象は見つかりませんでした。</p>
                         <?php endif; ?>
 
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Omnis et enim aperiam inventore, similique necessitatibus neque non! Doloribus, modi sapiente laboriosam aperiam fugiat laborum. Sequi mollitia, necessitatibus quae sint natus.</p>
+                        <small class="text-muted">Posted by Anonymous on 3/1/17</small>
+                        <hr>
 
                         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Omnis et enim aperiam inventore, similique necessitatibus neque non! Doloribus, modi sapiente laboriosam aperiam fugiat laborum. Sequi mollitia, necessitatibus quae sint natus.</p>
                         <small class="text-muted">Posted by Anonymous on 3/1/17</small>
                         <hr>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Omnis et enim aperiam inventore, similique necessitatibus neque non! Doloribus, modi sapiente laboriosam aperiam fugiat laborum. Sequi mollitia, necessitatibus quae sint natus.</p>
-                        <small class="text-muted">Posted by Anonymous on 3/1/17</small>
-                        <hr>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Omnis et enim aperiam inventore, similique necessitatibus neque non! Doloribus, modi sapiente laboriosam aperiam fugiat laborum. Sequi mollitia, necessitatibus quae sint natus.</p>
-                        <small class="text-muted">Posted by Anonymous on 3/1/17</small>
-                        <hr>
-                        <a href="#" class="btn btn-success">Leave a Review</a>
+
                     </div>
                 </div>
                 <!-- /.card -->
