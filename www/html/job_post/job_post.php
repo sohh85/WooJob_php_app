@@ -93,10 +93,21 @@
 
                             <div class="form-group">
                                 <label for="Wage">時給</label>
+                                <input name="wage" class="form-control form-control-sm" id="Wage" value="<?= isset($_GET['wage']) ? h($_GET['wage']) : '' ?>">
                             </div>
 
                             <div class="form-group">
                                 <label for="Lang">英語使用頻度</label>
+                                <select name="lang" class="form-control form-control-sm" id="Lang">
+                                    <option value="0" <?= empty($_GET['lang']) ? 'selected' : '' ?>>選択しない</option>
+                                    <option value="1" <?= isset($_GET['lang']) && $_GET['lang'] == '1' ? 'selected' : '' ?>>ほぼない</option>
+                                    <option value="2" <?= isset($_GET['lang']) && $_GET['lang'] == '2' ? 'selected' : '' ?>>たまに</option>
+                                    <option value="3" <?= isset($_GET['lang']) && $_GET['lang'] == '3' ? 'selected' : '' ?>>頻繁に</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="Lang">おすすめ度✨</label>
                                 <select name="lang" class="form-control form-control-sm" id="Lang">
                                     <option value="0" <?= empty($_GET['lang']) ? 'selected' : '' ?>>選択しない</option>
                                     <option value="1" <?= isset($_GET['lang']) && $_GET['lang'] == '1' ? 'selected' : '' ?>>ほぼない</option>
