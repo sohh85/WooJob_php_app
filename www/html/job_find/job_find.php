@@ -1,12 +1,13 @@
 <?php
 require_once '../function.php';
+require_once '../pdo_connect.php';
 
 // データ取得ロジック呼び出し
 // include_once('model.php');
 
 // フォームで選ばれた$_GETの値を関数使用し検索
 // $jobData = getJobData($_GET);
-
+$cities = array(1 => "シドニー", 2 => "メルボルン", 3 => "ケアンズ", 4 => "ゴールドコースト", 5 => "ブリズベン", 6 => "パース", 7 => "キャンベラ", 8 => "アデレード");
 ?>
 
 <!DOCTYPE html>
@@ -78,14 +79,11 @@ require_once '../function.php';
                             <label for="City">地域</label>
                             <select name="city" class="form-control form-control-sm" id="City">
                                 <option value="0" <?= empty($_GET['city']) ? 'selected' : '' ?>>選択しない</option>
-                                <option value="1" <?= isset($_GET['city']) && $_GET['city'] == '1' ? 'selected' : '' ?>>シドニー</option>
-                                <option value="2" <?= isset($_GET['city']) && $_GET['city'] == '2' ? 'selected' : '' ?>>メルボルン</option>
-                                <option value="3" <?= isset($_GET['city']) && $_GET['city'] == '3' ? 'selected' : '' ?>>ケアンズ</option>
-                                <option value="4" <?= isset($_GET['city']) && $_GET['city'] == '4' ? 'selected' : '' ?>>ゴールドコースト</option>
-                                <option value="5" <?= isset($_GET['city']) && $_GET['city'] == '5' ? 'selected' : '' ?>>ブリズベン</option>
-                                <option value="6" <?= isset($_GET['city']) && $_GET['city'] == '6' ? 'selected' : '' ?>>パース</option>
-                                <option value="7" <?= isset($_GET['city']) && $_GET['city'] == '7' ? 'selected' : '' ?>>キャンベラ</option>
-                                <option value="8" <?= isset($_GET['city']) && $_GET['city'] == '8' ? 'selected' : '' ?>>アデレード</option>
+
+                                <?php foreach ($cities as $key => $value) : ?>
+                                    <option value="<?= $key; ?>" <?php if (isset($_GET['city']) && $_GET['city'] == "{$key}") echo 'selected' ?>><?= $value; ?></option>
+                                <?php endforeach; ?>
+
                             </select>
                         </div>
 
