@@ -1,3 +1,10 @@
+<?php
+
+
+$cities = array(1 => "シドニー", 2 => "メルボルン", 3 => "ケアンズ", 4 => "ゴールドコースト", 5 => "ブリズベン", 6 => "パース", 7 => "キャンベラ", 8 => "アデレード");
+
+
+?>
 <!DOCTYPE html>
 <html>
 
@@ -48,7 +55,6 @@
 
     <!-- Page Content -->
     <div class="container">
-
         <div class="row">
 
             <div class="col-lg-9">
@@ -71,10 +77,7 @@
                     </div>
                     <div class="card-body">
 
-
-
-
-                        <form method="post">
+                        <form method="get">
 
                             <div class="form-group">
                                 <label for="Name">企業・店の名前</label>
@@ -97,27 +100,26 @@
                             </div>
 
                             <div class="form-group">
-                                <label for="Lang">英語使用頻度</label>
-                                <select name="lang" class="form-control form-control-sm" id="Lang">
-                                    <option value="0" <?= empty($_GET['lang']) ? 'selected' : '' ?>>選択しない</option>
-                                    <option value="1" <?= isset($_GET['lang']) && $_GET['lang'] == '1' ? 'selected' : '' ?>>ほぼない</option>
-                                    <option value="2" <?= isset($_GET['lang']) && $_GET['lang'] == '2' ? 'selected' : '' ?>>たまに</option>
-                                    <option value="3" <?= isset($_GET['lang']) && $_GET['lang'] == '3' ? 'selected' : '' ?>>頻繁に</option>
+                                <label for="Language">英語使用頻度</label>
+                                <select name="language" class="form-control form-control-sm" id="Language">
+                                    <option value="0" <?= empty($_GET['language']) ? 'selected' : '' ?>>選択しない</option>
+                                    <option value="1" <?= isset($_GET['language']) && $_GET['language'] == '1' ? 'selected' : '' ?>>ほぼない</option>
+                                    <option value="2" <?= isset($_GET['language']) && $_GET['language'] == '2' ? 'selected' : '' ?>>たまに</option>
+                                    <option value="3" <?= isset($_GET['language']) && $_GET['language'] == '3' ? 'selected' : '' ?>>頻繁に</option>
                                 </select>
                             </div>
 
                             <div class="form-group">
-                                <label for="Lang">おすすめ度✨</label>
-                                <select name="lang" class="form-control form-control-sm" id="Lang">
-                                    <option value="0" <?= empty($_GET['lang']) ? 'selected' : '' ?>>選択しない</option>
-                                    <option value="1" <?= isset($_GET['lang']) && $_GET['lang'] == '1' ? 'selected' : '' ?>>ほぼない</option>
-                                    <option value="2" <?= isset($_GET['lang']) && $_GET['lang'] == '2' ? 'selected' : '' ?>>たまに</option>
-                                    <option value="3" <?= isset($_GET['lang']) && $_GET['lang'] == '3' ? 'selected' : '' ?>>頻繁に</option>
+                                <label for="Like">おすすめ度✨</label>
+                                <select name="like" class="form-control form-control-sm" id="Like">
+                                    <?php for ($i = 1; $i <= 5; $i++) : ?>
+                                        <option value="<?= $i ?>"><?= 'おすすめ度' . $i ?></option>
+                                    <?php endfor; ?>
                                 </select>
                             </div>
 
                             <hr>
-                            <button type="submit" class="btn btn-info mt-4 px-5" name="search">情報を投稿する</button>
+                            <button type="submit" class="btn btn-info mt-4 px-5" name="post">情報を投稿する</button>
                         </form>
                     </div>
                 </div>
