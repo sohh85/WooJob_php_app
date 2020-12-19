@@ -8,7 +8,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>仕事情報投稿フォーム</title>
+    <title>仕事情報投稿</title>
 
     <!-- Bootstrap core CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
@@ -51,19 +51,9 @@
 
         <div class="row">
 
-            <div class="col-lg-3">
-                <h1 class="my-4">Shop Name</h1>
-                <div class="list-group">
-                    <a href="#" class="list-group-item active">Category 1</a>
-                    <a href="#" class="list-group-item">Category 2</a>
-                    <a href="#" class="list-group-item">Category 3</a>
-                </div>
-            </div>
-            <!-- /.col-lg-3 -->
-
             <div class="col-lg-9">
 
-                <div class="card mt-4">
+                <!-- <div class="card mt-4">
                     <img class="card-img-top img-fluid" src="http://placehold.it/900x400" alt="">
                     <div class="card-body">
                         <h3 class="card-title">Product Name</h3>
@@ -72,30 +62,69 @@
                         <span class="text-warning">&#9733; &#9733; &#9733; &#9733; &#9734;</span>
                         4.0 stars
                     </div>
-                </div>
+                </div> -->
                 <!-- /.card -->
 
                 <div class="card card-outline-secondary my-4">
-                    <div class="card-header">
-                        Product Reviews
+                    <div class="card-header h4 py-3">
+                        仕事情報投稿フォーム
                     </div>
                     <div class="card-body">
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Omnis et enim aperiam inventore, similique necessitatibus neque non! Doloribus, modi sapiente laboriosam aperiam fugiat laborum. Sequi mollitia, necessitatibus quae sint natus.</p>
-                        <small class="text-muted">Posted by Anonymous on 3/1/17</small>
-                        <hr>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Omnis et enim aperiam inventore, similique necessitatibus neque non! Doloribus, modi sapiente laboriosam aperiam fugiat laborum. Sequi mollitia, necessitatibus quae sint natus.</p>
-                        <small class="text-muted">Posted by Anonymous on 3/1/17</small>
-                        <hr>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Omnis et enim aperiam inventore, similique necessitatibus neque non! Doloribus, modi sapiente laboriosam aperiam fugiat laborum. Sequi mollitia, necessitatibus quae sint natus.</p>
-                        <small class="text-muted">Posted by Anonymous on 3/1/17</small>
-                        <hr>
-                        <a href="#" class="btn btn-success">Leave a Review</a>
+
+
+
+
+                        <form method="post">
+
+                            <div class="form-group">
+                                <label for="Name">企業・店の名前</label>
+                                <input name="name" class="form-control form-control-sm" id="Name" value="<?= isset($_GET['name']) ? h($_GET['name']) : '' ?>">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="City">地域</label>
+                                <select name="city" class="form-control form-control-sm" id="City">
+                                    <option value="0" <?= empty($_GET['city']) ? 'selected' : '' ?>>選択しない</option>
+                                    <?php foreach ($cities as $key => $value) : ?>
+                                        <option value="<?= $key; ?>" <?php if (isset($_GET['city']) && $_GET['city'] == "{$key}") echo 'selected' ?>><?= $value; ?></option>
+                                    <?php endforeach; ?>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="Wage">時給</label>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="Lang">英語使用頻度</label>
+                                <select name="lang" class="form-control form-control-sm" id="Lang">
+                                    <option value="0" <?= empty($_GET['lang']) ? 'selected' : '' ?>>選択しない</option>
+                                    <option value="1" <?= isset($_GET['lang']) && $_GET['lang'] == '1' ? 'selected' : '' ?>>ほぼない</option>
+                                    <option value="2" <?= isset($_GET['lang']) && $_GET['lang'] == '2' ? 'selected' : '' ?>>たまに</option>
+                                    <option value="3" <?= isset($_GET['lang']) && $_GET['lang'] == '3' ? 'selected' : '' ?>>頻繁に</option>
+                                </select>
+                            </div>
+
+                            <hr>
+                            <button type="submit" class="btn btn-info mt-4 px-5" name="search">情報を投稿する</button>
+                        </form>
                     </div>
                 </div>
                 <!-- /.card -->
 
             </div>
             <!-- /.col-lg-9 -->
+
+
+            <!-- <div class="col-lg-3">
+                <h1 class="my-4">Shop Name</h1>
+                <div class="list-group">
+                    <a href="#" class="list-group-item active">Category 1</a>
+                    <a href="#" class="list-group-item">Category 2</a>
+                    <a href="#" class="list-group-item">Category 3</a>
+                </div>
+            </div> -->
+            <!-- /.col-lg-3 -->
 
         </div>
 
