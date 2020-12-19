@@ -110,10 +110,10 @@ $cities = array(1 => "シドニー", 2 => "メルボルン", 3 => "ケアンズ"
                             </div>
 
                             <div class="form-group">
-                                <label for="Like">おすすめ度✨</label>
-                                <select name="like" class="form-control form-control-sm" id="Like">
+                                <label for="Rating">おすすめ度</label>
+                                <select name="rating" class="form-control form-control-sm" id="Rating">
                                     <?php for ($i = 1; $i <= 5; $i++) : ?>
-                                        <option value="<?= $i ?>"><?= 'おすすめ度' . $i ?></option>
+                                        <option value="<?= $i ?>"><?= str_repeat('⭐️', $i) ?></option>
                                     <?php endfor; ?>
                                 </select>
                             </div>
