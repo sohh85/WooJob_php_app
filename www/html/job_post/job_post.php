@@ -41,8 +41,7 @@ if (isset($_REQUEST["post"])) {
         $stmt->execute();
 
         unset($_SESSION['chkno']);
-
-        header('Location: index.php?after_register');
+        header('Location: index.php');
         exit();
     }
 }
