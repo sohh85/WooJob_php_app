@@ -20,14 +20,15 @@ $language = array(1 => "全く必要ない", 2 => "たまに英語を使用", 3 
 if (isset($_POST['post'])) {
 
     $stmt = $dbh->prepare('INSERT INTO job_data SET name=?, city_id=?, wage=?, language=?, rating=?, detail=?, created=NOW()+INTERVAL 9 HOUR');
-    $stmt->execute(array(
-        $_POST['name'],
-        $_POST['city'],
-        $_POST['wage'],
-        $_POST['language'],
-        $_POST['rating'],
-        $_POST['detail']
-    ));
+
+    $stmt->bindValue(1, $_POST['name'], PDO::PARAM_STR);
+    $stmt->bindValue(2, $_POST['city'], PDO::PARAM_INT);
+    $stmt->bindValue(3, $_POST['wage'], PDO::PARAM_INT);
+    $stmt->bindValue(4, $_POST['language'], PDO::PARAM_STR);
+    $stmt->bindValue(5, $_POST['rating'], PDO::PARAM_INT);
+    $stmt->bindValue(6, $_POST['detail'], PDO::PARAM_STR);
+
+    $stmt->execute();
 }
 
 
