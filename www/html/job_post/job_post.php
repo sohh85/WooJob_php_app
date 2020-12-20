@@ -145,7 +145,7 @@ if (isset($_POST['post'])) {
                             </div>
 
                             <hr>
-                            <button type="submit" class="btn btn-info mt-4 px-5" name="post">情報を投稿する</button>
+                            <button type="submit" class="button" name="post">情報を投稿する</button>
                         </form>
                     </div>
                 </div>
