@@ -37,17 +37,38 @@ $posts->execute(array($_REQUEST['id']));
 
 
         <?php if ($post = $posts->fetch()) : ?>
+
           <div class="msg">
             <img src="/../images/member_picture/<?php print(h($post['picture'])); ?>" width="250" height="250">
-            <p><?= h($post['message']); ?><span class="name">（<?= h($post['name']); ?>）</span></p>
-            <p class="day"><?= h($post['created']); ?></p>
+            <!-- js-autolinkでurlを有効か -->
+            <pre class="js-autolink"><?= (h($post['message'])); ?><span class="name">（<?= h($post['name']); ?>）</span></pre>
+            <small class="day"><?= h($post['created']); ?></small>
           </div>
+
         <?php else : ?>
           <p>その投稿は削除されたか、URLが間違えています</p>
         <?php endif; ?>
       </div>
     </div>
   </div>
+  <script>
+    // 表示する際にURLを有効化（下記二つ）
+    $(function() {
+      $('.js-autolink').each(function() {
+        $(this).html($(this).html().replace(/(\b(https?|ftp|file):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/ig, "<a href='$1' class='m-0'>$1</a>"));
+      });
+    });
+
+    $(function() {
+      $('.js-menu__item__link').each(function() {
+        $(this).on('click', function() {
+          $(this).toggleClass('on');
+          $("+.submenu", this).slideToggle()
+          return false;
+        });
+      });
+    });
+  </script>
 </body>
 
 </html>

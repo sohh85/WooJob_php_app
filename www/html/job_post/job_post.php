@@ -1,5 +1,4 @@
 <?php
-
 session_start();
 require_once '../pdo_connect.php';
 require_once '../function.php';
@@ -77,7 +76,7 @@ if (isset($_POST['post'])) {
     <div class="container">
         <div class="row">
 
-            <div class="col-lg-8">
+            <div class="col-lg-7">
 
                 <!-- <div class="card mt-4">
                     <img class="card-img-top img-fluid" src="http://placehold.it/900x400" alt="">
@@ -152,10 +151,10 @@ if (isset($_POST['post'])) {
                 <!-- /.card -->
 
             </div>
-            <!-- /.col-lg-9 -->
+            <!-- /.col-lg-7 -->
 
 
-            <!-- <div class="col-lg-4">
+            <!-- <div class="col-lg-5">
                 <h1 class="my-4">Shop Name</h1>
                 <div class="list-group">
                     <a href="#" class="list-group-item active">Category 1</a>
@@ -163,7 +162,7 @@ if (isset($_POST['post'])) {
                     <a href="#" class="list-group-item">Category 3</a>
                 </div>
             </div> -->
-            <!-- /.col-lg-3 -->
+            <!-- /.col-lg-5 -->
 
         </div>
     </div>

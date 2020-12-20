@@ -110,6 +110,7 @@ if (isset($_REQUEST['res'])) {
             <div class="float_text">
               <!-- メッセージと返信ボタン -->
               <p>
+                <!-- js-autolinkでurlを有効か -->
                 <pre class="js-autolink"><?= (h($post['message'])); ?></pre>
                 <div class="btn-radius-gradient-wrap">
                   <a class="btn btn-radius-gradient m-0" href="index.php?res=<?= (h($post['id'])); ?>">返信</a>
@@ -153,6 +154,7 @@ if (isset($_REQUEST['res'])) {
   </div>
 
   <script>
+    // 表示する際にURLを有効化（下記二つ）
     $(function() {
       $('.js-autolink').each(function() {
         $(this).html($(this).html().replace(/(\b(https?|ftp|file):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/ig, "<a href='$1' class='m-0'>$1</a>"));
