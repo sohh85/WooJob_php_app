@@ -82,12 +82,12 @@ $language = array(1 => "全く使わない", 2 => "稀に使う", 3 => "よく�
                         <form method="get">
 
                             <div class="form-group">
-                                <label for="Name">企業・店の名前</label>
+                                <label for="Name">企業・店の名前<span class="text-danger"> *</span></label>
                                 <input name="name" type="text" class="form-control form-control-sm" id="Name" value="<?= isset($_GET['name']) ? h($_GET['name']) : '' ?>" autofocus required>
                             </div>
 
                             <div class="form-group">
-                                <label for="City">地域</label>
+                                <label for="City">地域<span class="text-danger"> *</span></label>
                                 <select name="city" class="form-control form-control-sm" id="City" required>
                                     <option value="" disabled selected>選択してください</option>
                                     <?php foreach ($cities as $key => $value) : ?>
@@ -97,13 +97,13 @@ $language = array(1 => "全く使わない", 2 => "稀に使う", 3 => "よく�
                             </div>
 
                             <div class="form-group">
-                                <label for="Wage">時給（$）</label>
+                                <label for="Wage">時給（$）<span class="text-danger"> *</span></label>
                                 <!-- 1以下の数字と0.1より細かい値は記入できない -->
                                 <input type="number" step="0.1" min="1" name="wage" class="form-control form-control-sm" id="Wage" value="<?= isset($_GET['wage']) ? h($_GET['wage']) : '' ?>" required>
                             </div>
 
                             <div class="form-group">
-                                <label for="Language">英語使用頻度</label>
+                                <label for="Language">英語使用頻度<span class="text-danger"> *</span></label>
                                 <select name="language" class="form-control form-control-sm" id="Language" required>
                                     <option value="" disabled selected>選択してください</option>
                                     <?php foreach ($language as $key => $value) : ?>
@@ -113,7 +113,7 @@ $language = array(1 => "全く使わない", 2 => "稀に使う", 3 => "よく�
                             </div>
 
                             <div class="form-group">
-                                <label for="Rating">おすすめ度</label>
+                                <label for="Rating">おすすめ度<span class="text-danger"> *</span></label>
                                 <select name="rating" class="form-control form-control-sm" id="Rating" required>
                                     <option value="" disabled selected>選択してください</option>
                                     <?php for ($i = 1; $i <= 5; $i++) : ?>
@@ -123,7 +123,7 @@ $language = array(1 => "全く使わない", 2 => "稀に使う", 3 => "よく�
                             </div>
 
                             <div class="form-group">
-                                <label for="Detail">企業・店の名前</label>
+                                <label for="Detail">追記情報</label>
                                 <textarea rows="6" cols="60" name="detail" class="form-control form-control-sm" placeholder="「場所や給与に関しての詳細」「実際に働いてみて感じたこと」などを自由にご記入下さい" id="Detail" value="<?= isset($_GET['detail']) ? h($_GET['detail']) : '' ?>" required></textarea>
                             </div>
 
