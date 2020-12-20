@@ -57,3 +57,12 @@ button {
 }
 
 /* -----投稿ボタン装飾 */
+
+
+
+@media screen and (min-width: 768px) {
+  /* 768px以上に適用されるCSS（タブレット用） */
+.widthSize {
+  padding: 0 80px;
+}
+}
