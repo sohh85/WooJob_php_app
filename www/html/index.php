@@ -166,11 +166,7 @@ function verifyPassword($user)
             <input class="btn btn-secondary btn-lg mt-3" name="login" type="submit" value="ログインする">
 
         </form>
-
-
     </div>
-
-
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, Popper.js, Bootstrap JSの順番に読み込む -->
