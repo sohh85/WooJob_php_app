@@ -18,7 +18,7 @@ if (isset($_SESSION['id']) && $_SESSION['time'] + 3600 > time()) {
 
 if (!empty($_POST)) {
   if ($_POST['message'] !== "") {
-    $message = $dbh->prepare("INSERT INTO posts SET member_id=?, message=?, reply_message_id=?, created=NOW()");
+    $message = $dbh->prepare("INSERT INTO posts SET member_id=?, message=?, reply_message_id=?, created=NOW()+INTERVAL 9 HOUR");
     $message->execute(array(
       $member['id'],
       $_POST['message'],
@@ -110,6 +110,7 @@ if (isset($_REQUEST['res'])) {
             <div class="float_text">
               <!-- メッセージと返信ボタン -->
               <p>
+                <!-- js-autolinkでurlを有効か -->
                 <pre class="js-autolink"><?= (h($post['message'])); ?></pre>
                 <div class="btn-radius-gradient-wrap">
                   <a class="btn btn-radius-gradient m-0" href="index.php?res=<?= (h($post['id'])); ?>">返信</a>
@@ -151,24 +152,8 @@ if (isset($_REQUEST['res'])) {
 
     </div>
   </div>
-
-  <script>
-    $(function() {
-      $('.js-autolink').each(function() {
-        $(this).html($(this).html().replace(/(\b(https?|ftp|file):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/ig, "<a href='$1' class='m-0'>$1</a>"));
-      });
-    });
-
-    $(function() {
-      $('.js-menu__item__link').each(function() {
-        $(this).on('click', function() {
-          $(this).toggleClass('on');
-          $("+.submenu", this).slideToggle()
-          return false;
-        });
-      });
-    });
-  </script>
+  <!-- URL有効化JSファイル -->
+  <script src="../js/validate-url.js"></script>
 </body>
 
 </html>
