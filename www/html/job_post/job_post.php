@@ -3,6 +3,8 @@
 
 $cities = array(1 => "シドニー", 2 => "メルボルン", 3 => "ケアンズ", 4 => "ゴールドコースト", 5 => "ブリズベン", 6 => "パース", 7 => "キャンベラ", 8 => "アデレード");
 
+$language = array(1 => "全く使わない", 2 => "稀に使う", 3 => "よく英語で会話する", 4 => "ほぼ英語環境");
+
 
 ?>
 <!DOCTYPE html>
@@ -103,12 +105,10 @@ $cities = array(1 => "シドニー", 2 => "メルボルン", 3 => "ケアンズ"
                             <div class="form-group">
                                 <label for="Language">英語使用頻度</label>
                                 <select name="language" class="form-control form-control-sm" id="Language" required>
-
                                     <option value="" disabled selected>選択してください</option>
-
-                                    <option value="1" <?= isset($_GET['language']) && $_GET['language'] == '1' ? 'selected' : '' ?>>ほぼない</option>
-                                    <option value="2" <?= isset($_GET['language']) && $_GET['language'] == '2' ? 'selected' : '' ?>>たまに</option>
-                                    <option value="3" <?= isset($_GET['language']) && $_GET['language'] == '3' ? 'selected' : '' ?>>頻繁に</option>
+                                    <?php foreach ($language as $key => $value) : ?>
+                                        <option value="<?= $key; ?>" <?php if (isset($_GET['language']) && $_GET['language'] == "{$key}") echo 'selected' ?>><?= $value; ?></option>
+                                    <?php endforeach; ?>
                                 </select>
                             </div>
 
@@ -138,7 +138,7 @@ $cities = array(1 => "シドニー", 2 => "メルボルン", 3 => "ケアンズ"
             <!-- /.col-lg-9 -->
 
 
-            <!-- <div class="col-lg-3">
+            <!-- <div class="col-lg-4">
                 <h1 class="my-4">Shop Name</h1>
                 <div class="list-group">
                     <a href="#" class="list-group-item active">Category 1</a>
