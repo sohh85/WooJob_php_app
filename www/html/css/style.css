@@ -1,3 +1,20 @@
 body {
     margin-top: 110px;
 }
+
+
+
+textarea {
+  width: 100%; /* 幅 */
+  margin: 1em 0; /* 周囲の余白 */
+  padding: 0.5em; /* 枠線内の余白 */
+  font-size: 1em; /* フォントサイズ */
+  border: solid 2px #e1e3e8; /* 枠線のスタイル */
+  border-radius: 4px; /* 角丸に */
+  resize: none; /* リサイズ不可に */
+}
+/* フォーカス時のスタイル */
+textarea:focus {
+  border-color: #56a9ff;
+  outline: 0;
+}
