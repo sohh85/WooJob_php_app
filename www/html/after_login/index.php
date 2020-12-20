@@ -152,6 +152,7 @@ if (isset($_REQUEST['res'])) {
 
     </div>
   </div>
+  <!-- URL有効化JSファイル -->
   <script src="../js/validate-url.js"></script>
 </body>
 

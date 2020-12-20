@@ -12,7 +12,7 @@ require_once '../function.php';
 
 // 選択肢に使用する連想配列
 $cities = array(1 => "シドニー", 2 => "メルボルン", 3 => "ケアンズ", 4 => "ゴールドコースト", 5 => "ブリズベン", 6 => "パース", 7 => "キャンベラ", 8 => "アデレード");
-$language = array(1 => "全く使わない", 2 => "稀に使う", 3 => "よく英語で会話する", 4 => "ほぼ英語環境");
+$language = array(1 => "全く必要ない", 2 => "たまに英語を使用", 3 => "よく英語を使用", 4 => "頻繁に英語を使用");
 
 
 
@@ -77,19 +77,6 @@ if (isset($_POST['post'])) {
         <div class="row">
 
             <div class="col-lg-7">
-
-                <!-- <div class="card mt-4">
-                    <img class="card-img-top img-fluid" src="http://placehold.it/900x400" alt="">
-                    <div class="card-body">
-                        <h3 class="card-title">Product Name</h3>
-                        <h4>$24.99</h4>
-                        <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sapiente dicta fugit fugiat hic aliquam itaque facere, soluta. Totam id dolores, sint aperiam sequi pariatur praesentium animi perspiciatis molestias iure, ducimus!</p>
-                        <span class="text-warning">&#9733; &#9733; &#9733; &#9733; &#9734;</span>
-                        4.0 stars
-                    </div>
-                </div> -->
-                <!-- /.card -->
-
                 <div class="card card-outline-secondary my-4">
                     <div class="card-header h4 py-3">
                         仕事情報投稿フォーム
@@ -133,14 +120,14 @@ if (isset($_POST['post'])) {
                                 <select name="rating" class="form-control form-control-sm" id="Rating" required>
                                     <option value="" disabled selected>選択してください</option>
                                     <?php for ($i = 1; $i <= 5; $i++) : ?>
-                                        <option value="<?= $i ?>"><?= str_repeat('⭐️', $i) ?></option>
+                                        <option value="<?= $i ?>" <?php if (isset($_POST['rating']) && $_POST['rating'] == "{$i}") echo 'selected' ?>><?= str_repeat('⭐️', $i) ?></option>
                                     <?php endfor; ?>
                                 </select>
                             </div>
 
                             <div class="form-group">
                                 <label for="Detail">追記情報</label>
-                                <textarea rows="6" cols="60" name="detail" class="form-control form-control-sm" placeholder="「場所や給与に関しての詳細」「実際に働いてみて感じたこと」などを自由にご記入下さい" id="Detail" value="<?= isset($_POST['detail']) ? h($_POST['detail']) : '' ?>"></textarea>
+                                <textarea rows="6" cols="60" name="detail" class="form-control form-control-sm" placeholder="「場所や給与に関しての詳細」「実際に働いてみて感じたこと」などを自由にご記入下さい" id="Detail"><?= isset($_POST['detail']) ? h($_POST['detail']) : '' ?></textarea>
                             </div>
 
                             <hr>
@@ -154,14 +141,29 @@ if (isset($_POST['post'])) {
             <!-- /.col-lg-7 -->
 
 
-            <!-- <div class="col-lg-5">
+            <!-- 何を表示するか未定 col-lg-5 -->
+            <div class="col-lg-5">
+
                 <h1 class="my-4">Shop Name</h1>
                 <div class="list-group">
                     <a href="#" class="list-group-item active">Category 1</a>
                     <a href="#" class="list-group-item">Category 2</a>
                     <a href="#" class="list-group-item">Category 3</a>
                 </div>
-            </div> -->
+
+
+                <div class="card mt-4">
+                    <img class="card-img-top img-fluid" src="http://placehold.it/900x400" alt="">
+                    <div class="card-body">
+                        <h3 class="card-title">Product Name</h3>
+                        <h4>$24.99</h4>
+                        <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sapiente dicta fugit fugiat hic aliquam itaque facere, soluta. Totam id dolores, sint aperiam sequi!</p>
+                        <span class="text-warning">&#9733; &#9733; &#9733; &#9733; &#9734;</span>
+                        4.0 stars
+                    </div>
+                </div>
+
+            </div>
             <!-- /.col-lg-5 -->
 
         </div>

@@ -51,6 +51,7 @@ $posts->execute(array($_REQUEST['id']));
       </div>
     </div>
   </div>
+  <!-- URL有効化JSファイル -->
   <script src="../js/validate-url.js"></script>
 </body>
 
