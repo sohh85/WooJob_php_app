@@ -57,7 +57,7 @@ $cities = array(1 => "シドニー", 2 => "メルボルン", 3 => "ケアンズ"
     <div class="container">
         <div class="row">
 
-            <div class="col-lg-9">
+            <div class="col-lg-8">
 
                 <!-- <div class="card mt-4">
                     <img class="card-img-top img-fluid" src="http://placehold.it/900x400" alt="">
@@ -81,13 +81,13 @@ $cities = array(1 => "シドニー", 2 => "メルボルン", 3 => "ケアンズ"
 
                             <div class="form-group">
                                 <label for="Name">企業・店の名前</label>
-                                <input name="name" class="form-control form-control-sm" id="Name" value="<?= isset($_GET['name']) ? h($_GET['name']) : '' ?>">
+                                <input name="name" type="text" class="form-control form-control-sm" id="Name" value="<?= isset($_GET['name']) ? h($_GET['name']) : '' ?>" autofocus required>
                             </div>
 
                             <div class="form-group">
                                 <label for="City">地域</label>
-                                <select name="city" class="form-control form-control-sm" id="City">
-                                    <option value="0" <?= empty($_GET['city']) ? 'selected' : '' ?>>選択しない</option>
+                                <select name="city" class="form-control form-control-sm" id="City" required>
+                                    <option value="" disabled selected>選択してください</option>
                                     <?php foreach ($cities as $key => $value) : ?>
                                         <option value="<?= $key; ?>" <?php if (isset($_GET['city']) && $_GET['city'] == "{$key}") echo 'selected' ?>><?= $value; ?></option>
                                     <?php endforeach; ?>
@@ -95,14 +95,17 @@ $cities = array(1 => "シドニー", 2 => "メルボルン", 3 => "ケアンズ"
                             </div>
 
                             <div class="form-group">
-                                <label for="Wage">時給</label>
-                                <input name="wage" class="form-control form-control-sm" id="Wage" value="<?= isset($_GET['wage']) ? h($_GET['wage']) : '' ?>">
+                                <label for="Wage">時給（$）</label>
+                                <!-- 1以下の数字と0.1より細かい値は記入できない -->
+                                <input type="number" step="0.1" min="1" name="wage" class="form-control form-control-sm" id="Wage" value="<?= isset($_GET['wage']) ? h($_GET['wage']) : '' ?>" required>
                             </div>
 
                             <div class="form-group">
                                 <label for="Language">英語使用頻度</label>
-                                <select name="language" class="form-control form-control-sm" id="Language">
-                                    <option value="0" <?= empty($_GET['language']) ? 'selected' : '' ?>>選択しない</option>
+                                <select name="language" class="form-control form-control-sm" id="Language" required>
+
+                                    <option value="" disabled selected>選択してください</option>
+
                                     <option value="1" <?= isset($_GET['language']) && $_GET['language'] == '1' ? 'selected' : '' ?>>ほぼない</option>
                                     <option value="2" <?= isset($_GET['language']) && $_GET['language'] == '2' ? 'selected' : '' ?>>たまに</option>
                                     <option value="3" <?= isset($_GET['language']) && $_GET['language'] == '3' ? 'selected' : '' ?>>頻繁に</option>
@@ -111,11 +114,18 @@ $cities = array(1 => "シドニー", 2 => "メルボルン", 3 => "ケアンズ"
 
                             <div class="form-group">
                                 <label for="Rating">おすすめ度</label>
-                                <select name="rating" class="form-control form-control-sm" id="Rating">
+                                <select name="rating" class="form-control form-control-sm" id="Rating" required>
+                                    <option value="" disabled selected>選択してください</option>
                                     <?php for ($i = 1; $i <= 5; $i++) : ?>
                                         <option value="<?= $i ?>"><?= str_repeat('⭐️', $i) ?></option>
                                     <?php endfor; ?>
                                 </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="Detail">企業・店の名前</label>
+                                <textarea name="detail" class="form-control form-control-sm" placeholder="好きなテキストを入力" id="Detail" value="<?= isset($_GET['detail']) ? h($_GET['detail']) : '' ?>" required>></textarea>
+                                <!-- <input name="detail" type="text" class="form-control form-control-sm" id="Detail" value="<?= isset($_GET['detail']) ? h($_GET['detail']) : '' ?>" required> -->
                             </div>
 
                             <hr>
