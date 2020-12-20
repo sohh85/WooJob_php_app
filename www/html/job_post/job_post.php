@@ -1,9 +1,53 @@
 <?php
 
+session_start();
+require_once 'pdo_connect.php';
+require_once 'function.php';
 
+// ログイン済でない場合
+if (!isset($_SESSION['join'])) {
+    header('Location: ..index.php');
+    exit();
+}
+
+
+// 選択肢に使用する連想配列
 $cities = array(1 => "シドニー", 2 => "メルボルン", 3 => "ケアンズ", 4 => "ゴールドコースト", 5 => "ブリズベン", 6 => "パース", 7 => "キャンベラ", 8 => "アデレード");
-
 $language = array(1 => "全く使わない", 2 => "稀に使う", 3 => "よく英語で会話する", 4 => "ほぼ英語環境");
+
+
+
+// 登録ボタン押されたら次の処理へ
+if (isset($_POST['post'])) {
+
+    try {
+        $dbh->beginTransaction();
+        //パスワードのハッシュ化
+        $password_hash =  password_hash($_SESSION['join']['password'], PASSWORD_DEFAULT);
+
+        $stmt = $dbh->prepare('INSERT INTO members SET name=?, email=?, password=?, picture=?, created=NOW()');
+        $stmt->execute(array(
+            $_SESSION['join']['name'],
+            $_SESSION['join']['mail'],
+            $password_hash,
+            $_SESSION['image']
+        ));
+        //セッション削除
+        $_SESSION = array();
+
+        $dbh->commit();
+        // ログイン画面へリダイレクト
+        header('Location: index.php?after_register');
+        exit();
+    } catch (PDOException $e) {
+        $dbh->rollBack();
+        $error = '<div class="alert alert-primary" role="alert"> 登録に失敗しました。もう一度お願いします。</div>';
+        echo $e->getMessage();
+        exit();
+    }
+    //データベース接続切断
+    $dbh = null;
+}
 
 
 ?>
@@ -11,18 +55,15 @@ $language = array(1 => "全く使わない", 2 => "稀に使う", 3 => "よく�
 <html>
 
 <head>
-
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
-
     <title>仕事情報投稿</title>
-
-    <!-- Bootstrap core CSS -->
+    <!-- Bootstrap -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <!-- CSS -->
     <link rel="stylesheet" href="../css/style.css">
-
 </head>
 
 <body>
@@ -78,12 +119,11 @@ $language = array(1 => "全く使わない", 2 => "稀に使う", 3 => "よく�
                         仕事情報投稿フォーム
                     </div>
                     <div class="card-body">
-
-                        <form method="get">
+                        <form method="post">
 
                             <div class="form-group">
                                 <label for="Name">企業・店の名前<span class="text-danger"> *</span></label>
-                                <input name="name" type="text" class="form-control form-control-sm" id="Name" value="<?= isset($_GET['name']) ? h($_GET['name']) : '' ?>" autofocus required>
+                                <input name="name" type="text" class="form-control form-control-sm" id="Name" value="<?= isset($_POST['name']) ? h($_POST['name']) : '' ?>" autofocus required>
                             </div>
 
                             <div class="form-group">
@@ -91,15 +131,15 @@ $language = array(1 => "全く使わない", 2 => "稀に使う", 3 => "よく�
                                 <select name="city" class="form-control form-control-sm" id="City" required>
                                     <option value="" disabled selected>選択してください</option>
                                     <?php foreach ($cities as $key => $value) : ?>
-                                        <option value="<?= $key; ?>" <?php if (isset($_GET['city']) && $_GET['city'] == "{$key}") echo 'selected' ?>><?= $value; ?></option>
+                                        <option value="<?= $key; ?>" <?php if (isset($_POST['city']) && $_POST['city'] == "{$key}") echo 'selected' ?>><?= $value; ?></option>
                                     <?php endforeach; ?>
                                 </select>
                             </div>
 
                             <div class="form-group">
-                                <label for="Wage">時給（$）<span class="text-danger"> *</span></label>
+                                <label for="Wage">時給 ($)<span class="text-danger">*</span></label>
                                 <!-- 1以下の数字と0.1より細かい値は記入できない -->
-                                <input type="number" step="0.1" min="1" name="wage" class="form-control form-control-sm" id="Wage" value="<?= isset($_GET['wage']) ? h($_GET['wage']) : '' ?>" required>
+                                <input type="number" step="0.1" min="1" name="wage" class="form-control form-control-sm" id="Wage" value="<?= isset($_POST['wage']) ? h($_POST['wage']) : '' ?>" required>
                             </div>
 
                             <div class="form-group">
@@ -107,7 +147,7 @@ $language = array(1 => "全く使わない", 2 => "稀に使う", 3 => "よく�
                                 <select name="language" class="form-control form-control-sm" id="Language" required>
                                     <option value="" disabled selected>選択してください</option>
                                     <?php foreach ($language as $key => $value) : ?>
-                                        <option value="<?= $key; ?>" <?php if (isset($_GET['language']) && $_GET['language'] == "{$key}") echo 'selected' ?>><?= $value; ?></option>
+                                        <option value="<?= $key; ?>" <?php if (isset($_POST['language']) && $_POST['language'] == "{$key}") echo 'selected' ?>><?= $value; ?></option>
                                     <?php endforeach; ?>
                                 </select>
                             </div>
@@ -124,7 +164,7 @@ $language = array(1 => "全く使わない", 2 => "稀に使う", 3 => "よく�
 
                             <div class="form-group">
                                 <label for="Detail">追記情報</label>
-                                <textarea rows="6" cols="60" name="detail" class="form-control form-control-sm" placeholder="「場所や給与に関しての詳細」「実際に働いてみて感じたこと」などを自由にご記入下さい" id="Detail" value="<?= isset($_GET['detail']) ? h($_GET['detail']) : '' ?>" required></textarea>
+                                <textarea rows="6" cols="60" name="detail" class="form-control form-control-sm" placeholder="「場所や給与に関しての詳細」「実際に働いてみて感じたこと」などを自由にご記入下さい" id="Detail" value="<?= isset($_POST['detail']) ? h($_POST['detail']) : '' ?>" required></textarea>
                             </div>
 
                             <hr>
@@ -149,7 +189,6 @@ $language = array(1 => "全く使わない", 2 => "稀に使う", 3 => "よく�
             <!-- /.col-lg-3 -->
 
         </div>
-
     </div>
     <!-- /.container -->
 
