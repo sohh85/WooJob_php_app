@@ -18,7 +18,7 @@ if (isset($_SESSION['id']) && $_SESSION['time'] + 3600 > time()) {
 
 if (!empty($_POST)) {
   if ($_POST['message'] !== "") {
-    $message = $dbh->prepare("INSERT INTO posts SET member_id=?, message=?, reply_message_id=?, created=NOW()");
+    $message = $dbh->prepare("INSERT INTO posts SET member_id=?, message=?, reply_message_id=?, created=NOW()+INTERVAL 10 HOUR");
     $message->execute(array(
       $member['id'],
       $_POST['message'],

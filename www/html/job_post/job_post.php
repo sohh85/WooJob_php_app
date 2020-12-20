@@ -20,33 +20,13 @@ $language = array(1 => "全く使わない", 2 => "稀に使う", 3 => "よく�
 // 登録ボタン押されたら次の処理へ
 if (isset($_POST['post'])) {
 
-    try {
-        $dbh->beginTransaction();
-        //パスワードのハッシュ化
-        $password_hash =  password_hash($_SESSION['join']['password'], PASSWORD_DEFAULT);
-
-        $stmt = $dbh->prepare('INSERT INTO members SET name=?, email=?, password=?, picture=?, created=NOW()');
-        $stmt->execute(array(
-            $_SESSION['join']['name'],
-            $_SESSION['join']['mail'],
-            $password_hash,
-            $_SESSION['image']
-        ));
-        //セッション削除
-        $_SESSION = array();
-
-        $dbh->commit();
-        // ログイン画面へリダイレクト
-        header('Location: index.php?after_register');
-        exit();
-    } catch (PDOException $e) {
-        $dbh->rollBack();
-        $error = '<div class="alert alert-primary" role="alert"> 登録に失敗しました。もう一度お願いします。</div>';
-        echo $e->getMessage();
-        exit();
-    }
-    //データベース接続切断
-    $dbh = null;
+    $stmt = $dbh->prepare('INSERT INTO job_data SET name=?, city_id=?, wage=?, language=?, rating=?, detail=?, created=NOW()+INTERVAL 10 HOUR');
+    $stmt->execute(array(
+        $_SESSION['join']['name'],
+        $_SESSION['join']['mail'],
+        $password_hash,
+        $_SESSION['image']
+    ));
 }
 
 
