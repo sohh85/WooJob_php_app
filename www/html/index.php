@@ -92,8 +92,6 @@ function verifyPassword($user)
     <!-- ファビコン -->
     <link rel="shortcut icon" href="images/favicon.png" type="image/vnd.microsoft.icon">
     <link rel="icon" href="images/favicon.png" type="image/vnd.microsoft.icon">
-
-
     <!-- Bootstrap CSSの読み込み -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
     <link rel="stylesheet" href="css/style.css">
@@ -166,11 +164,7 @@ function verifyPassword($user)
             <input class="btn btn-secondary btn-lg mt-3" name="login" type="submit" value="ログインする">
 
         </form>
-
-
     </div>
-
-
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, Popper.js, Bootstrap JSの順番に読み込む -->

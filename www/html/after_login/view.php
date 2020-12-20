@@ -37,17 +37,22 @@ $posts->execute(array($_REQUEST['id']));
 
 
         <?php if ($post = $posts->fetch()) : ?>
+
           <div class="msg">
             <img src="/../images/member_picture/<?php print(h($post['picture'])); ?>" width="250" height="250">
-            <p><?= h($post['message']); ?><span class="name">（<?= h($post['name']); ?>）</span></p>
-            <p class="day"><?= h($post['created']); ?></p>
+            <!-- js-autolinkでurlを有効か -->
+            <pre class="js-autolink"><?= (h($post['message'])); ?><span class="name">（<?= h($post['name']); ?>）</span></pre>
+            <small class="day"><?= h($post['created']); ?></small>
           </div>
+
         <?php else : ?>
           <p>その投稿は削除されたか、URLが間違えています</p>
         <?php endif; ?>
       </div>
     </div>
   </div>
+  <!-- URL有効化JSファイル -->
+  <script src="../js/validate-url.js"></script>
 </body>
 
 </html>
