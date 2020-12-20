@@ -37,19 +37,14 @@ $cities = array(1 => "シドニー", 2 => "メルボルン", 3 => "ケアンズ"
             </button>
             <div class="collapse navbar-collapse" id="navbarResponsive">
                 <ul class="navbar-nav ml-auto">
-                    <li class="nav-item active">
-                        <a class="nav-link" href="#">Home
-                            <span class="sr-only">(current)</span>
-                        </a>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">投稿フォーム</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">About</a>
+                        <a class="nav-link" href="#">検索フォーム<span class="sr-only">(current)</span></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Services</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Contact</a>
+                        <a class="nav-link" href="#">掲示板</a>
                     </li>
                 </ul>
             </div>
