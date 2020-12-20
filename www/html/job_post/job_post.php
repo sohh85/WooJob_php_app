@@ -1,6 +1,5 @@
 <?php
 session_start();
-require_once '../pdo_connect.php';
 require_once '../function.php';
 
 
@@ -29,6 +28,8 @@ if (isset($_REQUEST["post"])) {
     // リロード時の送信防止のため照合番号を確認
     if (isset($_REQUEST["chkno"]) && isset($_SESSION["chkno"]) && ($_REQUEST["chkno"] == $_SESSION["chkno"])) {
 
+        require_once '../pdo_connect.php';
+
         $stmt = $dbh->prepare('INSERT INTO job_data SET name=?, city_id=?, wage=?, language=?, rating=?, detail=?, created=NOW()+INTERVAL 9 HOUR');
 
         $stmt->bindValue(1, $name, PDO::PARAM_STR);
@@ -41,7 +42,7 @@ if (isset($_REQUEST["post"])) {
         $stmt->execute();
 
         unset($_SESSION['chkno']);
-        header('Location: index.php');
+        header('Location: ../job_find/job_find.php');
         exit();
     }
 }
@@ -106,7 +107,7 @@ $_SESSION["chkno"] = $chkno = mt_rand();
 
                             <div class="form-group">
                                 <label for="Name">企業・店の名前<span class="text-danger"> *</span></label>
-                                <input name="name" type="text" class="form-control form-control-sm" id="Name" value="<?= $name ?>" autofocus required>
+                                <input name="name" type="text" class="form-control form-control-sm" id="Name" value="<?= $name; ?>" autofocus required>
                             </div>
 
                             <div class="form-group">
