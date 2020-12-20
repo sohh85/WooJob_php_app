@@ -3,6 +3,7 @@ session_start();
 require_once '../pdo_connect.php';
 require_once '../function.php';
 
+
 // ログイン済でない場合
 // if (!isset($_SESSION['join'])) {
 //     header('Location: ..index.php');
@@ -15,8 +16,8 @@ $cities = array(1 => "シドニー", 11 => "メルボルン", 21 => "ケアン�
 $language = array("全く必要ない", "たまに英語を使用", "よく英語を使用", "頻繁に英語を使用");
 
 
-// 登録ボタン押されたら次の処理へ
-if (isset($_POST['post'])) {
+// 送信ボタン押されたら
+if (isset($_REQUEST["post"])) {
 
     $name = filter_input(INPUT_POST, 'name');
     $city = filter_input(INPUT_POST, 'city', FILTER_VALIDATE_INT);
@@ -25,21 +26,23 @@ if (isset($_POST['post'])) {
     $rating = filter_input(INPUT_POST, 'rating', FILTER_VALIDATE_INT);
     $detail = filter_input(INPUT_POST, 'detail');
 
+    // リロード時の送信防止のため照合番号を確認
+    if (isset($_REQUEST["chkno"]) && isset($_SESSION["chkno"]) && ($_REQUEST["chkno"] == $_SESSION["chkno"])) {
 
+        $stmt = $dbh->prepare('INSERT INTO job_data SET name=?, city_id=?, wage=?, language=?, rating=?, detail=?, created=NOW()+INTERVAL 9 HOUR');
 
-    $stmt = $dbh->prepare('INSERT INTO job_data SET name=?, city_id=?, wage=?, language=?, rating=?, detail=?, created=NOW()+INTERVAL 9 HOUR');
-
-    $stmt->bindValue(1, $name, PDO::PARAM_STR);
-    $stmt->bindValue(2, $city, PDO::PARAM_INT);
-    $stmt->bindValue(3, $wage, PDO::PARAM_INT);
-    $stmt->bindValue(4, $lang, PDO::PARAM_STR);
-    $stmt->bindValue(5, $rating, PDO::PARAM_INT);
-    $stmt->bindValue(6, $detail, PDO::PARAM_LOB);
-
-    // 上記実行しジョブデータを格納
-    $stmt->execute();
+        $stmt->bindValue(1, $name, PDO::PARAM_STR);
+        $stmt->bindValue(2, $city, PDO::PARAM_INT);
+        $stmt->bindValue(3, $wage, PDO::PARAM_INT);
+        $stmt->bindValue(4, $lang, PDO::PARAM_STR);
+        $stmt->bindValue(5, $rating, PDO::PARAM_INT);
+        $stmt->bindValue(6, $detail, PDO::PARAM_LOB);
+        $stmt->execute();
+    }
 }
 
+// 新しいトークンをセット
+$_SESSION["chkno"] = $chkno = mt_rand();
 
 ?>
 <!DOCTYPE html>
@@ -93,6 +96,8 @@ if (isset($_POST['post'])) {
                     </div>
                     <div class="card-body">
                         <form method="post">
+                            <!-- リロード時の処置のためのhidden -->
+                            <input name="chkno" type="hidden" value="<?= $chkno; ?>">
 
                             <div class="form-group">
                                 <label for="Name">企業・店の名前<span class="text-danger"> *</span></label>
@@ -112,8 +117,7 @@ if (isset($_POST['post'])) {
                             <div class="form-group">
                                 <label for="Wage">時給 ($)<span class="text-danger">*</span></label>
                                 <!-- 1以下の数字と0.1より細かい値は記入できない -->
-                                <input type="number" step="0.1" min="1" name="wage" class="form-control form-control-sm" id="Wage" value="<?= h($wage)
-                                                                                                                                            ?>" required>
+                                <input type="number" step="0.1" min="1" max="150" max name="wage" class="form-control form-control-sm" id="Wage" value="<?= h($wage); ?>" required>
                             </div>
 
                             <div class="form-group">
@@ -121,7 +125,7 @@ if (isset($_POST['post'])) {
                                 <select name="language" class="form-control form-control-sm" id="Language" required>
                                     <option value="" disabled selected>選択してください</option>
                                     <?php foreach ($language as $value) : ?>
-                                        <option value="<?= $value ?>" <?php if ($lang == "{$value}") echo 'selected' ?>><?= $value; ?></option>
+                                        <option value="<?= $value; ?>" <?php if ($lang == "{$value}") echo 'selected' ?>><?= $value; ?></option>
                                     <?php endforeach; ?>
                                 </select>
                             </div>
@@ -131,34 +135,30 @@ if (isset($_POST['post'])) {
                                 <select name="rating" class="form-control form-control-sm" id="Rating" required>
                                     <option value="" disabled selected>選択してください</option>
                                     <?php for ($i = 1; $i <= 5; $i++) : ?>
-                                        <option value="<?= $i ?>" <?php if ($rating == "{$i}") echo 'selected' ?>><?= str_repeat('⭐️', $i) ?></option>
+                                        <option value="<?= $i; ?>" <?php if ($rating == "{$i}") echo 'selected' ?>><?= str_repeat('⭐️', $i) ?></option>
                                     <?php endfor; ?>
                                 </select>
                             </div>
 
                             <div class="form-group">
                                 <label for="Detail">追記情報</label>
-                                <textarea rows="6" cols="60" name="detail" class="form-control form-control-sm" placeholder="「場所や給与に関しての詳細」「実際に働いてみて感じたこと」などを自由にご記入下さい" id="Detail"><?= h($detail) ?></textarea>
+                                <textarea rows="6" cols="60" name="detail" class="form-control form-control-sm" placeholder="「場所や給与に関しての詳細」「実際に働いてみて感じたこと」などを自由にご記入下さい" id="Detail"><?= h($detail); ?></textarea>
                             </div>
 
                             <hr>
+
                             <button type="submit" class="button" name="post">情報を投稿する</button>
                         </form>
-
-
-                        <?= var_dump($_POST['name']); ?>
-                        <?= var_dump($_POST['city']); ?>
-                        <?= var_dump($_POST['wage']); ?>
-                        <?= var_dump($_POST['lang']); ?>
-                        <?= var_dump($_POST['rating']); ?>
-                        <?= var_dump($_POST['detail']); ?>
 
                     </div>
                 </div>
                 <!-- /.card -->
-
             </div>
             <!-- /.col-lg-7 -->
+
+
+
+
 
 
             <!-- 何を表示するか未定 col-lg-5 -->
