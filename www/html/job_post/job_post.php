@@ -37,7 +37,13 @@ if (isset($_REQUEST["post"])) {
         $stmt->bindValue(4, $lang, PDO::PARAM_STR);
         $stmt->bindValue(5, $rating, PDO::PARAM_INT);
         $stmt->bindValue(6, $detail, PDO::PARAM_LOB);
+
         $stmt->execute();
+
+        unset($_SESSION['chkno']);
+
+        header('Location: index.php?after_register');
+        exit();
     }
 }
 
@@ -146,17 +152,13 @@ $_SESSION["chkno"] = $chkno = mt_rand();
                             </div>
 
                             <hr>
-
                             <button type="submit" class="button" name="post">情報を投稿する</button>
                         </form>
-
                     </div>
                 </div>
                 <!-- /.card -->
             </div>
             <!-- /.col-lg-7 -->
-
-
 
 
 
@@ -171,7 +173,6 @@ $_SESSION["chkno"] = $chkno = mt_rand();
                     <a href="#" class="list-group-item">Category 3</a>
                 </div>
 
-
                 <div class="card mt-4">
                     <img class="card-img-top img-fluid" src="http://placehold.it/900x400" alt="">
                     <div class="card-body">
@@ -182,10 +183,8 @@ $_SESSION["chkno"] = $chkno = mt_rand();
                         4.0 stars
                     </div>
                 </div>
-
             </div>
             <!-- /.col-lg-5 -->
-
         </div>
     </div>
     <!-- /.container -->
