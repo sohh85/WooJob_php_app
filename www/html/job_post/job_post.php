@@ -20,12 +20,14 @@ $language = array(1 => "全く使わない", 2 => "稀に使う", 3 => "よく�
 // 登録ボタン押されたら次の処理へ
 if (isset($_POST['post'])) {
 
-    $stmt = $dbh->prepare('INSERT INTO job_data SET name=?, city_id=?, wage=?, language=?, rating=?, detail=?, created=NOW()+INTERVAL 10 HOUR');
+    $stmt = $dbh->prepare('INSERT INTO job_data SET name=?, city_id=?, wage=?, language=?, rating=?, detail=?, created=NOW()+INTERVAL 9 HOUR');
     $stmt->execute(array(
-        $_SESSION['join']['name'],
-        $_SESSION['join']['mail'],
-        $password_hash,
-        $_SESSION['image']
+        $_POST['name'],
+        $_POST['city'],
+        $_POST['wage'],
+        $_POST['language'],
+        $_POST['rating'],
+        $_POST['detail']
     ));
 }
 
@@ -139,7 +141,7 @@ if (isset($_POST['post'])) {
 
                             <div class="form-group">
                                 <label for="Detail">追記情報</label>
-                                <textarea rows="6" cols="60" name="detail" class="form-control form-control-sm" placeholder="「場所や給与に関しての詳細」「実際に働いてみて感じたこと」などを自由にご記入下さい" id="Detail" value="<?= isset($_POST['detail']) ? h($_POST['detail']) : '' ?>" required></textarea>
+                                <textarea rows="6" cols="60" name="detail" class="form-control form-control-sm" placeholder="「場所や給与に関しての詳細」「実際に働いてみて感じたこと」などを自由にご記入下さい" id="Detail" value="<?= isset($_POST['detail']) ? h($_POST['detail']) : '' ?>"></textarea>
                             </div>
 
                             <hr>
