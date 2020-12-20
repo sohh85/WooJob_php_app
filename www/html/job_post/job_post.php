@@ -124,8 +124,7 @@ $cities = array(1 => "シドニー", 2 => "メルボルン", 3 => "ケアンズ"
 
                             <div class="form-group">
                                 <label for="Detail">企業・店の名前</label>
-                                <textarea name="detail" class="form-control form-control-sm" placeholder="好きなテキストを入力" id="Detail" value="<?= isset($_GET['detail']) ? h($_GET['detail']) : '' ?>" required>></textarea>
-                                <!-- <input name="detail" type="text" class="form-control form-control-sm" id="Detail" value="<?= isset($_GET['detail']) ? h($_GET['detail']) : '' ?>" required> -->
+                                <textarea rows="6" cols="60" name="detail" class="form-control form-control-sm" placeholder="「場所や給与に関しての詳細」「実際に働いてみて感じたこと」などを自由にご記入下さい" id="Detail" value="<?= isset($_GET['detail']) ? h($_GET['detail']) : '' ?>" required></textarea>
                             </div>
 
                             <hr>
