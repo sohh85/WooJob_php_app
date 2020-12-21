@@ -36,7 +36,6 @@ function getJobData($params)
     //SQL文を実行する
     $jobDataSet = $dbh->query($sql);
 
-    //扱いやすい形に変える
     $result = [];
 
     if (!empty($jobDataSet)) {

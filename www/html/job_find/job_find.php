@@ -2,7 +2,7 @@
 require_once '../function.php';
 
 $cities = array(1 => "シドニー", 11 => "メルボルン", 21 => "ケアンズ", 31 => "ゴールドコースト", 41 => "ブリズベン", 51 => "パース", 61 => "キャンベラ", 71 => "アデレード");
-$language = array("全く必要ない", "たまに英語を使用", "よく英語を使用", "頻繁に英語を使用");
+$languages = array("全く必要ない", "たまに英語を使用", "よく英語を使用", "頻繁に英語を使用");
 
 // 条件が指定された状態で「検索」がクリックされたら次の処理へ
 if (!empty(array_filter($_GET))) {
@@ -104,7 +104,7 @@ if (!empty(array_filter($_GET))) {
                             <label for="Language" class="mb-1 small">英語使用頻度</label>
                             <select name="language" class="form-control form-control-sm" id="Language">
                                 <option value="" <?= empty($_GET['language']) ? 'selected' : '' ?>>選択しない</option>
-                                <?php foreach ($language as $value) : ?>
+                                <?php foreach ($languages as $value) : ?>
                                     <option value="<?= $value; ?>" <?php if (isset($_GET['language']) && $_GET['language'] == "{$value}") echo 'selected' ?>><?= $value; ?></option>
                                 <?php endforeach; ?>
                             </select>
