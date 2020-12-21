@@ -14,7 +14,7 @@ function getJobData($params)
     }
     // 地域
     if (!empty($params['city'])) {
-        $where[] = 'city = ' . (int)$params['city'];
+        $where[] = 'city_id = ' . (int)$params['city'];
     }
     // 時給
     if (!empty($params['wage'])) {
@@ -38,8 +38,11 @@ function getJobData($params)
 
     //扱いやすい形に変える
     $result = [];
-    while ($row = $jobDataSet->fetch(PDO::FETCH_ASSOC)) {
-        $result[] = $row;
+
+    if (!empty($jobDataSet)) {
+        while ($row = $jobDataSet->fetch(PDO::FETCH_ASSOC)) {
+            $result[] = $row;
+        }
+        return $result;
     }
-    return $result;
 }

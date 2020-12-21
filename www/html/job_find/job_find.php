@@ -4,12 +4,10 @@ require_once '../function.php';
 $cities = array(1 => "シドニー", 11 => "メルボルン", 21 => "ケアンズ", 31 => "ゴールドコースト", 41 => "ブリズベン", 51 => "パース", 61 => "キャンベラ", 71 => "アデレード");
 $language = array("全く必要ない", "たまに英語を使用", "よく英語を使用", "頻繁に英語を使用");
 
-
+// 条件が指定された状態で「検索」がクリックされたら次の処理へ
 if (!empty(array_filter($_GET))) {
     // データ取得ロジック呼び出し
     include_once('model.php');
-
-    // フォームで選ばれた$_GETの値を関数使用し検索
     $jobData = getJobData($_GET);
 }
 
@@ -60,26 +58,20 @@ if (!empty(array_filter($_GET))) {
     <!-- 検索フォーム -->
     <div class="container">
         <div class="row py-5">
-
             <div class="col-lg-4">
                 <div class="px-3">
                     <h1 class="h2">条件検索フォーム</h1>
 
-                    <?php if (empty($_GET)) : ?>
-                        <p class="alert alert-danger">検索したい条件を入力してください</p>
+                    <?php if (empty(array_filter($_GET))) : ?>
+                        <p class="alert alert-danger">検索条件を入力してください</p>
                     <?php endif; ?>
-
-
 
 
                     <?php var_dump($_GET) ?>
                     <?php print_r(array_filter($_GET)); ?>
 
 
-
-
                     <p class="my-4"><small>条件を指定し検索ボタンをクリックしてください</small></p>
-
                     <!-- 条件検索フォーム  -->
                     <form method="get">
 
@@ -117,15 +109,11 @@ if (!empty(array_filter($_GET))) {
                                 <?php endforeach; ?>
                             </select>
                         </div>
-
                         <button type="submit" class="button w-100" name="search">検索</button>
                     </form>
-
                 </div>
             </div>
             <!-- /検索フォーム -->
-
-
 
 
 
@@ -140,11 +128,9 @@ if (!empty(array_filter($_GET))) {
                     </div>
                 </div>
 
-
                 <!-- ヒットしたデータを表示する  -->
                 <?php if (isset($jobData) && count($jobData)) : ?>
                     <p class="alert alert-success"><?= count($jobData) ?>件見つかりました。</p>
-
 
                     <?php foreach ($jobData as $row) : ?>
                         <div class="card card-outline-secondary my-4">
