@@ -91,11 +91,9 @@ $language = array("全く必要ない", "たまに英語を使用", "よく英�
                             <label for="City" class="mb-1 small">地域</label>
                             <select name="city" class="form-control form-control-sm" id="City">
                                 <option value="0" <?= empty($_GET['city']) ? 'selected' : '' ?>>選択しない</option>
-
                                 <?php foreach ($cities as $key => $value) : ?>
                                     <option value="<?= $key; ?>" <?php if (isset($_GET['city']) && $_GET['city'] == "{$key}") echo 'selected' ?>><?= $value; ?></option>
                                 <?php endforeach; ?>
-
                             </select>
                         </div>
 
@@ -113,9 +111,9 @@ $language = array("全く必要ない", "たまに英語を使用", "よく英�
                             <label for="Language" class="mb-1 small">英語使用頻度</label>
                             <select name="language" class="form-control form-control-sm" id="Language">
                                 <option value="0" <?= empty($_GET['language']) ? 'selected' : '' ?>>選択しない</option>
-                                <option value="1" <?= isset($_GET['language']) && $_GET['language'] == '1' ? 'selected' : '' ?>>ほぼない</option>
-                                <option value="2" <?= isset($_GET['language']) && $_GET['language'] == '2' ? 'selected' : '' ?>>たまに</option>
-                                <option value="3" <?= isset($_GET['language']) && $_GET['language'] == '3' ? 'selected' : '' ?>>頻繁に</option>
+                                <?php foreach ($language as $value) : ?>
+                                    <option value="<?= $value; ?>" <?php if (isset($_GET['language']) && $_GET['language'] == "{$value}") echo 'selected' ?>><?= $value; ?></option>
+                                <?php endforeach; ?>
                             </select>
                         </div>
 
