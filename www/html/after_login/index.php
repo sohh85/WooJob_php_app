@@ -1,12 +1,11 @@
 <?php
 session_start();
-require_once '../pdo_connect.php';
 require_once '../function.php';
 
-// ログイン後1時間以上経過していたら再ログイン
+// 未ログイン or ログイン後1時間以上経過の場合再ログイン
 if (isset($_SESSION['id']) && $_SESSION['time'] + 3600 > time()) {
   $_SESSION['time'] = time();
-
+  require_once '../pdo_connect.php';
   $members = $dbh->prepare("SELECT * FROM members WHERE id=?");
   $members->execute(array($_SESSION['id']));
   $member = $members->fetch();
