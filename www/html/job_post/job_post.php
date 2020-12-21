@@ -12,7 +12,7 @@ require_once '../function.php';
 
 // 選択肢に使用する連想配列
 $cities = array(1 => "シドニー", 11 => "メルボルン", 21 => "ケアンズ", 31 => "ゴールドコースト", 41 => "ブリズベン", 51 => "パース", 61 => "キャンベラ", 71 => "アデレード");
-$language = array("全く必要ない", "たまに英語を使用", "よく英語を使用", "頻繁に英語を使用");
+$languages = array("英語力必要無し", "必要な英語力（少）", "日常会話レベルの英語力", "必要な英語力（高）");
 
 
 // 送信ボタン押されたら
@@ -21,7 +21,7 @@ if (isset($_REQUEST["post"])) {
     $name = filter_input(INPUT_POST, 'name');
     $city = filter_input(INPUT_POST, 'city', FILTER_VALIDATE_INT);
     $wage = filter_input(INPUT_POST, 'wage', FILTER_VALIDATE_INT);
-    $lang = filter_input(INPUT_POST, 'language');
+    $language = filter_input(INPUT_POST, 'language');
     $rating = filter_input(INPUT_POST, 'rating', FILTER_VALIDATE_INT);
     $detail = filter_input(INPUT_POST, 'detail');
 
@@ -35,7 +35,7 @@ if (isset($_REQUEST["post"])) {
         $stmt->bindValue(1, $name, PDO::PARAM_STR);
         $stmt->bindValue(2, $city, PDO::PARAM_INT);
         $stmt->bindValue(3, $wage, PDO::PARAM_INT);
-        $stmt->bindValue(4, $lang, PDO::PARAM_STR);
+        $stmt->bindValue(4, $language, PDO::PARAM_STR);
         $stmt->bindValue(5, $rating, PDO::PARAM_INT);
         $stmt->bindValue(6, $detail, PDO::PARAM_LOB);
 
@@ -111,7 +111,7 @@ $_SESSION["chkno"] = $chkno = mt_rand();
                             </div>
 
                             <div class="form-group">
-                                <label for="City">地域<span class="text-danger"> *</span></label>
+                                <label for="City">都市<span class="text-danger"> *</span></label>
                                 <select name="city" class="form-control form-control-sm" id="City" required>
                                     <option value="" disabled selected>選択してください</option>
                                     <?php foreach ($cities as $key => $value) : ?>
@@ -130,8 +130,8 @@ $_SESSION["chkno"] = $chkno = mt_rand();
                                 <label for="Language">英語使用頻度<span class="text-danger"> *</span></label>
                                 <select name="language" class="form-control form-control-sm" id="Language" required>
                                     <option value="" disabled selected>選択してください</option>
-                                    <?php foreach ($language as $value) : ?>
-                                        <option value="<?= $value; ?>" <?php if ($lang == "{$value}") echo 'selected' ?>><?= $value; ?></option>
+                                    <?php foreach ($languages as $value) : ?>
+                                        <option value="<?= $value; ?>" <?php if ($language == "{$value}") echo 'selected' ?>><?= $value; ?></option>
                                     <?php endforeach; ?>
                                 </select>
                             </div>
