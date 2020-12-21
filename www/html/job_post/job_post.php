@@ -12,7 +12,7 @@ require_once '../function.php';
 
 // 選択肢に使用する連想配列
 $cities = array(1 => "シドニー", 11 => "メルボルン", 21 => "ケアンズ", 31 => "ゴールドコースト", 41 => "ブリズベン", 51 => "パース", 61 => "キャンベラ", 71 => "アデレード");
-$languages = array(1 => "英語力必要無し", 11 => "必要な英語力（少）", 21 => "日常会話レベルの英語力", 31 => "必要な英語力（高）");
+$languages = array(1 => "英語力必要無し", 11 => "必要な英語力（低）", 21 => "日常会話レベルの英語力", 31 => "必要な英語力（高）");
 
 
 // 送信ボタン押されたら
@@ -30,7 +30,7 @@ if (isset($_REQUEST["post"])) {
 
         require_once '../pdo_connect.php';
 
-        $stmt = $dbh->prepare('INSERT INTO job_data SET name=?, city_id=?, wage=?, language=?, rating=?, detail=?, created=NOW()+INTERVAL 9 HOUR');
+        $stmt = $dbh->prepare('INSERT INTO job_data SET name=?, city_no=?, wage=?, language_no=?, rating=?, detail=?, created=NOW()+INTERVAL 9 HOUR');
 
         $stmt->bindValue(1, $name, PDO::PARAM_STR);
         $stmt->bindValue(2, $city, PDO::PARAM_INT);
@@ -123,7 +123,7 @@ $_SESSION["chkno"] = $chkno = mt_rand();
                             <div class="form-group">
                                 <label for="Wage">時給 ($)<span class="text-danger">*</span></label>
                                 <!-- 1以下の数字と0.1より細かい値は記入できない -->
-                                <input type="number" step="0.1" min="1" max="150" max name="wage" class="form-control form-control-sm" id="Wage" value="<?= h($wage); ?>" required>
+                                <input type="number" step="0.1" min="1" max="99" max name="wage" class="form-control form-control-sm" id="Wage" value="<?= h($wage); ?>" required>
                             </div>
 
                             <div class="form-group">
@@ -164,7 +164,7 @@ $_SESSION["chkno"] = $chkno = mt_rand();
 
 
             <!-- 何を表示するか未定 col-lg-5 -->
-            <div class="col-lg-5">
+            <!-- <div class="col-lg-5">
 
                 <h1 class="my-4">Shop Name</h1>
                 <div class="list-group">
@@ -183,7 +183,7 @@ $_SESSION["chkno"] = $chkno = mt_rand();
                         4.0 stars
                     </div>
                 </div>
-            </div>
+            </div> -->
             <!-- /.col-lg-5 -->
         </div>
     </div>
