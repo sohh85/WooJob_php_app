@@ -14,7 +14,7 @@ function getJobData($params)
     }
     // 地域
     if (!empty($params['city'])) {
-        $where[] = 'city = ' . $params['city'];
+        $where[] = 'city = ' . (int)$params['city'];
     }
     // 時給
     if (!empty($params['wage'])) {

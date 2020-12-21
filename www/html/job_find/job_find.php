@@ -8,7 +8,8 @@ require_once '../pdo_connect.php';
 // フォームで選ばれた$_GETの値を関数使用し検索
 // $jobData = getJobData($_GET);
 
-$cities = array(1 => "シドニー", 2 => "メルボルン", 3 => "ケアンズ", 4 => "ゴールドコースト", 5 => "ブリズベン", 6 => "パース", 7 => "キャンベラ", 8 => "アデレード");
+$cities = array(1 => "シドニー", 11 => "メルボルン", 21 => "ケアンズ", 31 => "ゴールドコースト", 41 => "ブリズベン", 51 => "パース", 61 => "キャンベラ", 71 => "アデレード");
+$language = array("全く必要ない", "たまに英語を使用", "よく英語を使用", "頻繁に英語を使用");
 ?>
 
 <!DOCTYPE html>
@@ -72,10 +73,10 @@ $cities = array(1 => "シドニー", 2 => "メルボルン", 3 => "ケアンズ"
             </div>
 
 
-            <div class="col-lg-4">
+            <div class="col-lg-4 my-5">
                 <div class="px-3">
 
-                    <h1 class="">条件検索フォーム</h1>
+                    <h1 class="h2">条件検索フォーム</h1>
                     <p class="my-4"><small>条件を指定し検索ボタンをクリックしてください</small></p>
 
                     <!-- 条件検索フォーム  -->
@@ -127,17 +128,13 @@ $cities = array(1 => "シドニー", 2 => "メルボルン", 3 => "ケアンズ"
 
 
 
-            <div class="col-lg-8">
-
-
+            <div class="col-lg-8 my-5">
                 <!-- /.card -->
-
                 <div class="card card-outline-secondary my-4">
                     <div class="card-header">
                         検索結果
                     </div>
                     <div class="card-body">
-
 
                         <!-- ヒットしたデータを表示する  -->
                         <?php if (isset($jobData) && count($jobData)) : ?>
@@ -146,7 +143,7 @@ $cities = array(1 => "シドニー", 2 => "メルボルン", 3 => "ケアンズ"
                                 <thead>
                                     <tr>
                                         <th>企業名</th>
-                                        <th>都市名</th>
+                                        <th>都市</th>
                                         <th>時給</th>
                                         <th>英語使用頻度</th>
                                     </tr>
