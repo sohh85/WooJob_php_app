@@ -1,15 +1,15 @@
 <?php
 require_once '../function.php';
-require_once '../pdo_connect.php';
-
-// データ取得ロジック呼び出し
-// include_once('model.php');
-
-// フォームで選ばれた$_GETの値を関数使用し検索
-// $jobData = getJobData($_GET);
 
 $cities = array(1 => "シドニー", 11 => "メルボルン", 21 => "ケアンズ", 31 => "ゴールドコースト", 41 => "ブリズベン", 51 => "パース", 61 => "キャンベラ", 71 => "アデレード");
 $language = array("全く必要ない", "たまに英語を使用", "よく英語を使用", "頻繁に英語を使用");
+
+// データ取得ロジック呼び出し
+include_once('model.php');
+
+// フォームで選ばれた$_GETの値を関数使用し検索
+$jobData = getJobData($_GET);
+
 ?>
 
 <!DOCTYPE html>
@@ -57,7 +57,7 @@ $language = array("全く必要ない", "たまに英語を使用", "よく英�
     <div class="container widthSize">
         <div class="row">
 
-            <div class="col-lg-12 my-5">
+            <!-- <div class="col-lg-12 my-5">
                 <h1 class="my-2">Shop Name</h1>
 
                 <div class="card">
@@ -70,12 +70,11 @@ $language = array("全く必要ない", "たまに英語を使用", "よく英�
                         4.0 stars
                     </div>
                 </div>
-            </div>
+            </div> -->
 
 
             <div class="col-lg-4 my-5">
                 <div class="px-3">
-
                     <h1 class="h2">条件検索フォーム</h1>
                     <p class="my-4"><small>条件を指定し検索ボタンをクリックしてください</small></p>
 
@@ -117,7 +116,7 @@ $language = array("全く必要ない", "たまに英語を使用", "よく英�
                             </select>
                         </div>
 
-                        <button type="submit" class="btn btn-outline-info btn-block mt-4" name="search">検索</button>
+                        <button type="submit" class="button w-100" name="search">検索</button>
                     </form>
 
                 </div>
@@ -144,7 +143,8 @@ $language = array("全く必要ない", "たまに英語を使用", "よく英�
                                         <th>都市</th>
                                         <th>時給</th>
                                         <th>英語使用頻度</th>
-                                        <th>英語使用頻度</th>
+                                        <th>おすすめ度</th>
+                                        <th>追記情報</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -152,24 +152,19 @@ $language = array("全く必要ない", "たまに英語を使用", "よく英�
                                         <tr>
                                             <td><?= h($row['name']) ?></td>
                                             <td><?= h($row['city']) ?></td>
-                                            <td><?= h($row['wage']) ?></td>
+                                            <td><?= h($row['wage']) . "$" ?></td>
                                             <td><?= h($row['language']) ?></td>
+                                            <td><?= str_repeat('⭐️', h($row['rating'])) ?></td>
+                                            <td><?= h($row['detail']) ?></td>
+                                            <!-- Posted by 名前 on 日にちにしたい -->
+                                            <td><small class="text-muted">Posted on <?= h($row['created']) ?></small></td>
                                         </tr>
                                     <?php endforeach; ?>
                                 </tbody>
                             </table>
                         <?php else : ?>
-                            <p class="alert alert-danger">検索対象は見つかりませんでした。</p>
+                            <p class="alert alert-danger">検索対象が見つかりませんでした。</p>
                         <?php endif; ?>
-
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Omnis et enim aperiam inventore, similique necessitatibus neque non! Doloribus, modi sapiente laboriosam aperiam fugiat laborum. Sequi mollitia, necessitatibus quae sint natus.</p>
-                        <small class="text-muted">Posted by Anonymous on 3/1/17</small>
-                        <hr>
-
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Omnis et enim aperiam inventore, similique necessitatibus neque non! Doloribus, modi sapiente laboriosam aperiam fugiat laborum. Sequi mollitia, necessitatibus quae sint natus.</p>
-                        <small class="text-muted">Posted by Anonymous on 3/1/17</small>
-                        <hr>
-
                     </div>
                 </div>
                 <!-- /.card -->
@@ -182,7 +177,7 @@ $language = array("全く必要ない", "たまに英語を使用", "よく英�
     <!-- Footer -->
     <footer class="py-5 bg-dark">
         <div class="container">
-            <p class="m-0 text-center text-white">Copyright &copy; Your Website 2020</p>
+            <p class="m-0 text-center text-white">Copyright &copy; WooJob 2020</p>
         </div>
         <!-- /.container -->
     </footer>
