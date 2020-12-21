@@ -2,7 +2,7 @@
 require_once '../function.php';
 
 $cities = array(1 => "シドニー", 11 => "メルボルン", 21 => "ケアンズ", 31 => "ゴールドコースト", 41 => "ブリズベン", 51 => "パース", 61 => "キャンベラ", 71 => "アデレード");
-$languages = array("全く必要ない", "たまに英語を使用", "よく英語を使用", "頻繁に英語を使用");
+$languages = array("英語力必要無し", "必要な英語力（少）", "日常会話レベルの英語力", "必要な英語力（高）");
 
 // 条件が指定された状態で「検索」が押されたら次の処理へ
 if (!empty(array_filter($_GET))) {
@@ -105,6 +105,7 @@ if (!empty(array_filter($_GET))) {
                             </select>
                         </div>
                         <button type="submit" class="button w-100" name="search">検索</button>
+
                     </form>
                 </div>
             </div>
@@ -135,10 +136,10 @@ if (!empty(array_filter($_GET))) {
                             <div class="card-body">
 
                                 <div>
-                                    都市<?= h($row['city']) ?>
+                                    都市<?= $cities[(int)h($row['city_id'])] ?>
                                 </div>
                                 <div>
-                                    時給<?= h($row['wage']) . "$" ?>
+                                    時給<?= h($row['wage']) ?>$
                                 </div>
                                 <div>
                                     英語使用頻度<?= h($row['language']) ?>
