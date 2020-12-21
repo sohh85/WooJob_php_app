@@ -4,7 +4,7 @@ require_once '../function.php';
 $cities = array(1 => "シドニー", 11 => "メルボルン", 21 => "ケアンズ", 31 => "ゴールドコースト", 41 => "ブリズベン", 51 => "パース", 61 => "キャンベラ", 71 => "アデレード");
 $languages = array("全く必要ない", "たまに英語を使用", "よく英語を使用", "頻繁に英語を使用");
 
-// 条件が指定された状態で「検索」がクリックされたら次の処理へ
+// 条件が指定された状態で「検索」が押されたら次の処理へ
 if (!empty(array_filter($_GET))) {
     // データ取得ロジック呼び出し
     include_once('model.php');
@@ -62,14 +62,14 @@ if (!empty(array_filter($_GET))) {
                 <div class="px-3">
                     <h1 class="h2">条件検索フォーム</h1>
 
-                    <?php if (empty(array_filter($_GET))) : ?>
-                        <p class="alert alert-danger">検索条件を入力してください</p>
+                    <?php if (empty(array_filter($_GET)) && isset($_GET['search'])) : ?>
+                        <p class="text-danger">検索条件を入力してください</p>
+                    <?php else : ?>
+                        <p class="my-4"><small>条件を指定し検索ボタンをクリックしてください</small></p>
                     <?php endif; ?>
 
-                    <p class="my-4"><small>条件を指定し検索ボタンをクリックしてください</small></p>
                     <!-- 条件検索フォーム  -->
                     <form method="get">
-
                         <div class="form-group">
                             <label for="Name" class="mb-1 small">企業・店の名前</label>
                             <input name="name" class="form-control form-control-sm" id="Name" value="<?= isset($_GET['name']) ? h($_GET['name']) : '' ?>">
@@ -103,9 +103,6 @@ if (!empty(array_filter($_GET))) {
                                     <option value="<?= $value; ?>" <?php if (isset($_GET['language']) && $_GET['language'] == "{$value}") echo 'selected' ?>><?= $value; ?></option>
                                 <?php endforeach; ?>
                             </select>
-
-                            <?php var_dump($_GET['language']); ?><br>
-                            <?php var_dump(array_filter($_GET)); ?>
                         </div>
                         <button type="submit" class="button w-100" name="search">検索</button>
                     </form>
@@ -138,19 +135,19 @@ if (!empty(array_filter($_GET))) {
                             <div class="card-body">
 
                                 <div>
-                                    <p>都市</p><?= h($row['city']) ?>
+                                    都市<?= h($row['city']) ?>
                                 </div>
                                 <div>
-                                    <p>時給</p><?= h($row['wage']) . "$" ?>
+                                    時給<?= h($row['wage']) . "$" ?>
                                 </div>
                                 <div>
-                                    <p>英語使用頻度</p><?= h($row['language']) ?>
+                                    英語使用頻度<?= h($row['language']) ?>
                                 </div>
                                 <div>
-                                    <p>おすすめ度</p><?= str_repeat('⭐️', h($row['rating'])) ?>
+                                    おすすめ度<?= str_repeat('⭐️', h($row['rating'])) ?>
                                 </div>
                                 <div>
-                                    <p>詳細情報</p><?= h($row['detail']) ?>
+                                    詳細情報<?= h($row['detail']) ?>
                                 </div>
                                 <div>
                                     <small class="text-muted">Posted on <?= h($row['created']) ?></small>
