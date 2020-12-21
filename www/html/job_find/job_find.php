@@ -66,11 +66,6 @@ if (!empty(array_filter($_GET))) {
                         <p class="alert alert-danger">検索条件を入力してください</p>
                     <?php endif; ?>
 
-
-                    <?php var_dump($_GET) ?>
-                    <?php print_r(array_filter($_GET)); ?>
-
-
                     <p class="my-4"><small>条件を指定し検索ボタンをクリックしてください</small></p>
                     <!-- 条件検索フォーム  -->
                     <form method="get">
@@ -108,6 +103,9 @@ if (!empty(array_filter($_GET))) {
                                     <option value="<?= $value; ?>" <?php if (isset($_GET['language']) && $_GET['language'] == "{$value}") echo 'selected' ?>><?= $value; ?></option>
                                 <?php endforeach; ?>
                             </select>
+
+                            <?php var_dump($_GET['language']); ?><br>
+                            <?php var_dump(array_filter($_GET)); ?>
                         </div>
                         <button type="submit" class="button w-100" name="search">検索</button>
                     </form>
@@ -143,7 +141,7 @@ if (!empty(array_filter($_GET))) {
                                     <p>都市</p><?= h($row['city']) ?>
                                 </div>
                                 <div>
-                                    <p>地域</p><?= h($row['wage']) . "$" ?>
+                                    <p>時給</p><?= h($row['wage']) . "$" ?>
                                 </div>
                                 <div>
                                     <p>英語使用頻度</p><?= h($row['language']) ?>

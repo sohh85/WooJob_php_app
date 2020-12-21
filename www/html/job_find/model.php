@@ -22,7 +22,7 @@ function getJobData($params)
     }
     // 英語使用頻度
     if (!empty($params['language'])) {
-        $where[] = 'language = ' . $params['language'];
+        $where[] = "language like '%{$params['language']}%'";
     }
 
     if ($where) {
