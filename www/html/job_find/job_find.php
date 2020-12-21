@@ -4,11 +4,14 @@ require_once '../function.php';
 $cities = array(1 => "シドニー", 11 => "メルボルン", 21 => "ケアンズ", 31 => "ゴールドコースト", 41 => "ブリズベン", 51 => "パース", 61 => "キャンベラ", 71 => "アデレード");
 $language = array("全く必要ない", "たまに英語を使用", "よく英語を使用", "頻繁に英語を使用");
 
-// データ取得ロジック呼び出し
-include_once('model.php');
 
-// フォームで選ばれた$_GETの値を関数使用し検索
-$jobData = getJobData($_GET);
+if (!empty(array_filter($_GET))) {
+    // データ取得ロジック呼び出し
+    include_once('model.php');
+
+    // フォームで選ばれた$_GETの値を関数使用し検索
+    $jobData = getJobData($_GET);
+}
 
 ?>
 
@@ -30,7 +33,7 @@ $jobData = getJobData($_GET);
 
 <body>
 
-    <!-- Navigation -->
+    <!-- header -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
         <div class="container">
             <a class="navbar-brand" href="#">WooJob</a>
@@ -52,30 +55,29 @@ $jobData = getJobData($_GET);
             </div>
         </div>
     </nav>
+    <!-- /header -->
 
-    <!-- Page Content -->
-    <div class="container widthSize">
-        <div class="row">
+    <!-- 検索フォーム -->
+    <div class="container">
+        <div class="row py-5">
 
-            <!-- <div class="col-lg-12 my-5">
-                <h1 class="my-2">Shop Name</h1>
-
-                <div class="card">
-                    <img class="card-img-top img-fluid" src="http://placehold.it/900x400" alt="">
-                    <div class="card-body">
-                        <h3 class="card-title">Product Name</h3>
-                        <h4>$24.99</h4>
-                        <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sapiente dicta fugit fugiat hic aliquam itaque facere, soluta. Totam id dolores, sint aperiam sequi!</p>
-                        <span class="text-warning">&#9733; &#9733; &#9733; &#9733; &#9734;</span>
-                        4.0 stars
-                    </div>
-                </div>
-            </div> -->
-
-
-            <div class="col-lg-4 my-5">
+            <div class="col-lg-4">
                 <div class="px-3">
                     <h1 class="h2">条件検索フォーム</h1>
+
+                    <?php if (empty($_GET)) : ?>
+                        <p class="alert alert-danger">検索したい条件を入力してください</p>
+                    <?php endif; ?>
+
+
+
+
+                    <?php var_dump($_GET) ?>
+                    <?php print_r(array_filter($_GET)); ?>
+
+
+
+
                     <p class="my-4"><small>条件を指定し検索ボタンをクリックしてください</small></p>
 
                     <!-- 条件検索フォーム  -->
@@ -89,7 +91,7 @@ $jobData = getJobData($_GET);
                         <div class="form-group">
                             <label for="City" class="mb-1 small">都市</label>
                             <select name="city" class="form-control form-control-sm" id="City">
-                                <option value="0" <?= empty($_GET['city']) ? 'selected' : '' ?>>選択しない</option>
+                                <option value="" <?= empty($_GET['city']) ? 'selected' : '' ?>>選択しない</option>
                                 <?php foreach ($cities as $key => $value) : ?>
                                     <option value="<?= $key; ?>" <?php if (isset($_GET['city']) && $_GET['city'] == "{$key}") echo 'selected' ?>><?= $value; ?></option>
                                 <?php endforeach; ?>
@@ -99,7 +101,7 @@ $jobData = getJobData($_GET);
                         <div class="form-group">
                             <label for="Wage" class="mb-1 small">時給</label>
                             <select name="wage" class="form-control form-control-sm" id="Wage">
-                                <option value="0" <?= empty($_GET['wage']) ? 'selected' : '' ?>>選択しない</option>
+                                <option value="" <?= empty($_GET['wage']) ? 'selected' : '' ?>>選択しない</option>
                                 <option value="15" <?= isset($_GET['wage']) && $_GET['wage'] == '15' ? 'selected' : '' ?>>15ドル以上</option>
                                 <option value="20" <?= isset($_GET['wage']) && $_GET['wage'] == '20' ? 'selected' : '' ?>>20ドル以上</option>
                                 <option value="25" <?= isset($_GET['wage']) && $_GET['wage'] == '25' ? 'selected' : '' ?>>25ドル以上</option>
@@ -109,7 +111,7 @@ $jobData = getJobData($_GET);
                         <div class="form-group">
                             <label for="Language" class="mb-1 small">英語使用頻度</label>
                             <select name="language" class="form-control form-control-sm" id="Language">
-                                <option value="0" <?= empty($_GET['language']) ? 'selected' : '' ?>>選択しない</option>
+                                <option value="" <?= empty($_GET['language']) ? 'selected' : '' ?>>選択しない</option>
                                 <?php foreach ($language as $value) : ?>
                                     <option value="<?= $value; ?>" <?php if (isset($_GET['language']) && $_GET['language'] == "{$value}") echo 'selected' ?>><?= $value; ?></option>
                                 <?php endforeach; ?>
@@ -121,56 +123,68 @@ $jobData = getJobData($_GET);
 
                 </div>
             </div>
-            <!-- /.col-lg-4 -->
+            <!-- /検索フォーム -->
 
 
 
-            <div class="col-lg-8 my-5">
-                <!-- /.card -->
-                <div class="card card-outline-secondary my-4">
-                    <div class="card-header">
-                        検索結果
-                    </div>
-                    <div class="card-body">
 
-                        <!-- ヒットしたデータを表示する  -->
-                        <?php if (isset($jobData) && count($jobData)) : ?>
-                            <p class="alert alert-success"><?= count($jobData) ?>件見つかりました。</p>
-                            <table class="table">
-                                <thead>
-                                    <tr>
-                                        <th>企業名</th>
-                                        <th>都市</th>
-                                        <th>時給</th>
-                                        <th>英語使用頻度</th>
-                                        <th>おすすめ度</th>
-                                        <th>追記情報</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <?php foreach ($jobData as $row) : ?>
-                                        <tr>
-                                            <td><?= h($row['name']) ?></td>
-                                            <td><?= h($row['city']) ?></td>
-                                            <td><?= h($row['wage']) . "$" ?></td>
-                                            <td><?= h($row['language']) ?></td>
-                                            <td><?= str_repeat('⭐️', h($row['rating'])) ?></td>
-                                            <td><?= h($row['detail']) ?></td>
-                                            <!-- Posted by 名前 on 日にちにしたい -->
-                                            <td><small class="text-muted">Posted on <?= h($row['created']) ?></small></td>
-                                        </tr>
-                                    <?php endforeach; ?>
-                                </tbody>
-                            </table>
-                        <?php else : ?>
-                            <p class="alert alert-danger">検索対象が見つかりませんでした。</p>
-                        <?php endif; ?>
+
+            <div class="col-lg-8">
+
+                <!-- ここに地域の画像と地域名載せる？ -->
+                <div class="card text-white mb-3">
+                    <img class="card-img" src="../images/barista.jpg" alt="都市の画像">
+                    <div class="card-img-overlay">
+                        <h4 class="card-title">ライトコース</h4>
+                        <p class="card-text">ホームページ・ブログ開設など基礎を身に付けたい方向けコースです。</p>
                     </div>
                 </div>
-                <!-- /.card -->
+
+
+                <!-- ヒットしたデータを表示する  -->
+                <?php if (isset($jobData) && count($jobData)) : ?>
+                    <p class="alert alert-success"><?= count($jobData) ?>件見つかりました。</p>
+
+
+                    <?php foreach ($jobData as $row) : ?>
+                        <div class="card card-outline-secondary my-4">
+                            <div class="card-header">
+                                <?= h($row['name']) ?>
+                            </div>
+                            <div class="card-body">
+
+                                <div>
+                                    <p>都市</p><?= h($row['city']) ?>
+                                </div>
+                                <div>
+                                    <p>地域</p><?= h($row['wage']) . "$" ?>
+                                </div>
+                                <div>
+                                    <p>英語使用頻度</p><?= h($row['language']) ?>
+                                </div>
+                                <div>
+                                    <p>おすすめ度</p><?= str_repeat('⭐️', h($row['rating'])) ?>
+                                </div>
+                                <div>
+                                    <p>詳細情報</p><?= h($row['detail']) ?>
+                                </div>
+                                <div>
+                                    <small class="text-muted">Posted on <?= h($row['created']) ?></small>
+                                </div>
+
+                            </div>
+                        </div>
+                    <?php endforeach; ?>
+
+                <?php else : ?>
+                    <p class="alert alert-danger">検索対象が見つかりませんでした。</p>
+                <?php endif; ?>
             </div>
-            <!-- /.col-lg-8 -->
         </div>
+        <!-- /.card -->
+    </div>
+    <!-- /.col-lg-8 -->
+    </div>
     </div>
     <!-- /.container -->
 
@@ -179,7 +193,6 @@ $jobData = getJobData($_GET);
         <div class="container">
             <p class="m-0 text-center text-white">Copyright &copy; WooJob 2020</p>
         </div>
-        <!-- /.container -->
     </footer>
 
     <!-- Optional JavaScript -->
