@@ -14,7 +14,7 @@ function getJobData($params)
     }
     // 地域
     if (!empty($params['city'])) {
-        $where[] = 'city = ' . $params['city'];
+        $where[] = 'city_id = ' . (int)$params['city'];
     }
     // 時給
     if (!empty($params['wage'])) {
@@ -22,7 +22,7 @@ function getJobData($params)
     }
     // 英語使用頻度
     if (!empty($params['language'])) {
-        $where[] = 'language = ' . $params['language'];
+        $where[] = "language like '%{$params['language']}%'";
     }
 
     if ($where) {
@@ -36,10 +36,12 @@ function getJobData($params)
     //SQL文を実行する
     $jobDataSet = $dbh->query($sql);
 
-    //扱いやすい形に変える
     $result = [];
-    while ($row = $jobDataSet->fetch(PDO::FETCH_ASSOC)) {
-        $result[] = $row;
+
+    if (!empty($jobDataSet)) {
+        while ($row = $jobDataSet->fetch(PDO::FETCH_ASSOC)) {
+            $result[] = $row;
+        }
+        return $result;
     }
-    return $result;
 }

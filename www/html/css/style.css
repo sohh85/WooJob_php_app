@@ -1,7 +1,8 @@
-body {
-    margin-top: 110px;
-}
 
+ .row {
+   margin-top: 100px;
+   margin-bottom: 60px;
+ }
 
 /* 投稿ボタン装飾----- */
 button {
@@ -18,8 +19,8 @@ button {
     position: relative;
     display: block;
     padding: 1em 2em 1em 1em;
-    margin: 1em;
-    width: 300px;
+    margin: 1em 0;
+    width: 45%;
     font-size: 14px;
     color: #fff;
     text-align: center;
@@ -57,3 +58,12 @@ button {
 }
 
 /* -----投稿ボタン装飾 */
+
+
+
+@media screen and (min-width: 768px) {
+  /* 768px以上に適用されるCSS（タブレット用） */
+.widthSize {
+  padding: 0 80px;
+}
+}
