@@ -88,7 +88,7 @@ $language = array("全く必要ない", "たまに英語を使用", "よく英�
                         </div>
 
                         <div class="form-group">
-                            <label for="City" class="mb-1 small">地域</label>
+                            <label for="City" class="mb-1 small">都市</label>
                             <select name="city" class="form-control form-control-sm" id="City">
                                 <option value="0" <?= empty($_GET['city']) ? 'selected' : '' ?>>選択しない</option>
                                 <?php foreach ($cities as $key => $value) : ?>
@@ -143,6 +143,7 @@ $language = array("全く必要ない", "たまに英語を使用", "よく英�
                                         <th>企業名</th>
                                         <th>都市</th>
                                         <th>時給</th>
+                                        <th>英語使用頻度</th>
                                         <th>英語使用頻度</th>
                                     </tr>
                                 </thead>

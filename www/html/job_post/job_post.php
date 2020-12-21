@@ -111,7 +111,7 @@ $_SESSION["chkno"] = $chkno = mt_rand();
                             </div>
 
                             <div class="form-group">
-                                <label for="City">地域<span class="text-danger"> *</span></label>
+                                <label for="City">都市<span class="text-danger"> *</span></label>
                                 <select name="city" class="form-control form-control-sm" id="City" required>
                                     <option value="" disabled selected>選択してください</option>
                                     <?php foreach ($cities as $key => $value) : ?>
