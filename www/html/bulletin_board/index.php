@@ -69,6 +69,7 @@ if (isset($_REQUEST['res'])) {
   <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
   <script src="https://kit.fontawesome.com/82342a278b.js" crossorigin="anonymous"></script>
   <link rel="stylesheet" href="../css/sns_style.css">
+  <!-- ファビコン -->
   <link rel="shortcut icon" href="../images/favicon.png" type="image/vnd.microsoft.icon">
   <link rel="icon" href="../images/favicon.png" type="image/vnd.microsoft.icon">
 </head>

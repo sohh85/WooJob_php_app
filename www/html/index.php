@@ -18,15 +18,14 @@ if ($_POST['save'] === 'on') {
 // ログインボタンが押されたら次の処理へ
 if (isset($_POST['login'])) {
     $mail = $_POST['mail'];
-
-    if (checkPassword() && checkMail($mail)) {   //メール形式確認
-        $user = getUserByMail($mail);  //登録済みメールか確認
+    if (checkPassword() && checkMail($mail)) {
+        $user = getUserByMail($mail);
         if (empty($user)) {
             $errors['mail'] = '<p class="text-danger">*登録されていないメールアドレスです</p>';
         } elseif (verifyPassword($user)) {
-            $_SESSION['id'] = $user['id'];  //ユーザ情報を配列でセッションに格納
+            $_SESSION['id'] = $user['id'];
             $_SESSION['time'] = time();
-            header('Location: after_login/index.php');   //トップページにリダイレクト
+            header('Location: bulletin_board/index.php');
             exit();
         }
     }
@@ -82,8 +81,9 @@ function verifyPassword($user)
     return true;
 }
 ?>
+
 <!DOCTYPE html>
-<html lang="ja">
+<html>
 
 <head>
     <meta charset="utf-8">
@@ -92,85 +92,50 @@ function verifyPassword($user)
     <!-- ファビコン -->
     <link rel="shortcut icon" href="images/favicon.png" type="image/vnd.microsoft.icon">
     <link rel="icon" href="images/favicon.png" type="image/vnd.microsoft.icon">
-    <!-- Bootstrap CSSの読み込み -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
-    <link rel="stylesheet" href="css/style.css">
-
-    <!-- Font Awesome -->
-    <script src="https://kit.fontawesome.com/82342a278b.js" crossorigin="anonymous"></script>
+    <!-- CSSの読み込み -->
+    <link rel="stylesheet" href="css/form.css">
 </head>
 
 <body>
-    <!------- Header ------->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
-        <div class="container">
-            <a class="navbar-brand" href="#">WooJob</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarResponsive">
-                <ul class="navbar-nav ml-auto">
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">About</a>
-                    </li>
-                    <li class="nav-item active">
-                        <a class="nav-link" href="#">Login<span class="sr-only">(current)</span></a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="register.php">Register</a>
-                    </li>
-                </ul>
+    <div id="formWrapper">
+
+        <div id="form">
+
+            <div class="logo">
+                <img src="images/favicon.png" class="logo-img" alt="WooJobタイトル画像">
             </div>
+
+            <form action="" method="post">
+
+                <div class="form-item">
+                    <p class="formLabel">Email</p>
+                    <input type="email" name="mail" class="form-style" value="<?= h($mail); ?>">
+                    <?= $errors['mail']; ?>
+                </div>
+
+                <div class="form-item">
+                    <p class="formLabel">Password</p>
+                    <input type="password" name="password" class="form-style" value="<?= h($_POST['password']); ?>">
+                    <!-- <div class="pw-view"><i class="fa fa-eye"></i></div> -->
+                    <?= $errors['password']; ?>
+                </div>
+
+                <div class="form-item font-gray">
+                    <input id="save" type="checkbox" name="save" value="on">
+                    <label for="save">ログイン情報を記録する</label>
+                </div>
+
+                <div class="form-item">
+                    <p class="pull-left"><a href="register.php"><small>Register</small></a></p>
+                    <input name="login" type="submit" class="login pull-right" value="Log In">
+                    <div class="clear-fix"></div>
+                </div>
+            </form>
+
         </div>
-    </nav>
-
-
-
-    <!-- ログインフォーム -->
-    <div class="container" id="contact">
-
-        <!-- アラート表示 -->
-        <?php if (isset($_GET['logout'])) : ?>
-            <div class="alert alert-primary mb-4 col-md-9" role="alert">ログアウトしました</div>
-        <?php endif; ?>
-        <?php if (isset($_GET['after_register'])) : ?>
-            <div class="alert alert-primary mb-4 col-md-9" role="alert">登録ありがとうございます<br>下記フォームよりログインしてください</div>
-        <?php endif; ?>
-
-        <h2 class="mb-4">ログインする</h2>
-        <form action="" method="post">
-
-            <div class="form-group">
-                <label for="Email">メールアドレス</label>
-                <input type="email" class="form-control col-md-9" name="mail" id="Email" value="<?= h($mail); ?>" aria-describedby="emailHelp">
-                <!-- エラー表示 -->
-                <?= $errors['mail']; ?>
-            </div>
-
-            <div class="form-group">
-                <label for="Password">パスワード</label>
-                <input type="password" name="password" class="form-control col-md-9" id="Password" value="<?= h($_POST['password']); ?>">
-                <!-- エラー表示 -->
-                <?= $errors['password']; ?>
-            </div>
-
-            <div class="mt-4">
-                <input id="save" type="checkbox" name="save" value="on" style="transform:scale(1.5);">
-                <label for="save" class="pl-1">ログイン情報を記録する</label>
-            </div>
-            <input class="btn btn-secondary btn-lg mt-3" name="login" type="submit" value="ログインする">
-
-        </form>
     </div>
-
-    <!-- Optional JavaScript -->
-    <!-- jQuery first, Popper.js, Bootstrap JSの順番に読み込む -->
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-2.1.0.min.js"></script>
+    <script src="js/form.js"></script>
 </body>
 
 </html>

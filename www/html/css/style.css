@@ -1,8 +1,11 @@
+body {
+  padding-top: 120px;
+}
 
- .row {
-   margin-top: 100px;
-   margin-bottom: 60px;
- }
+.row {
+  margin-top: 100px;
+  margin-bottom: 60px;
+}
 
 /* 投稿ボタン装飾----- */
 button {
@@ -56,9 +59,7 @@ button {
 .button:focus {
 	outline:0;
 }
-
 /* -----投稿ボタン装飾 */
-
 
 
 @media screen and (min-width: 768px) {
