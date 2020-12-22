@@ -1,8 +1,17 @@
 <?php
 require_once '../function.php';
 
-$cities = array(1 => "シドニー", 11 => "メルボルン", 21 => "ケアンズ", 31 => "ゴールドコースト", 41 => "ブリズベン", 51 => "パース", 61 => "キャンベラ", 71 => "アデレード");
-$languages = array("英語力必要無し", "必要な英語力（少）", "日常会話レベルの英語力", "必要な英語力（高）");
+// 未ログイン or ログイン後1時間経過の場合再ログイン
+if (isset($_SESSION['id']) && $_SESSION['time'] + 3600 > time()) {
+    $_SESSION['time'] = time();
+} else {
+    header("Location: ../index.php");
+    exit();
+}
+
+// 選択肢に使用する連想配列
+$cities = array(1 => "シドニー", 2 => "メルボルン", 3 => "ケアンズ", 4 => "ゴールドコースト", 5 => "ブリズベン", 6 => "パース", 7 => "キャンベラ", 8 => "アデレード");
+$languages = array(1 => "英語力必要無し", 2 => "必要な英語力（低）", 3 => "日常会話レベルの英語力", 4 => "必要な英語力（高）");
 
 // 条件が指定された状態で「検索」が押されたら次の処理へ
 if (!empty(array_filter($_GET))) {
@@ -99,8 +108,8 @@ if (!empty(array_filter($_GET))) {
                             <label for="Language" class="mb-1 small">英語使用頻度</label>
                             <select name="language" class="form-control form-control-sm" id="Language">
                                 <option value="" <?= empty($_GET['language']) ? 'selected' : '' ?>>選択しない</option>
-                                <?php foreach ($languages as $value) : ?>
-                                    <option value="<?= $value; ?>" <?php if (isset($_GET['language']) && $_GET['language'] == "{$value}") echo 'selected' ?>><?= $value; ?></option>
+                                <?php foreach ($languages as $key => $value) : ?>
+                                    <option value="<?= $key; ?>" <?php if (isset($_GET['language']) && $_GET['language'] == "{$key}") echo 'selected' ?>><?= $value; ?></option>
                                 <?php endforeach; ?>
                             </select>
                         </div>
@@ -136,13 +145,13 @@ if (!empty(array_filter($_GET))) {
                             <div class="card-body">
 
                                 <div>
-                                    都市<?= $cities[(int)h($row['city_id'])] ?>
+                                    都市<?= $cities[(int)h($row['city_no'])] ?>
                                 </div>
                                 <div>
                                     時給<?= h($row['wage']) ?>$
                                 </div>
                                 <div>
-                                    英語使用頻度<?= h($row['language']) ?>
+                                    英語使用頻度<?= $languages[(int)h($row['language_no'])] ?>
                                 </div>
                                 <div>
                                     おすすめ度<?= str_repeat('⭐️', h($row['rating'])) ?>

@@ -1,12 +1,11 @@
 <?php
 session_start();
-require_once '../pdo_connect.php';
 require_once '../function.php';
 
-// ログイン後1時間以上経過していたら再ログイン
+// 未ログイン or ログイン後1時間以上経過の場合再ログイン
 if (isset($_SESSION['id']) && $_SESSION['time'] + 3600 > time()) {
   $_SESSION['time'] = time();
-
+  require_once '../pdo_connect.php';
   $members = $dbh->prepare("SELECT * FROM members WHERE id=?");
   $members->execute(array($_SESSION['id']));
   $member = $members->fetch();
@@ -70,6 +69,7 @@ if (isset($_REQUEST['res'])) {
   <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
   <script src="https://kit.fontawesome.com/82342a278b.js" crossorigin="anonymous"></script>
   <link rel="stylesheet" href="../css/sns_style.css">
+  <!-- ファビコン -->
   <link rel="shortcut icon" href="../images/favicon.png" type="image/vnd.microsoft.icon">
   <link rel="icon" href="../images/favicon.png" type="image/vnd.microsoft.icon">
 </head>

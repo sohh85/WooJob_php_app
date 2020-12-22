@@ -14,7 +14,7 @@ function getJobData($params)
     }
     // 地域
     if (!empty($params['city'])) {
-        $where[] = 'city_id = ' . (int)$params['city'];
+        $where[] = 'city_no = ' . (int)$params['city'];
     }
     // 時給
     if (!empty($params['wage'])) {
@@ -22,7 +22,7 @@ function getJobData($params)
     }
     // 英語使用頻度
     if (!empty($params['language'])) {
-        $where[] = "language like '%{$params['language']}%'";
+        $where[] = 'language_no = ' . (int)$params['language'];
     }
 
     if ($where) {

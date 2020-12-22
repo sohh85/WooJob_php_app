@@ -2,26 +2,27 @@
 session_start();
 require_once '../function.php';
 
-
-// ログイン済でない場合
-// if (!isset($_SESSION['join'])) {
-//     header('Location: ..index.php');
-//     exit();
-// }
-
+// 未ログイン or ログイン後1時間経過の場合再ログイン
+if (isset($_SESSION['id']) && $_SESSION['time'] + 3600 > time()) {
+    $_SESSION['time'] = time();
+} else {
+    header("Location: ../index.php");
+    exit();
+}
 
 // 選択肢に使用する連想配列
-$cities = array(1 => "シドニー", 11 => "メルボルン", 21 => "ケアンズ", 31 => "ゴールドコースト", 41 => "ブリズベン", 51 => "パース", 61 => "キャンベラ", 71 => "アデレード");
-$languages = array("英語力必要無し", "必要な英語力（少）", "日常会話レベルの英語力", "必要な英語力（高）");
+$cities = array(1 => "シドニー", 2 => "メルボルン", 3 => "ケアンズ", 4 => "ゴールドコースト", 5 => "ブリズベン", 6 => "パース", 7 => "キャンベラ", 8 => "アデレード");
+$languages = array(1 => "英語力必要無し", 2 => "必要な英語力（低）", 3 => "日常会話レベルの英語力", 4 => "必要な英語力（高）");
 
 
 // 送信ボタン押されたら
 if (isset($_REQUEST["post"])) {
 
+    $member_id = $_SESSION['id'];
     $name = filter_input(INPUT_POST, 'name');
     $city = filter_input(INPUT_POST, 'city', FILTER_VALIDATE_INT);
     $wage = filter_input(INPUT_POST, 'wage', FILTER_VALIDATE_INT);
-    $language = filter_input(INPUT_POST, 'language');
+    $language = filter_input(INPUT_POST, 'language', FILTER_VALIDATE_INT);
     $rating = filter_input(INPUT_POST, 'rating', FILTER_VALIDATE_INT);
     $detail = filter_input(INPUT_POST, 'detail');
 
@@ -30,14 +31,15 @@ if (isset($_REQUEST["post"])) {
 
         require_once '../pdo_connect.php';
 
-        $stmt = $dbh->prepare('INSERT INTO job_data SET name=?, city_id=?, wage=?, language=?, rating=?, detail=?, created=NOW()+INTERVAL 9 HOUR');
+        $stmt = $dbh->prepare('INSERT INTO job_data SET member_id=?, name=?, city_no=?, wage=?, language_no=?, rating=?, detail=?, created=NOW()+INTERVAL 9 HOUR');
 
-        $stmt->bindValue(1, $name, PDO::PARAM_STR);
-        $stmt->bindValue(2, $city, PDO::PARAM_INT);
-        $stmt->bindValue(3, $wage, PDO::PARAM_INT);
-        $stmt->bindValue(4, $language, PDO::PARAM_STR);
-        $stmt->bindValue(5, $rating, PDO::PARAM_INT);
-        $stmt->bindValue(6, $detail, PDO::PARAM_LOB);
+        $stmt->bindValue(1, $member_id, PDO::PARAM_INT);
+        $stmt->bindValue(2, $name, PDO::PARAM_STR);
+        $stmt->bindValue(3, $city, PDO::PARAM_INT);
+        $stmt->bindValue(4, $wage, PDO::PARAM_INT);
+        $stmt->bindValue(5, $language, PDO::PARAM_INT);
+        $stmt->bindValue(6, $rating, PDO::PARAM_INT);
+        $stmt->bindValue(7, $detail, PDO::PARAM_LOB);
 
         $stmt->execute();
 
@@ -123,15 +125,15 @@ $_SESSION["chkno"] = $chkno = mt_rand();
                             <div class="form-group">
                                 <label for="Wage">時給 ($)<span class="text-danger">*</span></label>
                                 <!-- 1以下の数字と0.1より細かい値は記入できない -->
-                                <input type="number" step="0.1" min="1" max="150" max name="wage" class="form-control form-control-sm" id="Wage" value="<?= h($wage); ?>" required>
+                                <input type="number" step="0.1" min="1" max="99" max name="wage" class="form-control form-control-sm" id="Wage" value="<?= h($wage); ?>" required>
                             </div>
 
                             <div class="form-group">
                                 <label for="Language">英語使用頻度<span class="text-danger"> *</span></label>
                                 <select name="language" class="form-control form-control-sm" id="Language" required>
                                     <option value="" disabled selected>選択してください</option>
-                                    <?php foreach ($languages as $value) : ?>
-                                        <option value="<?= $value; ?>" <?php if ($language == "{$value}") echo 'selected' ?>><?= $value; ?></option>
+                                    <?php foreach ($languages as $key => $value) : ?>
+                                        <option value="<?= $key; ?>" <?php if ($language == "{$key}") echo 'selected' ?>><?= $value; ?></option>
                                     <?php endforeach; ?>
                                 </select>
                             </div>
@@ -164,7 +166,7 @@ $_SESSION["chkno"] = $chkno = mt_rand();
 
 
             <!-- 何を表示するか未定 col-lg-5 -->
-            <div class="col-lg-5">
+            <!-- <div class="col-lg-5">
 
                 <h1 class="my-4">Shop Name</h1>
                 <div class="list-group">
@@ -183,7 +185,7 @@ $_SESSION["chkno"] = $chkno = mt_rand();
                         4.0 stars
                     </div>
                 </div>
-            </div>
+            </div> -->
             <!-- /.col-lg-5 -->
         </div>
     </div>
