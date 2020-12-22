@@ -42,7 +42,6 @@ if (isset($_POST['check'])) {
                 $_SESSION['Ext'] = 'error';
             }
         }
-
         $_SESSION['image'] = $image;
         $_SESSION['join'] = $_POST;
         header('Location: check.php');
@@ -140,7 +139,6 @@ function spaceTrim($str) // 前後にある半角全角スペースを削除す�
     <div id="formWrapper">
 
         <div id="form">
-
             <div class="logo">
                 <img src="images/favicon.png" class="logo-img" alt="WooJobタイトル画像">
             </div>

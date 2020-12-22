@@ -62,10 +62,12 @@ $_SESSION["chkno"] = $chkno = mt_rand();
     <meta name="description" content="">
     <meta name="author" content="">
     <title>仕事情報投稿</title>
-    <!-- Bootstrap -->
+    <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
-    <!-- CSS -->
     <link rel="stylesheet" href="../css/style.css">
+    <!-- ファビコン -->
+    <link rel="shortcut icon" href="../images/favicon.png" type="image/vnd.microsoft.icon">
+    <link rel="icon" href="../images/favicon.png" type="image/vnd.microsoft.icon">
 </head>
 
 <body>
