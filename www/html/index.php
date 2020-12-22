@@ -31,7 +31,6 @@ if (isset($_POST['login'])) {
     }
 }
 
-
 // メール形式チェック。
 function checkMail($mail)
 {
@@ -100,7 +99,6 @@ function verifyPassword($user)
     <div id="formWrapper">
 
         <div id="form">
-
             <div class="logo">
                 <img src="images/favicon.png" class="logo-img" alt="WooJobタイトル画像">
             </div>

@@ -30,12 +30,15 @@ if (isset($_POST['register'])) {
 			$password_hash,
 			$_SESSION['image']
 		));
-		//セッション削除
+
+
+		// ユーザIDを取得
+		$memberId = $dbh->lastInsertId();
+
 		$_SESSION = array();
+		$dbh->commit(); // 実行
 
-		$dbh->commit();
-
-		$_SESSION['id'] = $user['id'];
+		$_SESSION['id'] = $memberId;
 		$_SESSION['time'] = time();
 		header('Location: bulletin_board/index.php');
 		exit();
@@ -91,7 +94,7 @@ if (isset($_POST['register'])) {
 					<dd>
 						<?= $password_hide ?>
 					</dd>
-					<!-- <dt>写真など</dt>
+					<!-- <dt>プロフィール画像</dt>
 					<dd>
 						<?php if (!empty($_SESSION['image'])) : ?>
 							<img src="images/member_picture/<?= (h($_SESSION['image'])); ?>" style="width:200px;">
