@@ -1,6 +1,6 @@
 # WooJob
  
-WooJob is a internet forum that you can share infomation about part-time job in Australia.
+WooJob is the web application that you can share & get infomations about a job in Australia.
 
 URL　：　https://woojob.herokuapp.com/index.php
  
