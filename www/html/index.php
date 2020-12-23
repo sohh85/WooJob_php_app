@@ -119,13 +119,14 @@ function verifyPassword($user)
 
                 <div class="form-item font-gray">
                     <input id="save" type="checkbox" name="save" value="on">
-                    <label for="save">ログイン情報を記録する</label>
+                    <label for="save">ログイン情報を保存</label>
                 </div>
 
-                <div class="form-item">
+                <div class="form-item ">
                     <p class="pull-left"><a href="register.php"><small>Register</small></a></p>
                     <input name="login" type="submit" class="login pull-right" value="Log In">
                     <div class="clear-fix"></div>
+                    <input name="guestLogin" type="submit" class="login pull-right" value="ゲストの方">
                 </div>
             </form>
 
