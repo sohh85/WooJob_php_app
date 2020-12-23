@@ -1,10 +1,37 @@
 body {
+  font-family: "Helvetica Neue",Arial,"Hiragino Kaku Gothic ProN","Hiragino Sans",Meiryo,sans-serif;
   padding-top: 120px;
+  background: #eeeeee;
 }
 
-.row {
-  margin-top: 100px;
-  margin-bottom: 60px;
+
+/* header画像 */
+.navbar-brand {
+  background: url("/images/favicon.png") no-repeat left center;
+  background-size: contain;
+  height: 60px;
+  width: 120px;
+}
+
+.card-body {
+  padding: 25px;
+}
+
+.font-small {
+  font-size: 0.9rem !important;
+}
+
+.btn {
+  padding: 6px 16px;
+  margin-right: 10px;
+}
+
+.clear-button {
+  margin: 18px 0;
+}
+
+.o-img {
+  opacity: 0.5;
 }
 
 /* 投稿ボタン装飾----- */
@@ -20,7 +47,7 @@ button {
 
 .button {
     position: relative;
-    display: block;
+    display: inline-block;
     padding: 1em 2em 1em 1em;
     margin: 1em 0;
     width: 45%;

@@ -7,12 +7,9 @@ require_once 'function.php';
 $errors = [];
 
 // postの値が無かったらsessionの値代入
-// $name = isset($_POST['name']) ? $_POST['name'] : $_SESSION['join']['name'];
-// $password = isset($_POST['password']) ? $_POST['password'] : $_SESSION['join']['password'];
-// $mail = isset($_POST['mail']) ? $_POST['mail'] : $_SESSION['join']['mail'];
-$name = $_POST['name'];
-$password = $_POST['password'];
-$mail = $_POST['mail'];
+$name = isset($_POST['name']) ? $_POST['name'] : $_SESSION['join']['name'];
+$password = isset($_POST['password']) ? $_POST['password'] : $_SESSION['join']['password'];
+$mail = isset($_POST['mail']) ? $_POST['mail'] : $_SESSION['join']['mail'];
 // 前後にある半角全角スペースを削除
 $name = spaceTrim($name);
 $password = spaceTrim($password);
