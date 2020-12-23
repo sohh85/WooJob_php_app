@@ -1,20 +1,22 @@
 # WooJob
  
 WooJob is a internet forum that you can share infomation about part-time job in Australia.
+
+URL　：　https://woojob.herokuapp.com/index.php
  
 # DEMO
 
-<img width="1440" alt="スクリーンショット 2020-11-25 0 44 18" src="https://user-images.githubusercontent.com/67961122/100117126-d60cfb80-2eb7-11eb-8a14-1d1da4e366ee.png">
+<img width="1404" alt="スクリーンショット 2020-12-23 19 49 15" src="https://user-images.githubusercontent.com/67961122/102989377-dbae3d80-4558-11eb-827f-ab33ca25bd61.png">
 
 # Features
 
-- you can reply and delete your post
-- Buttan that makes you want to push
+- You can reply and delete your post
+- You can make use of keywords to find a job that meets your requirement
 - Pagination
 
 # Requirement
  
-* PHP 7.2
+* PHP 7.4
  
 # Author
  
