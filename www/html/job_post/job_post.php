@@ -3,12 +3,12 @@ session_start();
 require_once '../function.php';
 
 // 未ログイン or ログイン後1時間経過の場合再ログイン
-// if (isset($_SESSION['id']) && $_SESSION['time'] + 3600 > time()) {
-//     $_SESSION['time'] = time();
-// } else {
-//     header("Location: ../index.php");
-//     exit();
-// }
+if (isset($_SESSION['id']) && $_SESSION['time'] + 3600 > time()) {
+    $_SESSION['time'] = time();
+} else {
+    header("Location: ../index.php");
+    exit();
+}
 
 // 選択肢に使用する連想配列
 $cities = array(1 => "シドニー", 2 => "メルボルン", 3 => "ケアンズ", 4 => "ゴールドコースト", 5 => "ブリズベン", 6 => "パース", 7 => "キャンベラ", 8 => "アデレード");
@@ -29,19 +29,45 @@ if (isset($_REQUEST["post"])) {
     // リロード時の送信防止のため照合番号を確認
     if (isset($_REQUEST["chkno"]) && isset($_SESSION["chkno"]) && ($_REQUEST["chkno"] == $_SESSION["chkno"])) {
 
+        $notification = $name . 'の情報が追加されました。';
         require_once '../pdo_connect.php';
 
-        $stmt = $dbh->prepare('INSERT INTO job_data SET member_id=?, name=?, city_no=?, wage=?, language_no=?, rating=?, detail=?, created=NOW()+INTERVAL 9 HOUR');
+        try {
+            require_once '../pdo_connect.php';
 
-        $stmt->bindValue(1, $member_id, PDO::PARAM_INT);
-        $stmt->bindValue(2, $name, PDO::PARAM_STR);
-        $stmt->bindValue(3, $city, PDO::PARAM_INT);
-        $stmt->bindValue(4, $wage, PDO::PARAM_STR);
-        $stmt->bindValue(5, $language, PDO::PARAM_INT);
-        $stmt->bindValue(6, $rating, PDO::PARAM_INT);
-        $stmt->bindValue(7, $detail, PDO::PARAM_LOB);
+            $dbh->beginTransaction();
 
-        $stmt->execute();
+
+            $stmt = $dbh->prepare('INSERT INTO job_data SET member_id=?, name=?, city_no=?, wage=?, language_no=?, rating=?, detail=?, created=NOW()+INTERVAL 9 HOUR');
+
+            $stmt->bindValue(1, $member_id, PDO::PARAM_INT);
+            $stmt->bindValue(2, $name, PDO::PARAM_STR);
+            $stmt->bindValue(3, $city, PDO::PARAM_INT);
+            $stmt->bindValue(4, $wage, PDO::PARAM_STR);
+            $stmt->bindValue(5, $language, PDO::PARAM_INT);
+            $stmt->bindValue(6, $rating, PDO::PARAM_INT);
+            $stmt->bindValue(7, $detail, PDO::PARAM_LOB);
+
+            $stmt->execute();
+
+
+            // 掲示板に新着情報掲載
+            $message = $dbh->prepare('INSERT INTO posts SET member_id=1, message=?, created=NOW()+INTERVAL 9 HOUR');
+            $message->bindValue(1, $notification, PDO::PARAM_STR);
+
+            $message->execute();
+
+
+            $dbh->commit(); // 実行
+
+            header('Location: ../bulletin_board/index.php');
+            exit();
+        } catch (PDOException $e) {
+            $dbh->rollBack();
+            echo $e->getMessage();
+            exit();
+        }
+        $dbh = null;
     }
 }
 
@@ -67,7 +93,6 @@ $_SESSION["chkno"] = $chkno = mt_rand();
 </head>
 
 <body>
-
     <!-- header -->
     <nav class="navbar navbar-expand-lg navbar-light bg-white fixed-top">
         <div class="container">

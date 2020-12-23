@@ -29,16 +29,18 @@ if (isset($_POST['check'])) {
     checkMail($mail);
 
     if (empty($errors)) { // エラーなければ次の処理へ
-        // 表示できない拡張子 or 選択されなかった場合のデフォルト画像 。NULLでDB保存させない
+        // 表示できない拡張子 or 選択されなかった場合のデフォルト画像 
         $image = 'human.png';
-        if ($_FILES['image']['name']) { // 画像選択済み + 指定の拡張子 = 保存
-            if (checkExt($fileName)) {
-                $image = date('YmdHis') . $_FILES['image']['name'];
-                move_uploaded_file($_FILES['image']['tmp_name'], 'images/member_picture/' . $image);
-            } else {
-                $_SESSION['Ext'] = 'error';
-            }
-        }
+
+        // if ($_FILES['image']['name']) { // 画像選択済み + 指定の拡張子 = 保存
+        //     if (checkExt($fileName)) {
+        //         $image = date('YmdHis') . $_FILES['image']['name'];
+        //         move_uploaded_file($_FILES['image']['tmp_name'], 'images/member_picture/' . $image);
+        //     } else {
+        //         $_SESSION['Ext'] = 'error';
+        //     }
+        // }
+
         $_SESSION['image'] = $image;
         $_SESSION['join'] = $_POST;
         header('Location: check.php');
@@ -140,7 +142,8 @@ function spaceTrim($str) // 前後にある半角全角スペースを削除す�
                 <img src="images/favicon.png" class="logo-img" alt="WooJobタイトル画像">
             </div>
 
-            <form action="" method="post" enctype="multipart/form-data">
+            <!-- <form action="" method="post" enctype="multipart/form-data"> -->
+            <form action="" method="post">
 
                 <div class="form-item">
                     <p class="formLabel">User Name</p>
@@ -157,7 +160,6 @@ function spaceTrim($str) // 前後にある半角全角スペースを削除す�
                 <div class="form-item">
                     <p class="formLabel">Password</p>
                     <input type="password" name="password" class="form-style" value="<?= h($password); ?>">
-                    <!-- <div class="pw-view"><i class="fa fa-eye"></i></div> -->
                     <?= $errors['password']; ?>
                 </div>
 

@@ -1,19 +1,20 @@
 <?php
+session_start();
 require_once '../function.php';
 
 // 未ログイン or ログイン後1時間経過の場合再ログイン
-// if (isset($_SESSION['id']) && $_SESSION['time'] + 3600 > time()) {
-//     $_SESSION['time'] = time();
-// } else {
-//     header("Location: ../index.php");
-//     exit();
-// }
+if (isset($_SESSION['id']) && $_SESSION['time'] + 3600 > time()) {
+    $_SESSION['time'] = time();
+} else {
+    header("Location: ../index.php");
+    exit();
+}
 
 // 選択肢に使用する連想配列
 $cities = array(1 => "シドニー", 2 => "メルボルン", 3 => "ケアンズ", 4 => "ゴールドコースト", 5 => "ブリズベン", 6 => "パース", 7 => "キャンベラ", 8 => "アデレード");
 $languages = array(1 => "英語力必要無し", 2 => "必要な英語力（低）", 3 => "日常会話レベルの英語力", 4 => "必要な英語力（高）");
 
-// データ取得ロジック呼び出し
+// データ取得model呼び出し
 include_once('model.php');
 $jobData = getJobData($_GET);
 
@@ -39,7 +40,6 @@ $jobData = getJobData($_GET);
 </head>
 
 <body>
-
     <!-- header -->
     <nav class="navbar navbar-expand-lg navbar-light bg-white fixed-top">
         <div class="container">
