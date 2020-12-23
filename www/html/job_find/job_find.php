@@ -73,14 +73,17 @@ $jobData = getJobData($_GET);
                 <div class="card">
                     <div class="h4 text-center card-header">条件検索 <i class="fas fa-search-plus"></i></div>
 
-                    <?php if (empty(array_filter($_GET)) && isset($_GET['search'])) : ?>
-                        <p class="my-2 text-danger text-center"><small>検索条件を入力してください</small></p>
-                    <?php else : ?>
-                        <p class="my-3 text-center"><small>条件を指定し検索ボタンをクリックしてください</small></p>
-                    <?php endif; ?>
+
+
+
 
                     <!-- 条件検索フォーム  -->
                     <div class="card-body">
+                        <?php if (empty(array_filter($_GET)) && isset($_GET['search'])) : ?>
+                            <p class="my-2 text-danger text-center"><small>検索条件を入力してください</small></p>
+                        <?php else : ?>
+                            <p class="mb-3 text-center"><small>条件を1つ以上指定してください</small></p>
+                        <?php endif; ?>
                         <form method="get">
                             <div class="form-group">
                                 <label for="Name" class="mb-1 small">企業・店の名前</label>
