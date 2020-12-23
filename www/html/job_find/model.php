@@ -26,7 +26,7 @@ function getJobData($params)
     }
 
     if ($where) {
-        // implode関数でSQL分をAND(第一引数)で連結
+        // implode関数で各文をAND(第一引数)で連結
         $whereSql = implode(' AND ', $where);
         $sql = 'select * from job_data where ' . $whereSql;
     } else {

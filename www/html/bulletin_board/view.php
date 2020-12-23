@@ -20,7 +20,7 @@ $posts->execute(array($_REQUEST['id']));
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>WooJob掲示板</title>
   <!-- Bootstrap CSS -->
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
   <link rel="stylesheet" href="/../css/sns_style.css">
   <!-- ファビコン -->
   <link rel="shortcut icon" href="../images/favicon.png" type="image/vnd.microsoft.icon">
@@ -28,6 +28,31 @@ $posts->execute(array($_REQUEST['id']));
 </head>
 
 <body>
+
+  <!-- header -->
+  <nav class="navbar navbar-expand-lg navbar-light bg-white fixed-top">
+    <div class="container">
+      <a class="navbar-brand" href="#"></a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarResponsive">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="../job_post/job_post.php">投稿フォーム</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="../job_find/job_find.php">検索フォーム</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" href="#">掲示板<span class="sr-only">(current)</span></a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+  <!-- /header -->
+
   <div id="wrap">
     <div class="content">
       <div id="head">
@@ -52,6 +77,14 @@ $posts->execute(array($_REQUEST['id']));
       </div>
     </div>
   </div>
+
+  <!-- Footer -->
+  <footer class="py-5 bg-white mt-5">
+    <div class="container">
+      <p class="m-0 text-center text-secondary">Copyright &copy; WooJob 2021</p>
+    </div>
+  </footer>
+  <!-- Optional JavaScript -->
   <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
   <!-- URL有効化JSファイル -->
   <script src="../js/validate-url.js"></script>
