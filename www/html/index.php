@@ -102,7 +102,6 @@ function verifyPassword($user)
             <div class="logo">
                 <img src="images/favicon.png" class="logo-img" alt="WooJobタイトル画像">
             </div>
-
             <form action="" method="post">
 
                 <div class="form-item">

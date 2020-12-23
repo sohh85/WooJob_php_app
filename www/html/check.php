@@ -31,7 +31,6 @@ if (isset($_POST['register'])) {
 			$_SESSION['image']
 		));
 
-
 		// ユーザIDを取得
 		$memberId = $dbh->lastInsertId();
 

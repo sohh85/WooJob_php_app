@@ -1,7 +1,7 @@
 body {
 	background: #eeeeee;
   color: #333;
-  font-size: 12px;
+  padding-top: 120px;
 }
 
 h1 {
@@ -34,26 +34,38 @@ pre {
 	font-weight: 300;
 }
 
-/* Head */
+
+/* header画像 */
+.navbar-brand {
+  background: url("/images/favicon.png") no-repeat left center;
+  background-size: contain;
+  height: 60px;
+  width: 120px;
+}
+
+
 #head {
-	background: #106eb7;
+  background: #66cccc;
 	color: #fff;
 	padding: 20px;
   margin-bottom: 20px;
+  border-radius: 4px;
 }
 #wrap {
 	width: 802px;
-	margin: 0 auto;
+  margin: 0 auto;
+  font-size: 12px;
 }
 
 #content {
 	padding: 20px;
-	background:#f8f8f8;
+	background: white;
 	width: 730px;
 	min-height: 490px;
 	margin: 0 auto;
 	margin-bottom: 10px;
-	font-size: 130.9%;
+  font-size: 130.9%;
+  border-radius: 4px;
 }
 
 /* ページネーション */
