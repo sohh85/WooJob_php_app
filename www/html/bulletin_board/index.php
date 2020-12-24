@@ -104,7 +104,7 @@ if (isset($_REQUEST['res'])) {
     <div id="wrap">
         <div class="content">
             <div id="head">
-                <h1>海外情報共有掲示板</h1>
+                <h1>新着情報共有掲示板</h1>
             </div>
             <div id="content">
                 <div style="text-align: right"><a href="logout.php">ログアウト</a></div>

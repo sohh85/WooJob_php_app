@@ -4,7 +4,6 @@ body {
   background: #eeeeee;
 }
 
-
 /* header画像 */
 .navbar-brand {
   background: url("/images/favicon.png") no-repeat left center;
@@ -22,8 +21,8 @@ body {
 }
 
 .btn {
-  padding: 6px 16px;
-  margin-right: 10px;
+  padding: 4px 14px;
+  margin: 0 10px 6px 0;
 }
 
 .clear-button {

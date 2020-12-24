@@ -1,19 +1,20 @@
 <?php
+session_start();
 require_once '../function.php';
 
 // 未ログイン or ログイン後1時間経過の場合再ログイン
-// if (isset($_SESSION['id']) && $_SESSION['time'] + 3600 > time()) {
-//     $_SESSION['time'] = time();
-// } else {
-//     header("Location: ../index.php");
-//     exit();
-// }
+if (isset($_SESSION['id']) && $_SESSION['time'] + 3600 > time()) {
+    $_SESSION['time'] = time();
+} else {
+    header("Location: ../index.php");
+    exit();
+}
 
 // 選択肢に使用する連想配列
 $cities = array(1 => "シドニー", 2 => "メルボルン", 3 => "ケアンズ", 4 => "ゴールドコースト", 5 => "ブリズベン", 6 => "パース", 7 => "キャンベラ", 8 => "アデレード");
 $languages = array(1 => "英語力必要無し", 2 => "必要な英語力（低）", 3 => "日常会話レベルの英語力", 4 => "必要な英語力（高）");
 
-// データ取得ロジック呼び出し
+// データ取得model呼び出し
 include_once('model.php');
 $jobData = getJobData($_GET);
 
@@ -39,7 +40,6 @@ $jobData = getJobData($_GET);
 </head>
 
 <body>
-
     <!-- header -->
     <nav class="navbar navbar-expand-lg navbar-light bg-white fixed-top">
         <div class="container">
@@ -73,14 +73,17 @@ $jobData = getJobData($_GET);
                 <div class="card">
                     <div class="h4 text-center card-header">条件検索 <i class="fas fa-search-plus"></i></div>
 
-                    <?php if (empty(array_filter($_GET)) && isset($_GET['search'])) : ?>
-                        <p class="my-2 text-danger text-center"><small>検索条件を入力してください</small></p>
-                    <?php else : ?>
-                        <p class="my-3 text-center"><small>条件を指定し検索ボタンをクリックしてください</small></p>
-                    <?php endif; ?>
+
+
+
 
                     <!-- 条件検索フォーム  -->
                     <div class="card-body">
+                        <?php if (empty(array_filter($_GET)) && isset($_GET['search'])) : ?>
+                            <p class="my-2 text-danger text-center"><small>検索条件を入力してください</small></p>
+                        <?php else : ?>
+                            <p class="mb-3 text-center"><small>条件を1つ以上指定してください</small></p>
+                        <?php endif; ?>
                         <form method="get">
                             <div class="form-group">
                                 <label for="Name" class="mb-1 small">企業・店の名前</label>
