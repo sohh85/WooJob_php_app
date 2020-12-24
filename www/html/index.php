@@ -13,9 +13,16 @@ if ($_COOKIE['mail'] !== '') {
 if ($_POST['save'] === 'on') {
     setcookie('mail', $_POST['mail'], time() + 60 * 60 * 24 * 4);
 }
+// ゲストログインが押されたら
+// if (isset($_POST['guestLogin'])) {
+//     $_SESSION['id'] = 21;
+//     $_SESSION['time'] = time();
+//     header('Location: bulletin_board/index.php');
+//     exit();
+// }
 
 
-// ログインボタンが押されたら次の処理へ
+// ログインボタンが押されたら
 if (isset($_POST['login'])) {
     $mail = $_POST['mail'];
     if (checkPassword() && checkMail($mail)) {
@@ -126,7 +133,7 @@ function verifyPassword($user)
                     <p class="pull-left"><a href="register.php"><small>Register</small></a></p>
                     <input name="login" type="submit" class="login pull-right" value="Log In">
                     <div class="clear-fix"></div>
-                    <input name="guestLogin" type="submit" class="login pull-right" value="ゲストの方">
+                    <!-- <input name="guestLogin" type="submit" class="login pull-right" value="ゲストの方"> -->
                 </div>
             </form>
 

@@ -116,3 +116,7 @@ dd {
 .form-guide {
   font-size: 13px;
 }
+
+#save {
+  margin-left: 12px;
+}
