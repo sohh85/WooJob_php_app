@@ -73,7 +73,7 @@ if (isset($_REQUEST['res'])) {
     <!-- ファビコン -->
     <link rel="shortcut icon" href="../images/favicon.png" type="image/vnd.microsoft.icon">
     <link rel="icon" href="../images/favicon.png" type="image/vnd.microsoft.icon">
-    <!-- フォントオーサム -->
+    <!-- font awesome -->
     <script src="https://kit.fontawesome.com/82342a278b.js" crossorigin="anonymous"></script>
 </head>
 
