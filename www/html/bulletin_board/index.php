@@ -73,18 +73,23 @@ if (isset($_REQUEST['res'])) {
     <!-- ファビコン -->
     <link rel="shortcut icon" href="../images/favicon.png" type="image/vnd.microsoft.icon">
     <link rel="icon" href="../images/favicon.png" type="image/vnd.microsoft.icon">
+    <!-- font awesome -->
+    <script src="https://kit.fontawesome.com/82342a278b.js" crossorigin="anonymous"></script>
 </head>
 
 <body>
     <!-- header -->
     <nav class="navbar navbar-expand-lg navbar-light bg-white fixed-top">
         <div class="container">
+
             <a class="navbar-brand" href="#"></a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
+
             <div class="collapse navbar-collapse" id="navbarResponsive">
                 <ul class="navbar-nav ml-auto">
+
                     <li class="nav-item">
                         <a class="nav-link" href="../job_post/job_post.php">投稿フォーム</a>
                     </li>
@@ -93,6 +98,14 @@ if (isset($_REQUEST['res'])) {
                     </li>
                     <li class="nav-item">
                         <a class="nav-link active" href="#">掲示板<span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle active" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <?= $_SESSION['name'] ?>
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                            <a class="dropdown-item" href="../logout.php">ログアウト</a>
+                        </div>
                     </li>
                 </ul>
             </div>
@@ -106,11 +119,10 @@ if (isset($_REQUEST['res'])) {
             <div id="head">
                 <h1>新着情報共有掲示板</h1>
             </div>
-            <div id="content">
-                <div style="text-align: right"><a href="logout.php">ログアウト</a></div>
 
+            <div id="content">
                 <form action="" method="post">
-                    <dl>
+                    <dl class="mt-3">
                         <dt><?= (h($member["name"])); ?>さん、メッセージをどうぞ</dt>
                         <dd>
                             <textarea name="message" cols="70" rows="5"><?= (h($message)); ?></textarea>
@@ -187,7 +199,8 @@ if (isset($_REQUEST['res'])) {
     </footer>
     <!-- Optional JavaScript -->
     <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
-    <script src="https://kit.fontawesome.com/82342a278b.js" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
     <!-- URL有効化JSファイル -->
     <script src="../js/validate-url.js"></script>
 </body>

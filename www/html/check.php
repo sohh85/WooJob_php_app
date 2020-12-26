@@ -8,7 +8,7 @@ if (!isset($_SESSION['join'])) {
 	exit();
 }
 
-// パスワードの文字数分「＊」を表示
+$userName = $_SESSION['join']['name'];
 $password = $_SESSION['join']['password'];
 $password_hide = str_repeat('*', strlen($password));
 
@@ -37,6 +37,7 @@ if (isset($_POST['register'])) {
 		$_SESSION = array();
 		$dbh->commit(); // 実行
 
+		$_SESSION['name'] = $userName;
 		$_SESSION['id'] = $memberId;
 		$_SESSION['time'] = time();
 		header('Location: bulletin_board/index.php');

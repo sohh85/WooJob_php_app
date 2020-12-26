@@ -31,6 +31,7 @@ if (isset($_POST['login'])) {
             $errors['mail'] = '<p class="text-danger">*登録されていないメールアドレスです</p>';
         } elseif (verifyPassword($user)) {
             $_SESSION['id'] = $user['id'];
+            $_SESSION['name'] = $user['name'];
             $_SESSION['time'] = time();
             header('Location: bulletin_board/index.php');
             exit();

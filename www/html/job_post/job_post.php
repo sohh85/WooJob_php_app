@@ -111,6 +111,14 @@ $_SESSION["chkno"] = $chkno = mt_rand();
                     <li class="nav-item">
                         <a class="nav-link" href="../bulletin_board/index.php">掲示板</a>
                     </li>
+                    <li class="nav-item dropdown active">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <?= $_SESSION['name'] ?>
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                            <a class="dropdown-item" href="../logout.php">ログアウト</a>
+                        </div>
+                    </li>
                 </ul>
             </div>
         </div>
@@ -120,7 +128,6 @@ $_SESSION["chkno"] = $chkno = mt_rand();
     <!-- Page Content -->
     <div class="container">
         <div class="row">
-
             <div class="col-lg-7">
                 <div class="card card-outline-secondary my-4">
                     <div class="card-header h4 py-3">
@@ -201,7 +208,6 @@ $_SESSION["chkno"] = $chkno = mt_rand();
                     </div>
                 </div>
             </div>
-
         </div>
     </div>
 
@@ -213,6 +219,8 @@ $_SESSION["chkno"] = $chkno = mt_rand();
     </footer>
     <!-- Optional JavaScript -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
     <script src="../js/form-reset.js"></script>
 </body>
