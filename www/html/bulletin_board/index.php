@@ -105,7 +105,6 @@ if (isset($_REQUEST['res'])) {
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                             <a class="dropdown-item" href="../logout.php">ログアウト</a>
-                            <a class="dropdown-item" href="#">明細データ出力</a>
                         </div>
                     </li>
                 </ul>
@@ -120,10 +119,10 @@ if (isset($_REQUEST['res'])) {
             <div id="head">
                 <h1>新着情報共有掲示板</h1>
             </div>
-            <div id="content">
 
+            <div id="content">
                 <form action="" method="post">
-                    <dl>
+                    <dl class="mt-3">
                         <dt><?= (h($member["name"])); ?>さん、メッセージをどうぞ</dt>
                         <dd>
                             <textarea name="message" cols="70" rows="5"><?= (h($message)); ?></textarea>

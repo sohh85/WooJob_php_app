@@ -117,7 +117,6 @@ $_SESSION["chkno"] = $chkno = mt_rand();
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                             <a class="dropdown-item" href="../logout.php">ログアウト</a>
-                            <a class="dropdown-item" href="#">明細データ出力</a>
                         </div>
                     </li>
                 </ul>
