@@ -85,6 +85,7 @@ if (isset($_REQUEST['res'])) {
             </button>
             <div class="collapse navbar-collapse" id="navbarResponsive">
                 <ul class="navbar-nav ml-auto">
+
                     <li class="nav-item">
                         <a class="nav-link" href="../job_post/job_post.php">投稿フォーム</a>
                     </li>
@@ -94,6 +95,17 @@ if (isset($_REQUEST['res'])) {
                     <li class="nav-item">
                         <a class="nav-link active" href="#">掲示板<span class="sr-only">(current)</span></a>
                     </li>
+
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            エクスポート
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                            <a class="dropdown-item" href="#">サマリーデータ出力</a>
+                            <a class="dropdown-item" href="#">明細データ出力</a>
+                        </div>
+                    </li>
+
                 </ul>
             </div>
         </div>
