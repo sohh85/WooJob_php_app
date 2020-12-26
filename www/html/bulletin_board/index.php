@@ -104,7 +104,7 @@ if (isset($_REQUEST['res'])) {
                             エクスポート
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                            <a class="dropdown-item" href="#">サマリーデータ出力</a>
+                            <a class="dropdown-item" href="../logout.php">ログアウト</a>
                             <a class="dropdown-item" href="#">明細データ出力</a>
                         </div>
                     </li>
@@ -121,7 +121,6 @@ if (isset($_REQUEST['res'])) {
                 <h1>新着情報共有掲示板</h1>
             </div>
             <div id="content">
-                <div style="text-align: right"><a href="logout.php">ログアウト</a></div>
 
                 <form action="" method="post">
                     <dl>

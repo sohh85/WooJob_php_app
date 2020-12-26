@@ -63,7 +63,7 @@ $jobData = getJobData($_GET);
                             エクスポート
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                            <a class="dropdown-item" href="#">サマリーデータ出力</a>
+                            <a class="dropdown-item" href="../logout.php">ログアウト</a>
                             <a class="dropdown-item" href="#">明細データ出力</a>
                         </div>
                     </li>
