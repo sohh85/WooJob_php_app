@@ -111,6 +111,15 @@ $_SESSION["chkno"] = $chkno = mt_rand();
                     <li class="nav-item">
                         <a class="nav-link" href="../bulletin_board/index.php">掲示板</a>
                     </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            エクスポート
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                            <a class="dropdown-item" href="#">サマリーデータ出力</a>
+                            <a class="dropdown-item" href="#">明細データ出力</a>
+                        </div>
+                    </li>
                 </ul>
             </div>
         </div>

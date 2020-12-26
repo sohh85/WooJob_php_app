@@ -99,7 +99,6 @@ if (isset($_REQUEST['res'])) {
                     <li class="nav-item">
                         <a class="nav-link active" href="#">掲示板<span class="sr-only">(current)</span></a>
                     </li>
-
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             エクスポート
@@ -109,7 +108,6 @@ if (isset($_REQUEST['res'])) {
                             <a class="dropdown-item" href="#">明細データ出力</a>
                         </div>
                     </li>
-
                 </ul>
             </div>
         </div>
