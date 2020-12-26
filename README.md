@@ -16,7 +16,10 @@ URL　：　https://woojob.herokuapp.com/index.php
 
 # Requirement
  
-* PHP 7.4
+* PHP 7.4.13
+* ext-mbstring (bundled with php)
+* composer (2.0.8)
+* apache (2.4.46)
  
 # Author
  
