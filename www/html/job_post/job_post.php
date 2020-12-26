@@ -111,7 +111,7 @@ $_SESSION["chkno"] = $chkno = mt_rand();
                     <li class="nav-item">
                         <a class="nav-link" href="../bulletin_board/index.php">掲示板</a>
                     </li>
-                    <li class="nav-item dropdown">
+                    <li class="nav-item dropdown active">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <?= $_SESSION['name'] ?>
                         </a>
@@ -128,7 +128,6 @@ $_SESSION["chkno"] = $chkno = mt_rand();
     <!-- Page Content -->
     <div class="container">
         <div class="row">
-
             <div class="col-lg-7">
                 <div class="card card-outline-secondary my-4">
                     <div class="card-header h4 py-3">
@@ -209,22 +208,6 @@ $_SESSION["chkno"] = $chkno = mt_rand();
                     </div>
                 </div>
             </div>
-            <div class="col-lg-5">
-                <div class="card mt-4">
-                    <img class="card-img-top img-fluid o-img" src="../images/barista.jpg" alt="仕事のイメージ画像">
-                    <div class="card-body font-small">
-                        <h4 class="card-title mb-4">「詳細情報」に記入すること</h4>
-                        <p class="card-text">フォームに書くことができなかった情報をご記入ください。</p>
-                        <ul>
-                            <li>働いてみて感じた職場の雰囲気</li>
-                            <li>週何日、一日何時間のシフトか</li>
-                            <li>職場へのアクセス</li>
-                        </ul>
-                        <p>ご協力いただきありがとうございます。</p>
-                    </div>
-                </div>
-            </div>
-
         </div>
     </div>
 
