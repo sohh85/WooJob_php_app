@@ -12,12 +12,63 @@ body {
   width: 120px;
 }
 
-.card-body {
-  padding: 25px;
+/* postページの注意項目タイトル（check） */
+.card-title-check {
+  font-size: 18px;
+  position: relative;
+  color: black;
+  background: #d0ecff;
+  line-height: 1.4;
+  padding: 0.6em 1.2em;
+  margin: 0;
+}
+.card-title-check:after {
+  position: absolute;
+  font-family: "Font Awesome 5 Free",'Quicksand','Avenir','Arial',sans-serif;
+  font-weight: 900;
+  content: '\f00c Check';
+  background: #2196F3;
+  color: #fff;
+  left: 0px;
+  bottom: 100%;
+  border-radius: 5px 5px 0 0;
+  padding: 3px 7px 1px;
+  font-size: 0.7em;
+  line-height: 1;
+  letter-spacing: 0.05em
 }
 
+/* postページの注意項目タイトル（point） */
+.card-title-point {
+  font-size: 18px;
+  position: relative;
+  border-top: solid 2px #80c8d1;
+  border-bottom: solid 2px #80c8d1;
+  background: #f4f4f4;
+  line-height: 1.4;
+  padding: 0.6em 1.2em;
+  margin: 0;
+}
+.card-title-point:after {
+  position: absolute;
+  font-family: "Font Awesome 5 Free",'Quicksand','Avenir','Arial',sans-serif;
+  font-weight: 900;
+  content: '\f0a7\ POINT';
+  background: #80c8d1;
+  color: #fff;
+  left: 0px;
+  bottom: 100%;
+  border-radius: 5px 5px 0 0;
+  padding: 5px 7px 3px;
+  font-size: 0.7em;
+  line-height: 1;
+  letter-spacing: 0.05em;
+}
+
+
+
 .font-small {
-  font-size: 0.9rem !important;
+  font-size: 0.8rem !important;
 }
 
 .btn {
@@ -43,7 +94,6 @@ button {
   border-radius: 0;
   outline: none;
 }
-
 .button {
     position: relative;
     display: inline-block;
@@ -62,7 +112,6 @@ button {
     box-sizing:border-box;
     cursor:pointer;
 }
-
 .button:after {
   content: "";
   position: absolute;
@@ -78,7 +127,6 @@ button {
   transform: rotate(45deg);
   transition: right 0.5s;
 }
-
 .button:hover:after{
   right: 1em;
 }
