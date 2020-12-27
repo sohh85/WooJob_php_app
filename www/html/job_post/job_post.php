@@ -47,14 +47,12 @@ if (isset($_REQUEST["post"])) {
             $stmt->bindValue(5, $language, PDO::PARAM_INT);
             $stmt->bindValue(6, $rating, PDO::PARAM_INT);
             $stmt->bindValue(7, $detail, PDO::PARAM_LOB);
-
             $stmt->execute();
 
 
             // 掲示板に新着情報掲載
             $message = $dbh->prepare('INSERT INTO posts SET member_id=1, message=?, created=NOW()+INTERVAL 9 HOUR');
             $message->bindValue(1, $notification, PDO::PARAM_STR);
-
             $message->execute();
 
 
@@ -90,6 +88,8 @@ $_SESSION["chkno"] = $chkno = mt_rand();
     <!-- ファビコン -->
     <link rel="shortcut icon" href="../images/favicon.png" type="image/vnd.microsoft.icon">
     <link rel="icon" href="../images/favicon.png" type="image/vnd.microsoft.icon">
+    <!-- font awesome -->
+    <script src="https://kit.fontawesome.com/82342a278b.js" crossorigin="anonymous"></script>
 </head>
 
 <body>
@@ -195,9 +195,9 @@ $_SESSION["chkno"] = $chkno = mt_rand();
 
 
             <div class="col-lg-5">
-                <div class="card mt-4">
-                    <!-- <img class="card-img-top img-fluid o-img" src="../images/barista.jpg" alt="仕事のイメージ画像"> -->
-                    <h4 class="card-title-font">「詳細情報」に記入すること</h4>
+
+                <div class="card mt-5">
+                    <h4 class="card-title-point">「詳細情報」に記入すること</h4>
                     <div class="card-body font-small">
                         <p class="card-text">フォームに書くことができなかった情報をご記入ください。</p>
                         <ul>
@@ -205,9 +205,23 @@ $_SESSION["chkno"] = $chkno = mt_rand();
                             <li>週何日、一日何時間のシフトか</li>
                             <li>職場へのアクセス</li>
                         </ul>
-                        <p>ご協力いただきありがとうございます。</p>
+                        <p class="mb-0">ご協力いただきありがとうございます。</p>
                     </div>
                 </div>
+
+                <div class="card mt-5">
+                    <h4 class="card-title-check">記入する上での注意点</h4>
+                    <div class="card-body font-small">
+                        <p class="card-text">フォームに書くことができなかった情報をご記入ください。</p>
+                        <ul>
+                            <li>働いてみて感じた職場の雰囲気</li>
+                            <li>週何日、一日何時間のシフトか</li>
+                            <li>職場へのアクセス</li>
+                        </ul>
+                        <p class="mb-0">ご協力いただきありがとうございます。</p>
+                    </div>
+                </div>
+
             </div>
 
         </div>

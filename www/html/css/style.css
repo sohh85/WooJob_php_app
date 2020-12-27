@@ -12,17 +12,17 @@ body {
   width: 120px;
 }
 
-/* postページの注意項目タイトル */
-.card-title-font {
+/* postページの注意項目タイトル（check） */
+.card-title-check {
   font-size: 18px;
   position: relative;
   color: black;
   background: #d0ecff;
   line-height: 1.4;
-  padding: 0.5em;
+  padding: 0.6em;
   margin: 0;
 }
-.card-title-font:after {
+.card-title-check:after {
   position: absolute;
   font-family: "Font Awesome 5 Free",'Quicksand','Avenir','Arial',sans-serif;
   font-weight: 900;
@@ -38,6 +38,32 @@ body {
   letter-spacing: 0.05em
 }
 
+/* postページの注意項目タイトル（point） */
+.card-title-point {
+  font-size: 18px;
+  position: relative;
+  border-top: solid 2px #80c8d1;
+  border-bottom: solid 2px #80c8d1;
+  background: #f4f4f4;
+  line-height: 1.4;
+  padding: 0.6em;
+  margin: 0;
+}
+.card-title-point:after {
+  position: absolute;
+  font-family: "Font Awesome 5 Free",'Quicksand','Avenir','Arial',sans-serif;
+  font-weight: 900;
+  content: '\f0a7\ POINT';
+  background: #80c8d1;
+  color: #fff;
+  left: 0px;
+  bottom: 100%;
+  border-radius: 5px 5px 0 0;
+  padding: 5px 7px 3px;
+  font-size: 0.7em;
+  line-height: 1;
+  letter-spacing: 0.05em;
+}
 
 
 
