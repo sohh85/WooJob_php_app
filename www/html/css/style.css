@@ -19,7 +19,7 @@ body {
   color: black;
   background: #d0ecff;
   line-height: 1.4;
-  padding: 0.6em;
+  padding: 0.6em 1.2em;
   margin: 0;
 }
 .card-title-check:after {
@@ -46,7 +46,7 @@ body {
   border-bottom: solid 2px #80c8d1;
   background: #f4f4f4;
   line-height: 1.4;
-  padding: 0.6em;
+  padding: 0.6em 1.2em;
   margin: 0;
 }
 .card-title-point:after {

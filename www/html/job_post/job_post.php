@@ -197,9 +197,9 @@ $_SESSION["chkno"] = $chkno = mt_rand();
             <div class="col-lg-5">
 
                 <div class="card mt-5">
-                    <h4 class="card-title-point">「詳細情報」に記入すること</h4>
+                    <h4 class="card-title-point">"詳細情報" に記入していただきたいこと</h4>
                     <div class="card-body font-small">
-                        <p class="card-text">フォームに書くことができなかった情報をご記入ください。</p>
+                        <p class="card-text">フォームに書くことができなかった情報をご記入ください。求職者にとって気になる項目の例はこちら</p>
                         <ul>
                             <li>働いてみて感じた職場の雰囲気</li>
                             <li>週何日、一日何時間のシフトか</li>
@@ -212,13 +212,13 @@ $_SESSION["chkno"] = $chkno = mt_rand();
                 <div class="card mt-5">
                     <h4 class="card-title-check">記入する上での注意点</h4>
                     <div class="card-body font-small">
-                        <p class="card-text">フォームに書くことができなかった情報をご記入ください。</p>
+                        <p class="card-text">情報を共有する上で・・</p>
                         <ul>
-                            <li>働いてみて感じた職場の雰囲気</li>
-                            <li>週何日、一日何時間のシフトか</li>
-                            <li>職場へのアクセス</li>
+                            <li>実名などの個人のプライバシーに関すること</li>
+                            <li>特定の企業様への批判</li>
+                            <li>企業の秘密情報漏洩</li>
                         </ul>
-                        <p class="mb-0">ご協力いただきありがとうございます。</p>
+                        <p class="mb-0">上記のような書き込みは避けるようお願い致します。見つけ次第、運営者が削除します。</p>
                     </div>
                 </div>
 
