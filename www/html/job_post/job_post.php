@@ -197,8 +197,8 @@ $_SESSION["chkno"] = $chkno = mt_rand();
             <div class="col-lg-5">
                 <div class="card mt-4">
                     <!-- <img class="card-img-top img-fluid o-img" src="../images/barista.jpg" alt="仕事のイメージ画像"> -->
+                    <h4 class="card-title-font">「詳細情報」に記入すること</h4>
                     <div class="card-body font-small">
-                        <h4 class="card-title mb-4">「詳細情報」に記入すること</h4>
                         <p class="card-text">フォームに書くことができなかった情報をご記入ください。</p>
                         <ul>
                             <li>働いてみて感じた職場の雰囲気</li>
