@@ -193,9 +193,7 @@ $_SESSION["chkno"] = $chkno = mt_rand();
                 </div>
             </div>
 
-
             <div class="col-lg-5">
-
                 <div class="card mt-5">
                     <h4 class="card-title-point">"詳細情報" に記入していただきたいこと</h4>
                     <div class="card-body font-small">
@@ -221,9 +219,7 @@ $_SESSION["chkno"] = $chkno = mt_rand();
                         <p class="mb-0">上記のような書き込みは避けるようお願い致します。見つけ次第、運営者が削除します。</p>
                     </div>
                 </div>
-
             </div>
-
         </div>
     </div>
 
