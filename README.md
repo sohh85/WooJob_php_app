@@ -4,14 +4,14 @@
 
 URL　：　https://woojob.herokuapp.com/index.php
  
-
+***
  ## 背景
 日本には企業の口コミサイトがあり、実際に働いた方の情報を得られますが、海外企業向けのそのようなサイトはありません。その結果、英語に弱い日本人を悪用する企業も多く、1週間働いても8000円の報酬しか渡さない企業もあります。このような労働条件で働くことを余儀なくされる友人がおり、この課題を解決したいと思い制作しました。
 
-
+***
 ## 概要や機能
 
-### ログイン・登録ページ
+### ログイン&会員登録ページ
 - URLをクリックすると最初に表示されます
 - 登録不要で「ゲスト」ボタンから使用することができます
 ![result](https://user-images.githubusercontent.com/67961122/107377788-ae304a00-6b2e-11eb-8d76-1d3e6aaa3a1a.gif)
@@ -34,7 +34,7 @@ URL　：　https://woojob.herokuapp.com/index.php
 - 投稿日が表示されており、クリックすると詳細表示
 - 削除/返信ができます
 
-
+***
 ## 使用スキル
  
 * PHP 7.4.13
@@ -43,6 +43,6 @@ URL　：　https://woojob.herokuapp.com/index.php
 * apache (2.4.46)
 
 
+***
 現在、下記のリポジトリにて、Laravelを利用して機能を改良を行っています
-
 Github URL　：　https://github.com/sohh85/Laravel-sns
