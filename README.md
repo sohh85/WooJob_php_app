@@ -38,7 +38,7 @@ URL　：　https://woojob.herokuapp.com/index.php
 
 ## テーブル
 
-<img width="476" alt="woojobTable" src="https://user-images.githubusercontent.com/67961122/109409728-7a7f6c00-79d8-11eb-8056-61f4a3408615.png">
+<img width="487" alt="ER_Woojob" src="https://user-images.githubusercontent.com/67961122/109411169-773dad80-79e3-11eb-870d-8b4750b6c8d7.png">
 
 
 ## 使用スキル
