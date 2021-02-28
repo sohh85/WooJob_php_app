@@ -81,10 +81,6 @@ $jobData = getJobData($_GET);
                 <div class="card">
                     <div class="h4 text-center card-header">条件検索 <i class="fas fa-search-plus"></i></div>
 
-
-
-
-
                     <!-- 条件検索フォーム  -->
                     <div class="card-body">
                         <?php if (empty(array_filter($_GET)) && isset($_GET['search'])) : ?>
@@ -167,7 +163,7 @@ $jobData = getJobData($_GET);
 
                                 <?php if (!empty(h($row['detail']))) : ?>
                                     <p class="mt-4"><span class="font-small"><i class="fas fa-caret-square-down"></i> 詳細情報</span><br>
-                                        <pre class="js-autolink"><?= h($row['detail']) ?></pre>
+                                    <pre class="js-autolink"><?= h($row['detail']) ?></pre>
                                     </p>
                                 <?php endif; ?>
 

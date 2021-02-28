@@ -42,7 +42,6 @@ $page = min($page, $maxPage); // 配列から一番小さな値を取り出す
 
 $start = ($page - 1) * 10;
 
-// membersの名前・postsの全カラムを取得
 $posts = $dbh->prepare("SELECT m.name, m.picture, p.* FROM members m, posts p WHERE m.id=p.member_id ORDER BY p.created DESC LIMIT ?,10");
 $posts->bindParam(1, $start, PDO::PARAM_INT);
 $posts->execute();
@@ -149,10 +148,10 @@ if (isset($_REQUEST['res'])) {
                             <!-- メッセージと返信ボタン -->
                             <p>
                                 <!-- js-autolinkでurlを有効化 -->
-                                <pre class="js-autolink"><?= (h($post['message'])); ?></pre>
-                                <div class="btn-radius-gradient-wrap">
-                                    <a class="btn btn-radius-gradient m-0" href="index.php?res=<?= (h($post['id'])); ?>">返信</a>
-                                </div>
+                            <pre class="js-autolink"><?= (h($post['message'])); ?></pre>
+                            <div class="btn-radius-gradient-wrap">
+                                <a class="btn btn-radius-gradient m-0" href="index.php?res=<?= (h($post['id'])); ?>">返信</a>
+                            </div>
                             </p>
 
                             <!-- プロフィール写真の下に表示する項目 -->
