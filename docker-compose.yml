@@ -25,14 +25,13 @@ services:
     ports:
       - 13306:3306
     environment:
-      MYSQL_ROOT_PASSWORD: password
-      MYSQL_DATABASE: woojob
-      MYSQL_USER: sohh
-      MYSQL_PASSWORD: pass
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
     volumes:
       - docker-volume:/var/lib/mysql
       - ./mysql/my.cnf:/etc/mysql/conf.d/my.cnf
-      # コンテナ作成時に実行されるsqlファイルを格納するパスをdocker-entrypoint-initdb.dにマウント
       - ./mysql/initdb.d:/docker-entrypoint-initdb.d
     tty: true
 
@@ -43,7 +42,7 @@ services:
       - PMA_ARBITRARY=1
       - PMA_HOST=mysql
       - PMA_USER=sohh
-      - PMA_PASSWORD=pass
+      - PMA_PASSWORD=${PMA_PASSWORD}
     links:
       - mysql
     ports:
